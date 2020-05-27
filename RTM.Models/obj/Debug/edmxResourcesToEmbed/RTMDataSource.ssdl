@@ -1,0 +1,718 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RTMDataSource.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Almacen">
+    <Key>
+      <PropertyRef Name="AlmacenID" />
+    </Key>
+    <Property Name="AlmacenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_Almacen" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Existencia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Area_Produccion">
+    <Key>
+      <PropertyRef Name="Area_ProduccionID" />
+    </Key>
+    <Property Name="Area_ProduccionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UsuarioID" Type="int" Nullable="false" />
+    <Property Name="Nombre_Area_Produccion" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Area_Produccion_Control_Piezas">
+    <Key>
+      <PropertyRef Name="Area_Produccion_Control_PiezasID" />
+    </Key>
+    <Property Name="Area_Produccion_Control_PiezasID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Area_ProduccionID" Type="int" Nullable="false" />
+    <Property Name="Control_Ubicacion_PiezaID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Area_Produccion_Materias_Primas">
+    <Key>
+      <PropertyRef Name="Area_Produccion_Materia_PrimaID" />
+    </Key>
+    <Property Name="Area_Produccion_Materia_PrimaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Area_ProduccionID" Type="int" Nullable="false" />
+    <Property Name="Materia_PrimaID" Type="int" Nullable="false" />
+    <Property Name="CantidadSaliente" Type="int" Nullable="false" />
+    <Property Name="FechaDeSalida" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="ClienteID" />
+    </Key>
+    <Property Name="ClienteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_Cliente" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Correo_Electronico" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="No_Telefono" Type="varchar" MaxLength="14" Nullable="false" />
+    <Property Name="Direccion" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Colores">
+    <Key>
+      <PropertyRef Name="ColorID" />
+    </Key>
+    <Property Name="ColorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Control_Ubicacion_Piezas">
+    <Key>
+      <PropertyRef Name="Control_Ubicacion_PiezaID" />
+    </Key>
+    <Property Name="Control_Ubicacion_PiezaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Orden_ClienteID" Type="int" Nullable="false" />
+    <Property Name="Area_ProduccionID" Type="int" Nullable="false" />
+    <Property Name="EstadoID" Type="int" Nullable="false" />
+    <Property Name="Tiempo_Inicio" Type="date" Nullable="false" />
+    <Property Name="Tiempo_Finalizacion" Type="date" Nullable="false" />
+    <Property Name="Cantidad_Piezas_Realizadas" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dimensiones">
+    <Key>
+      <PropertyRef Name="DimensionID" />
+    </Key>
+    <Property Name="DimensionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Longitud" Type="int" Nullable="false" />
+    <Property Name="Anchura" Type="int" Nullable="false" />
+    <Property Name="Altura" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Empleados">
+    <Key>
+      <PropertyRef Name="EmpleadoID" />
+    </Key>
+    <Property Name="EmpleadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombres" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Apellidos" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sexo" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="Cedula" Type="varchar" MaxLength="14" Nullable="false" />
+    <Property Name="Fecha_Nacimiento" Type="date" Nullable="false" />
+    <Property Name="Edad" Type="int" Nullable="false" />
+    <Property Name="Direccion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Telefono" Type="varchar" MaxLength="12" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Estados">
+    <Key>
+      <PropertyRef Name="EstadoID" />
+    </Key>
+    <Property Name="EstadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Estado" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Estados_Usuarios_Almacen">
+    <Key>
+      <PropertyRef Name="Estado_Usuario_AlmacenID" />
+    </Key>
+    <Property Name="Estado_Usuario_AlmacenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Estado" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Marcas">
+    <Key>
+      <PropertyRef Name="MarcaID" />
+    </Key>
+    <Property Name="MarcaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Marca" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Materias_Primas">
+    <Key>
+      <PropertyRef Name="Materia_PrimaID" />
+    </Key>
+    <Property Name="Materia_PrimaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo_MaterialID" Type="int" Nullable="false" />
+    <Property Name="Nombre_Materia_Prima" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Metricas_Eficiencias">
+    <Key>
+      <PropertyRef Name="Metrica_EficienciaID" />
+    </Key>
+    <Property Name="Metrica_EficienciaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Control_Ubicacion_PiezaID" Type="int" Nullable="false" />
+    <Property Name="Resultado_Metricas_Eficiencia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Modelos">
+    <Key>
+      <PropertyRef Name="ModeloID" />
+    </Key>
+    <Property Name="ModeloID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Modelo" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ordenes_Clientes">
+    <Key>
+      <PropertyRef Name="Orden_ClienteID" />
+    </Key>
+    <Property Name="Orden_ClienteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClienteID" Type="int" Nullable="false" />
+    <Property Name="CodigoQR" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cantidad_Calzado_Realizar" Type="int" Nullable="false" />
+    <Property Name="Fecha_Inicio" Type="date" Nullable="false" />
+    <Property Name="Fecha_Entrega" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ordenes_Clientes_Detalles">
+    <Key>
+      <PropertyRef Name="Orden_Cliente_DetalleID" />
+    </Key>
+    <Property Name="Orden_Cliente_DetalleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Orden_ClienteID" Type="int" Nullable="false" />
+    <Property Name="MarcaID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ordenes_Clientes_Detalles_Colores">
+    <Key>
+      <PropertyRef Name="Orden_Cliente_Detalle_ColorID" />
+    </Key>
+    <Property Name="Orden_Cliente_Detalle_ColorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Orden_Cliente_DetalleID" Type="int" Nullable="false" />
+    <Property Name="ColorID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ordenes_Clientes_Detalles_Dimensiones">
+    <Key>
+      <PropertyRef Name="Orden_Cliente_Detalle_DimensionID" />
+    </Key>
+    <Property Name="Orden_Cliente_Detalle_DimensionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Orden_Cliente_DetalleID" Type="int" Nullable="false" />
+    <Property Name="DimensionID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ordenes_Clientes_Detalles_Modelos">
+    <Key>
+      <PropertyRef Name="Orden_Cliente_Detalle_ModeloID" />
+    </Key>
+    <Property Name="Orden_Cliente_Detalle_ModeloID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Orden_Cliente_DetalleID" Type="int" Nullable="false" />
+    <Property Name="ModeloID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ordenes_Clientes_Detalles_Tipos_Calzados">
+    <Key>
+      <PropertyRef Name="Orden_Cliente_Detalle_Tipo_CalzadoID" />
+    </Key>
+    <Property Name="Orden_Cliente_Detalle_Tipo_CalzadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Orden_Cliente_DetalleID" Type="int" Nullable="false" />
+    <Property Name="Tipo_CalzadoID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RolID" />
+    </Key>
+    <Property Name="RolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo_Usuario" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Suplidor_Materia_Prima">
+    <Key>
+      <PropertyRef Name="Suplidor_Materia_PrimaID" />
+    </Key>
+    <Property Name="Suplidor_Materia_PrimaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SuplidorID" Type="int" Nullable="false" />
+    <Property Name="AlmacenID" Type="int" Nullable="false" />
+    <Property Name="Materia_PrimaID" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Fecha_Entrega" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Suplidores">
+    <Key>
+      <PropertyRef Name="SuplidorID" />
+    </Key>
+    <Property Name="SuplidorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_Suplidor" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="No_Telefono" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="Correo_Electronico" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tipo_Calzados">
+    <Key>
+      <PropertyRef Name="Tipo_CalzadoID" />
+    </Key>
+    <Property Name="Tipo_CalzadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo_Calzado" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tipo_Material">
+    <Key>
+      <PropertyRef Name="Tipo_MaterialID" />
+    </Key>
+    <Property Name="Tipo_MaterialID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_Material" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="UsuarioID" />
+    </Key>
+    <Property Name="UsuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RolID" Type="int" Nullable="false" />
+    <Property Name="EmpleadoID" Type="int" Nullable="false" />
+    <Property Name="Nombre_Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contrasena" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios_Almacen">
+    <Key>
+      <PropertyRef Name="Usuario_AlmacenID" />
+    </Key>
+    <Property Name="Usuario_AlmacenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UsuarioID" Type="int" Nullable="false" />
+    <Property Name="AlmacenID" Type="int" Nullable="false" />
+    <Property Name="Estado_Usuario_AlmacenID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Area_Produccion_Control_Piezas_Area_Produccion">
+    <End Role="Area_Produccion" Type="Self.Area_Produccion" Multiplicity="1" />
+    <End Role="Area_Produccion_Control_Piezas" Type="Self.Area_Produccion_Control_Piezas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area_Produccion">
+        <PropertyRef Name="Area_ProduccionID" />
+      </Principal>
+      <Dependent Role="Area_Produccion_Control_Piezas">
+        <PropertyRef Name="Area_ProduccionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Area_Produccion_Materias_Primas_Area_Produccion">
+    <End Role="Area_Produccion" Type="Self.Area_Produccion" Multiplicity="1" />
+    <End Role="Area_Produccion_Materias_Primas" Type="Self.Area_Produccion_Materias_Primas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area_Produccion">
+        <PropertyRef Name="Area_ProduccionID" />
+      </Principal>
+      <Dependent Role="Area_Produccion_Materias_Primas">
+        <PropertyRef Name="Area_ProduccionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Area_Produccion_Materias_Primas_Materias_Primas">
+    <End Role="Materias_Primas" Type="Self.Materias_Primas" Multiplicity="1" />
+    <End Role="Area_Produccion_Materias_Primas" Type="Self.Area_Produccion_Materias_Primas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materias_Primas">
+        <PropertyRef Name="Materia_PrimaID" />
+      </Principal>
+      <Dependent Role="Area_Produccion_Materias_Primas">
+        <PropertyRef Name="Materia_PrimaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Control_Ubicacion_Piezas_Area_Produccion">
+    <End Role="Area_Produccion" Type="Self.Area_Produccion" Multiplicity="1" />
+    <End Role="Control_Ubicacion_Piezas" Type="Self.Control_Ubicacion_Piezas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area_Produccion">
+        <PropertyRef Name="Area_ProduccionID" />
+      </Principal>
+      <Dependent Role="Control_Ubicacion_Piezas">
+        <PropertyRef Name="Area_ProduccionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Control_Ubicacion_Piezas_Estados">
+    <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+    <End Role="Control_Ubicacion_Piezas" Type="Self.Control_Ubicacion_Piezas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estados">
+        <PropertyRef Name="EstadoID" />
+      </Principal>
+      <Dependent Role="Control_Ubicacion_Piezas">
+        <PropertyRef Name="EstadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Control_Ubicacion_Piezas_Ordenes_Clientes">
+    <End Role="Ordenes_Clientes" Type="Self.Ordenes_Clientes" Multiplicity="1" />
+    <End Role="Control_Ubicacion_Piezas" Type="Self.Control_Ubicacion_Piezas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ordenes_Clientes">
+        <PropertyRef Name="Orden_ClienteID" />
+      </Principal>
+      <Dependent Role="Control_Ubicacion_Piezas">
+        <PropertyRef Name="Orden_ClienteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Materias_Primas_Tipo_Material">
+    <End Role="Tipo_Material" Type="Self.Tipo_Material" Multiplicity="1" />
+    <End Role="Materias_Primas" Type="Self.Materias_Primas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_Material">
+        <PropertyRef Name="Tipo_MaterialID" />
+      </Principal>
+      <Dependent Role="Materias_Primas">
+        <PropertyRef Name="Tipo_MaterialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Metricas_Eficiencias_Control_Ubicacion_Piezas">
+    <End Role="Control_Ubicacion_Piezas" Type="Self.Control_Ubicacion_Piezas" Multiplicity="1" />
+    <End Role="Metricas_Eficiencias" Type="Self.Metricas_Eficiencias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Control_Ubicacion_Piezas">
+        <PropertyRef Name="Control_Ubicacion_PiezaID" />
+      </Principal>
+      <Dependent Role="Metricas_Eficiencias">
+        <PropertyRef Name="Control_Ubicacion_PiezaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Clientes_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="Ordenes_Clientes" Type="Self.Ordenes_Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="ClienteID" />
+      </Principal>
+      <Dependent Role="Ordenes_Clientes">
+        <PropertyRef Name="ClienteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Clientes_Detalles_Colores_Colores">
+    <End Role="Colores" Type="Self.Colores" Multiplicity="1" />
+    <End Role="Ordenes_Clientes_Detalles_Colores" Type="Self.Ordenes_Clientes_Detalles_Colores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colores">
+        <PropertyRef Name="ColorID" />
+      </Principal>
+      <Dependent Role="Ordenes_Clientes_Detalles_Colores">
+        <PropertyRef Name="ColorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Clientes_Detalles_Colores_Ordenes_Clientes_Detalles">
+    <End Role="Ordenes_Clientes_Detalles" Type="Self.Ordenes_Clientes_Detalles" Multiplicity="1" />
+    <End Role="Ordenes_Clientes_Detalles_Colores" Type="Self.Ordenes_Clientes_Detalles_Colores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ordenes_Clientes_Detalles">
+        <PropertyRef Name="Orden_Cliente_DetalleID" />
+      </Principal>
+      <Dependent Role="Ordenes_Clientes_Detalles_Colores">
+        <PropertyRef Name="Orden_Cliente_DetalleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Clientes_Detalles_Dimensiones_Dimensiones">
+    <End Role="Dimensiones" Type="Self.Dimensiones" Multiplicity="1" />
+    <End Role="Ordenes_Clientes_Detalles_Dimensiones" Type="Self.Ordenes_Clientes_Detalles_Dimensiones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dimensiones">
+        <PropertyRef Name="DimensionID" />
+      </Principal>
+      <Dependent Role="Ordenes_Clientes_Detalles_Dimensiones">
+        <PropertyRef Name="DimensionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Clientes_Detalles_Dimensiones_Ordenes_Clientes_Detalles">
+    <End Role="Ordenes_Clientes_Detalles" Type="Self.Ordenes_Clientes_Detalles" Multiplicity="1" />
+    <End Role="Ordenes_Clientes_Detalles_Dimensiones" Type="Self.Ordenes_Clientes_Detalles_Dimensiones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ordenes_Clientes_Detalles">
+        <PropertyRef Name="Orden_Cliente_DetalleID" />
+      </Principal>
+      <Dependent Role="Ordenes_Clientes_Detalles_Dimensiones">
+        <PropertyRef Name="Orden_Cliente_DetalleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Clientes_Detalles_Marcas">
+    <End Role="Marcas" Type="Self.Marcas" Multiplicity="1" />
+    <End Role="Ordenes_Clientes_Detalles" Type="Self.Ordenes_Clientes_Detalles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marcas">
+        <PropertyRef Name="MarcaID" />
+      </Principal>
+      <Dependent Role="Ordenes_Clientes_Detalles">
+        <PropertyRef Name="MarcaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Clientes_Detalles_Modelos_Modelos">
+    <End Role="Modelos" Type="Self.Modelos" Multiplicity="1" />
+    <End Role="Ordenes_Clientes_Detalles_Modelos" Type="Self.Ordenes_Clientes_Detalles_Modelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modelos">
+        <PropertyRef Name="ModeloID" />
+      </Principal>
+      <Dependent Role="Ordenes_Clientes_Detalles_Modelos">
+        <PropertyRef Name="ModeloID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Clientes_Detalles_Modelos_Ordenes_Clientes_Detalles">
+    <End Role="Ordenes_Clientes_Detalles" Type="Self.Ordenes_Clientes_Detalles" Multiplicity="1" />
+    <End Role="Ordenes_Clientes_Detalles_Modelos" Type="Self.Ordenes_Clientes_Detalles_Modelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ordenes_Clientes_Detalles">
+        <PropertyRef Name="Orden_Cliente_DetalleID" />
+      </Principal>
+      <Dependent Role="Ordenes_Clientes_Detalles_Modelos">
+        <PropertyRef Name="Orden_Cliente_DetalleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Clientes_Detalles_Ordenes_Clientes">
+    <End Role="Ordenes_Clientes" Type="Self.Ordenes_Clientes" Multiplicity="1" />
+    <End Role="Ordenes_Clientes_Detalles" Type="Self.Ordenes_Clientes_Detalles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ordenes_Clientes">
+        <PropertyRef Name="Orden_ClienteID" />
+      </Principal>
+      <Dependent Role="Ordenes_Clientes_Detalles">
+        <PropertyRef Name="Orden_ClienteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Clientes_Detalles_Tipos_Calzados_Ordenes_Clientes_Detalles">
+    <End Role="Ordenes_Clientes_Detalles" Type="Self.Ordenes_Clientes_Detalles" Multiplicity="1" />
+    <End Role="Ordenes_Clientes_Detalles_Tipos_Calzados" Type="Self.Ordenes_Clientes_Detalles_Tipos_Calzados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ordenes_Clientes_Detalles">
+        <PropertyRef Name="Orden_Cliente_DetalleID" />
+      </Principal>
+      <Dependent Role="Ordenes_Clientes_Detalles_Tipos_Calzados">
+        <PropertyRef Name="Orden_Cliente_DetalleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Clientes_Detalles_Tipos_Calzados_Tipo_Calzados">
+    <End Role="Tipo_Calzados" Type="Self.Tipo_Calzados" Multiplicity="1" />
+    <End Role="Ordenes_Clientes_Detalles_Tipos_Calzados" Type="Self.Ordenes_Clientes_Detalles_Tipos_Calzados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_Calzados">
+        <PropertyRef Name="Tipo_CalzadoID" />
+      </Principal>
+      <Dependent Role="Ordenes_Clientes_Detalles_Tipos_Calzados">
+        <PropertyRef Name="Tipo_CalzadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Suplidor_Materia_Prima_Almacen">
+    <End Role="Almacen" Type="Self.Almacen" Multiplicity="1" />
+    <End Role="Suplidor_Materia_Prima" Type="Self.Suplidor_Materia_Prima" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Almacen">
+        <PropertyRef Name="AlmacenID" />
+      </Principal>
+      <Dependent Role="Suplidor_Materia_Prima">
+        <PropertyRef Name="AlmacenID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Suplidor_Materia_Prima_Materias_Primas">
+    <End Role="Materias_Primas" Type="Self.Materias_Primas" Multiplicity="1" />
+    <End Role="Suplidor_Materia_Prima" Type="Self.Suplidor_Materia_Prima" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materias_Primas">
+        <PropertyRef Name="Materia_PrimaID" />
+      </Principal>
+      <Dependent Role="Suplidor_Materia_Prima">
+        <PropertyRef Name="Materia_PrimaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Suplidor_Materia_Prima_Suplidores">
+    <End Role="Suplidores" Type="Self.Suplidores" Multiplicity="1" />
+    <End Role="Suplidor_Materia_Prima" Type="Self.Suplidor_Materia_Prima" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suplidores">
+        <PropertyRef Name="SuplidorID" />
+      </Principal>
+      <Dependent Role="Suplidor_Materia_Prima">
+        <PropertyRef Name="SuplidorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Almacen_Almacen">
+    <End Role="Almacen" Type="Self.Almacen" Multiplicity="1" />
+    <End Role="Usuarios_Almacen" Type="Self.Usuarios_Almacen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Almacen">
+        <PropertyRef Name="AlmacenID" />
+      </Principal>
+      <Dependent Role="Usuarios_Almacen">
+        <PropertyRef Name="AlmacenID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Almacen_Estados_Usuarios_Almacen">
+    <End Role="Estados_Usuarios_Almacen" Type="Self.Estados_Usuarios_Almacen" Multiplicity="1" />
+    <End Role="Usuarios_Almacen" Type="Self.Usuarios_Almacen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estados_Usuarios_Almacen">
+        <PropertyRef Name="Estado_Usuario_AlmacenID" />
+      </Principal>
+      <Dependent Role="Usuarios_Almacen">
+        <PropertyRef Name="Estado_Usuario_AlmacenID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Almacen_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Usuarios_Almacen" Type="Self.Usuarios_Almacen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="UsuarioID" />
+      </Principal>
+      <Dependent Role="Usuarios_Almacen">
+        <PropertyRef Name="UsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="EmpleadoID" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="EmpleadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RolID" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="RolID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RTMDataSourceStoreContainer">
+    <EntitySet Name="Almacen" EntityType="Self.Almacen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Area_Produccion" EntityType="Self.Area_Produccion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Area_Produccion_Control_Piezas" EntityType="Self.Area_Produccion_Control_Piezas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Area_Produccion_Materias_Primas" EntityType="Self.Area_Produccion_Materias_Primas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Colores" EntityType="Self.Colores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Control_Ubicacion_Piezas" EntityType="Self.Control_Ubicacion_Piezas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dimensiones" EntityType="Self.Dimensiones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estados_Usuarios_Almacen" EntityType="Self.Estados_Usuarios_Almacen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marcas" EntityType="Self.Marcas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Materias_Primas" EntityType="Self.Materias_Primas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Metricas_Eficiencias" EntityType="Self.Metricas_Eficiencias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Modelos" EntityType="Self.Modelos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ordenes_Clientes" EntityType="Self.Ordenes_Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ordenes_Clientes_Detalles" EntityType="Self.Ordenes_Clientes_Detalles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ordenes_Clientes_Detalles_Colores" EntityType="Self.Ordenes_Clientes_Detalles_Colores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ordenes_Clientes_Detalles_Dimensiones" EntityType="Self.Ordenes_Clientes_Detalles_Dimensiones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ordenes_Clientes_Detalles_Modelos" EntityType="Self.Ordenes_Clientes_Detalles_Modelos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ordenes_Clientes_Detalles_Tipos_Calzados" EntityType="Self.Ordenes_Clientes_Detalles_Tipos_Calzados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Suplidor_Materia_Prima" EntityType="Self.Suplidor_Materia_Prima" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Suplidores" EntityType="Self.Suplidores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tipo_Calzados" EntityType="Self.Tipo_Calzados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tipo_Material" EntityType="Self.Tipo_Material" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios_Almacen" EntityType="Self.Usuarios_Almacen" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Area_Produccion_Control_Piezas_Area_Produccion" Association="Self.FK_Area_Produccion_Control_Piezas_Area_Produccion">
+      <End Role="Area_Produccion" EntitySet="Area_Produccion" />
+      <End Role="Area_Produccion_Control_Piezas" EntitySet="Area_Produccion_Control_Piezas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Area_Produccion_Materias_Primas_Area_Produccion" Association="Self.FK_Area_Produccion_Materias_Primas_Area_Produccion">
+      <End Role="Area_Produccion" EntitySet="Area_Produccion" />
+      <End Role="Area_Produccion_Materias_Primas" EntitySet="Area_Produccion_Materias_Primas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Area_Produccion_Materias_Primas_Materias_Primas" Association="Self.FK_Area_Produccion_Materias_Primas_Materias_Primas">
+      <End Role="Materias_Primas" EntitySet="Materias_Primas" />
+      <End Role="Area_Produccion_Materias_Primas" EntitySet="Area_Produccion_Materias_Primas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Control_Ubicacion_Piezas_Area_Produccion" Association="Self.FK_Control_Ubicacion_Piezas_Area_Produccion">
+      <End Role="Area_Produccion" EntitySet="Area_Produccion" />
+      <End Role="Control_Ubicacion_Piezas" EntitySet="Control_Ubicacion_Piezas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Control_Ubicacion_Piezas_Estados" Association="Self.FK_Control_Ubicacion_Piezas_Estados">
+      <End Role="Estados" EntitySet="Estados" />
+      <End Role="Control_Ubicacion_Piezas" EntitySet="Control_Ubicacion_Piezas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Control_Ubicacion_Piezas_Ordenes_Clientes" Association="Self.FK_Control_Ubicacion_Piezas_Ordenes_Clientes">
+      <End Role="Ordenes_Clientes" EntitySet="Ordenes_Clientes" />
+      <End Role="Control_Ubicacion_Piezas" EntitySet="Control_Ubicacion_Piezas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Materias_Primas_Tipo_Material" Association="Self.FK_Materias_Primas_Tipo_Material">
+      <End Role="Tipo_Material" EntitySet="Tipo_Material" />
+      <End Role="Materias_Primas" EntitySet="Materias_Primas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Metricas_Eficiencias_Control_Ubicacion_Piezas" Association="Self.FK_Metricas_Eficiencias_Control_Ubicacion_Piezas">
+      <End Role="Control_Ubicacion_Piezas" EntitySet="Control_Ubicacion_Piezas" />
+      <End Role="Metricas_Eficiencias" EntitySet="Metricas_Eficiencias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Clientes_Clientes" Association="Self.FK_Ordenes_Clientes_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Ordenes_Clientes" EntitySet="Ordenes_Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Clientes_Detalles_Colores_Colores" Association="Self.FK_Ordenes_Clientes_Detalles_Colores_Colores">
+      <End Role="Colores" EntitySet="Colores" />
+      <End Role="Ordenes_Clientes_Detalles_Colores" EntitySet="Ordenes_Clientes_Detalles_Colores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Clientes_Detalles_Colores_Ordenes_Clientes_Detalles" Association="Self.FK_Ordenes_Clientes_Detalles_Colores_Ordenes_Clientes_Detalles">
+      <End Role="Ordenes_Clientes_Detalles" EntitySet="Ordenes_Clientes_Detalles" />
+      <End Role="Ordenes_Clientes_Detalles_Colores" EntitySet="Ordenes_Clientes_Detalles_Colores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Clientes_Detalles_Dimensiones_Dimensiones" Association="Self.FK_Ordenes_Clientes_Detalles_Dimensiones_Dimensiones">
+      <End Role="Dimensiones" EntitySet="Dimensiones" />
+      <End Role="Ordenes_Clientes_Detalles_Dimensiones" EntitySet="Ordenes_Clientes_Detalles_Dimensiones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Clientes_Detalles_Dimensiones_Ordenes_Clientes_Detalles" Association="Self.FK_Ordenes_Clientes_Detalles_Dimensiones_Ordenes_Clientes_Detalles">
+      <End Role="Ordenes_Clientes_Detalles" EntitySet="Ordenes_Clientes_Detalles" />
+      <End Role="Ordenes_Clientes_Detalles_Dimensiones" EntitySet="Ordenes_Clientes_Detalles_Dimensiones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Clientes_Detalles_Marcas" Association="Self.FK_Ordenes_Clientes_Detalles_Marcas">
+      <End Role="Marcas" EntitySet="Marcas" />
+      <End Role="Ordenes_Clientes_Detalles" EntitySet="Ordenes_Clientes_Detalles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Clientes_Detalles_Modelos_Modelos" Association="Self.FK_Ordenes_Clientes_Detalles_Modelos_Modelos">
+      <End Role="Modelos" EntitySet="Modelos" />
+      <End Role="Ordenes_Clientes_Detalles_Modelos" EntitySet="Ordenes_Clientes_Detalles_Modelos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Clientes_Detalles_Modelos_Ordenes_Clientes_Detalles" Association="Self.FK_Ordenes_Clientes_Detalles_Modelos_Ordenes_Clientes_Detalles">
+      <End Role="Ordenes_Clientes_Detalles" EntitySet="Ordenes_Clientes_Detalles" />
+      <End Role="Ordenes_Clientes_Detalles_Modelos" EntitySet="Ordenes_Clientes_Detalles_Modelos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Clientes_Detalles_Ordenes_Clientes" Association="Self.FK_Ordenes_Clientes_Detalles_Ordenes_Clientes">
+      <End Role="Ordenes_Clientes" EntitySet="Ordenes_Clientes" />
+      <End Role="Ordenes_Clientes_Detalles" EntitySet="Ordenes_Clientes_Detalles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Clientes_Detalles_Tipos_Calzados_Ordenes_Clientes_Detalles" Association="Self.FK_Ordenes_Clientes_Detalles_Tipos_Calzados_Ordenes_Clientes_Detalles">
+      <End Role="Ordenes_Clientes_Detalles" EntitySet="Ordenes_Clientes_Detalles" />
+      <End Role="Ordenes_Clientes_Detalles_Tipos_Calzados" EntitySet="Ordenes_Clientes_Detalles_Tipos_Calzados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Clientes_Detalles_Tipos_Calzados_Tipo_Calzados" Association="Self.FK_Ordenes_Clientes_Detalles_Tipos_Calzados_Tipo_Calzados">
+      <End Role="Tipo_Calzados" EntitySet="Tipo_Calzados" />
+      <End Role="Ordenes_Clientes_Detalles_Tipos_Calzados" EntitySet="Ordenes_Clientes_Detalles_Tipos_Calzados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Suplidor_Materia_Prima_Almacen" Association="Self.FK_Suplidor_Materia_Prima_Almacen">
+      <End Role="Almacen" EntitySet="Almacen" />
+      <End Role="Suplidor_Materia_Prima" EntitySet="Suplidor_Materia_Prima" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Suplidor_Materia_Prima_Materias_Primas" Association="Self.FK_Suplidor_Materia_Prima_Materias_Primas">
+      <End Role="Materias_Primas" EntitySet="Materias_Primas" />
+      <End Role="Suplidor_Materia_Prima" EntitySet="Suplidor_Materia_Prima" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Suplidor_Materia_Prima_Suplidores" Association="Self.FK_Suplidor_Materia_Prima_Suplidores">
+      <End Role="Suplidores" EntitySet="Suplidores" />
+      <End Role="Suplidor_Materia_Prima" EntitySet="Suplidor_Materia_Prima" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Almacen_Almacen" Association="Self.FK_Usuarios_Almacen_Almacen">
+      <End Role="Almacen" EntitySet="Almacen" />
+      <End Role="Usuarios_Almacen" EntitySet="Usuarios_Almacen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Almacen_Estados_Usuarios_Almacen" Association="Self.FK_Usuarios_Almacen_Estados_Usuarios_Almacen">
+      <End Role="Estados_Usuarios_Almacen" EntitySet="Estados_Usuarios_Almacen" />
+      <End Role="Usuarios_Almacen" EntitySet="Usuarios_Almacen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Almacen_Usuarios" Association="Self.FK_Usuarios_Almacen_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Usuarios_Almacen" EntitySet="Usuarios_Almacen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Empleados" Association="Self.FK_Usuarios_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="10df15b5da844e3ca12b9f29f532408d" Name="Diagram1" >
+        <EntityTypeShape EntityType="RTMDataSource.Almacen" Width="1.5" PointX="12.75" PointY="4.25" />
+        <EntityTypeShape EntityType="RTMDataSource.Area_Produccion" Width="1.5" PointX="6" PointY="15.875" />
+        <EntityTypeShape EntityType="RTMDataSource.Area_Produccion_Control_Piezas" Width="1.5" PointX="8.25" PointY="19.25" />
+        <EntityTypeShape EntityType="RTMDataSource.Area_Produccion_Materias_Primas" Width="1.5" PointX="16" PointY="8.25" />
+        <EntityTypeShape EntityType="RTMDataSource.Cliente" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="RTMDataSource.Colore" Width="1.5" PointX="8.25" PointY="16" />
+        <EntityTypeShape EntityType="RTMDataSource.Control_Ubicacion_Piezas" Width="1.5" PointX="8.25" PointY="8.25" />
+        <EntityTypeShape EntityType="RTMDataSource.Dimensione" Width="1.5" PointX="8.25" PointY="1.75" />
+        <EntityTypeShape EntityType="RTMDataSource.Empleado" Width="1.5" PointX="13.5" PointY="13" />
+        <EntityTypeShape EntityType="RTMDataSource.Estado" Width="1.5" PointX="6" PointY="1.5" />
+        <EntityTypeShape EntityType="RTMDataSource.Estados_Usuarios_Almacen" Width="1.5" PointX="15.75" PointY="15.625" />
+        <EntityTypeShape EntityType="RTMDataSource.Marca" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="RTMDataSource.Materias_Primas" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RTMDataSource.Metricas_Eficiencias" Width="1.5" PointX="10.5" PointY="8.875" />
+        <EntityTypeShape EntityType="RTMDataSource.Modelo" Width="1.5" PointX="5.25" PointY="13" />
+        <EntityTypeShape EntityType="RTMDataSource.Ordenes_Clientes" Width="1.5" PointX="3" PointY="8.375" />
+        <EntityTypeShape EntityType="RTMDataSource.Ordenes_Clientes_Detalles" Width="1.5" PointX="5.25" PointY="8.375" />
+        <EntityTypeShape EntityType="RTMDataSource.Ordenes_Clientes_Detalles_Colores" Width="1.5" PointX="10.5" PointY="11.75" />
+        <EntityTypeShape EntityType="RTMDataSource.Ordenes_Clientes_Detalles_Dimensiones" Width="1.5" PointX="10.5" PointY="5.75" />
+        <EntityTypeShape EntityType="RTMDataSource.Ordenes_Clientes_Detalles_Modelos" Width="1.5" PointX="7.5" PointY="12.75" />
+        <EntityTypeShape EntityType="RTMDataSource.Ordenes_Clientes_Detalles_Tipos_Calzados" Width="1.5" PointX="7.5" PointY="4.75" />
+        <EntityTypeShape EntityType="RTMDataSource.Role" Width="1.5" PointX="13.5" PointY="10.625" />
+        <EntityTypeShape EntityType="RTMDataSource.Suplidor_Materia_Prima" Width="1.5" PointX="15" PointY="3.875" />
+        <EntityTypeShape EntityType="RTMDataSource.Suplidore" Width="1.5" PointX="12.75" PointY="7.625" />
+        <EntityTypeShape EntityType="RTMDataSource.sysdiagram" Width="1.5" PointX="0.75" PointY="2" />
+        <EntityTypeShape EntityType="RTMDataSource.Tipo_Calzados" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="RTMDataSource.Tipo_Material" Width="1.5" PointX="10.5" PointY="3.125" />
+        <EntityTypeShape EntityType="RTMDataSource.Usuario" Width="1.5" PointX="15.75" PointY="12" />
+        <EntityTypeShape EntityType="RTMDataSource.Usuarios_Almacen" Width="1.5" PointX="18" PointY="4.125" />
+        <AssociationConnector Association="RTMDataSource.FK_Suplidor_Materia_Prima_Almacen" />
+        <AssociationConnector Association="RTMDataSource.FK_Usuarios_Almacen_Almacen" />
+        <AssociationConnector Association="RTMDataSource.FK_Area_Produccion_Control_Piezas_Area_Produccion" />
+        <AssociationConnector Association="RTMDataSource.FK_Area_Produccion_Materias_Primas_Area_Produccion" />
+        <AssociationConnector Association="RTMDataSource.FK_Control_Ubicacion_Piezas_Area_Produccion" />
+        <AssociationConnector Association="RTMDataSource.FK_Area_Produccion_Materias_Primas_Materias_Primas" />
+        <AssociationConnector Association="RTMDataSource.FK_Ordenes_Clientes_Clientes" />
+        <AssociationConnector Association="RTMDataSource.FK_Ordenes_Clientes_Detalles_Colores_Colores" />
+        <AssociationConnector Association="RTMDataSource.FK_Control_Ubicacion_Piezas_Estados" />
+        <AssociationConnector Association="RTMDataSource.FK_Control_Ubicacion_Piezas_Ordenes_Clientes" />
+        <AssociationConnector Association="RTMDataSource.FK_Metricas_Eficiencias_Control_Ubicacion_Piezas" />
+        <AssociationConnector Association="RTMDataSource.FK_Ordenes_Clientes_Detalles_Dimensiones_Dimensiones" />
+        <AssociationConnector Association="RTMDataSource.FK_Usuarios_Empleados" />
+        <AssociationConnector Association="RTMDataSource.FK_Usuarios_Almacen_Estados_Usuarios_Almacen" />
+        <AssociationConnector Association="RTMDataSource.FK_Ordenes_Clientes_Detalles_Marcas" />
+        <AssociationConnector Association="RTMDataSource.FK_Materias_Primas_Tipo_Material" />
+        <AssociationConnector Association="RTMDataSource.FK_Suplidor_Materia_Prima_Materias_Primas" />
+        <AssociationConnector Association="RTMDataSource.FK_Ordenes_Clientes_Detalles_Modelos_Modelos" />
+        <AssociationConnector Association="RTMDataSource.FK_Ordenes_Clientes_Detalles_Ordenes_Clientes" />
+        <AssociationConnector Association="RTMDataSource.FK_Ordenes_Clientes_Detalles_Colores_Ordenes_Clientes_Detalles" />
+        <AssociationConnector Association="RTMDataSource.FK_Ordenes_Clientes_Detalles_Dimensiones_Ordenes_Clientes_Detalles" />
+        <AssociationConnector Association="RTMDataSource.FK_Ordenes_Clientes_Detalles_Modelos_Ordenes_Clientes_Detalles" />
+        <AssociationConnector Association="RTMDataSource.FK_Ordenes_Clientes_Detalles_Tipos_Calzados_Ordenes_Clientes_Detalles" />
+        <AssociationConnector Association="RTMDataSource.FK_Ordenes_Clientes_Detalles_Tipos_Calzados_Tipo_Calzados" />
+        <AssociationConnector Association="RTMDataSource.FK_Usuarios_Roles" />
+        <AssociationConnector Association="RTMDataSource.FK_Suplidor_Materia_Prima_Suplidores" />
+        <AssociationConnector Association="RTMDataSource.FK_Usuarios_Almacen_Usuarios" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
