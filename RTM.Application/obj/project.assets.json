@@ -10376,11 +10376,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Application\\RTM.Application.csproj",
+      "projectUniqueName": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Application\\RTM.Application.csproj",
       "projectName": "RTM.Application",
-      "projectPath": "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Application\\RTM.Application.csproj",
+      "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Application\\RTM.Application.csproj",
       "packagesPath": "C:\\Users\\juan-concentra\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Application\\obj\\",
+      "outputPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -10401,11 +10401,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Models\\RTM.Models.csproj": {
-              "projectPath": "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Models\\RTM.Models.csproj"
+            "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj": {
+              "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj"
             },
-            "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Repository\\RTM.Repository.csproj": {
-              "projectPath": "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Repository\\RTM.Repository.csproj"
+            "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Repository\\RTM.Repository.csproj": {
+              "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Repository\\RTM.Repository.csproj"
             }
           }
         }

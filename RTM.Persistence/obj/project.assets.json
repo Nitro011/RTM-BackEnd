@@ -2851,11 +2851,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Persistence\\RTM.Persistence.csproj",
+      "projectUniqueName": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Persistence\\RTM.Persistence.csproj",
       "projectName": "RTM.Persistence",
-      "projectPath": "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Persistence\\RTM.Persistence.csproj",
+      "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Persistence\\RTM.Persistence.csproj",
       "packagesPath": "C:\\Users\\juan-concentra\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Persistence\\obj\\",
+      "outputPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -2876,8 +2876,8 @@
       "frameworks": {
         "net472": {
           "projectReferences": {
-            "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Models\\RTM.Models.csproj": {
-              "projectPath": "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Models\\RTM.Models.csproj"
+            "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj": {
+              "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj"
             }
           }
         }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JE9nX+zRQTae62Pmy7yYcR4iLdL4wxRicMXOHfX/LcVhnHF3BwZELNfhHGCIBJ7HVfq4hmIZPIEEbpke8Xh5zg==",
+  "dgSpecHash": "wFQmOvmXXlFW7oLGPOKLb/qPiLAX0cdPFlAgrlxpI2Wapc+Fyf2il26vKu02Zt52bH/SNkRdfZKLC3aSzmQxzA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\juan-concentra\\source\\repos\\RayTrackingMobile\\RTM.Application\\RTM.Application.csproj",
+  "projectFilePath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Application\\RTM.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\juan-concentra\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\juan-concentra\\.nuget\\packages\\microsoft.aspnetcore\\2.2.0\\microsoft.aspnetcore.2.2.0.nupkg.sha512",
