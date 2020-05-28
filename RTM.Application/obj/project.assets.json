@@ -3688,7 +3688,7 @@
       ]
     },
     "Microsoft.AspNetCore.Hosting/2.2.0": {
-      "sha512": "ryzJBUA3QL3BP9lR1Hk2wL2FZ7zgSaeaT7dQBX+fbHxirwvq5wArQW6kGzo8aoOGAqME7wYu5woaAVGz5Ozhgw==",
+      "sha512": "7t4RbUGugpHtQmzAkc9fpDdYJg6t/jcB2VVnjensVYbZFnLDU8pNrG0hrekk1DQG7P2UzpSqKLzDsFF0/lkkbw==",
       "type": "package",
       "path": "microsoft.aspnetcore.hosting/2.2.0",
       "files": [
@@ -10369,25 +10369,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\juan-concentra\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\hugog\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Application\\RTM.Application.csproj",
+      "projectUniqueName": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Application\\RTM.Application.csproj",
       "projectName": "RTM.Application",
-      "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Application\\RTM.Application.csproj",
-      "packagesPath": "C:\\Users\\juan-concentra\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Application\\obj\\",
+      "projectPath": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Application\\RTM.Application.csproj",
+      "packagesPath": "C:\\Users\\hugog\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\juan-concentra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\hugog\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -10401,11 +10399,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj": {
-              "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj"
+            "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj": {
+              "projectPath": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj"
             },
-            "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Repository\\RTM.Repository.csproj": {
-              "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Repository\\RTM.Repository.csproj"
+            "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Repository\\RTM.Repository.csproj": {
+              "projectPath": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Repository\\RTM.Repository.csproj"
             }
           }
         }
@@ -10490,7 +10488,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
