@@ -29,16 +29,61 @@ namespace RTM.Application.Controllers.Usuarios
 
         // GET: api/Usuarios
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("[action]")]
+        public async Task<IActionResult> lista()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+
+                var GetUser = await _UnitOfWork.context.Usuarios.Where(x => x.LockoutEnabled == true).ToListAsync();
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetUser
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "El usuario se registro correctamente",
+                    data = ex.Message
+                });
+            }
+
+
+
         }
 
         // GET: api/Usuarios/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> listaPorId(int id)
         {
-            return "value";
+            try
+            {
+
+                var GetUser = await _UnitOfWork.context.Usuarios.Where(x => x.LockoutEnabled == true && x.UsuarioID == id).FirstOrDefaultAsync();
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetUser
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "El usuario se registro correctamente",
+                    data = ex.Message
+                });
+            }
         }
 
         [HttpPost]
@@ -47,15 +92,15 @@ namespace RTM.Application.Controllers.Usuarios
         {
             try
             {
-             var isValid = await loguear(usuario);
+                var isValid = await loguear(usuario);
 
 
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "El usuario se registro correctamente",
+                    message = (isValid == true) ? "El usuario se logueo correctamente" : "Por favor verificar si introdujo las credenciales correctamante",
                     data = isValid
-                }); ;
+                });
             }
             catch (Exception ex)
             {
@@ -74,7 +119,7 @@ namespace RTM.Application.Controllers.Usuarios
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> Post([FromBody] Usuario usuario)
+        public async Task<IActionResult> register([FromBody] Usuario usuario)
         {
             try
             {
@@ -88,7 +133,7 @@ namespace RTM.Application.Controllers.Usuarios
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "El usuario se logueo correctamente",
+                    message = "El usuario se registro correctamente",
                     data = usuario
                 });
             }
@@ -106,10 +151,37 @@ namespace RTM.Application.Controllers.Usuarios
 
         }
 
+
+
         // PUT: api/Usuarios/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Route("[action]")]
+        public async Task<IActionResult> modificar([FromBody] Usuario usuario)
         {
+            try
+            {
+
+                _UnitOfWork.context.Entry(usuario).State = EntityState.Modified;
+
+                await Task.CompletedTask;
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente"
+
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "El usuario se registro correctamente",
+                    data = ex.Message
+                });
+            }
+
         }
 
         // DELETE: api/ApiWithActions/5
@@ -119,26 +191,26 @@ namespace RTM.Application.Controllers.Usuarios
         }
 
 
-        private async Task<bool> loguear(Usuario usuario) 
+        private async Task<bool> loguear(Usuario usuario)
         {
 
             var pass = Encriptar(usuario.PasswordHash);
 
-          var isOne = await _UnitOfWork.context.Usuarios.Where(x => x.UserName == usuario.UserName && x.PasswordHash == pass && x.LockoutEnabled == true).CountAsync();
+            var isOne = await _UnitOfWork.context.Usuarios.Where(x => x.UserName == usuario.UserName && x.PasswordHash == pass && x.LockoutEnabled == true).CountAsync();
 
 
             if (isOne == 1)
             {
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
         }
 
         /// Encripta una cadena
-        private  string Encriptar(string _cadenaAencriptar)
+        private string Encriptar(string _cadenaAencriptar)
         {
             string result = string.Empty;
             byte[] encryted = System.Text.Encoding.Unicode.GetBytes(_cadenaAencriptar);
@@ -147,7 +219,7 @@ namespace RTM.Application.Controllers.Usuarios
         }
 
         /// Esta función desencripta la cadena que le envíamos en el parámentro de entrada.
-        private  string DesEncriptar( string _cadenaAdesencriptar)
+        private string DesEncriptar(string _cadenaAdesencriptar)
         {
             string result = string.Empty;
             byte[] decryted = Convert.FromBase64String(_cadenaAdesencriptar);
