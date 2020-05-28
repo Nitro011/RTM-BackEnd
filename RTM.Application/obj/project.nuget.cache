@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wFQmOvmXXlFW7oLGPOKLb/qPiLAX0cdPFlAgrlxpI2Wapc+Fyf2il26vKu02Zt52bH/SNkRdfZKLC3aSzmQxzA==",
+  "dgSpecHash": "9TxRedp88IyucUOOjTvIjV9f/6uCksAKBoFw+lTo5yZiKgrgmAK/w78yHyz1T1erwobJAMIGzU7ywxF5/0r95Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Application\\RTM.Application.csproj",
   "expectedPackageFiles": [
@@ -29,6 +29,7 @@
     "C:\\Users\\juan-concentra\\.nuget\\packages\\microsoft.aspnetcore.httpoverrides\\2.2.0\\microsoft.aspnetcore.httpoverrides.2.2.0.nupkg.sha512",
     "C:\\Users\\juan-concentra\\.nuget\\packages\\microsoft.aspnetcore.identity\\2.2.0\\microsoft.aspnetcore.identity.2.2.0.nupkg.sha512",
     "C:\\Users\\juan-concentra\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\2.2.0\\microsoft.aspnetcore.identity.entityframeworkcore.2.2.0.nupkg.sha512",
+    "C:\\Users\\juan-concentra\\.nuget\\packages\\microsoft.aspnetcore.mvc.abstractions\\2.2.0\\microsoft.aspnetcore.mvc.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\juan-concentra\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\juan-concentra\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\3.1.0\\microsoft.aspnetcore.razor.language.3.1.0.nupkg.sha512",
     "C:\\Users\\juan-concentra\\.nuget\\packages\\microsoft.aspnetcore.razor.runtime\\2.2.0\\microsoft.aspnetcore.razor.runtime.2.2.0.nupkg.sha512",
