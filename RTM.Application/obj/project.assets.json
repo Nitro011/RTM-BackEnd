@@ -380,6 +380,19 @@
           "lib/netstandard2.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll": {}
         }
       },
+      "Microsoft.AspNetCore.Mvc.Abstractions/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Routing.Abstractions": "2.2.0",
+          "Microsoft.Net.Http.Headers": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Abstractions.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Razor/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -3688,7 +3701,7 @@
       ]
     },
     "Microsoft.AspNetCore.Hosting/2.2.0": {
-      "sha512": "7t4RbUGugpHtQmzAkc9fpDdYJg6t/jcB2VVnjensVYbZFnLDU8pNrG0hrekk1DQG7P2UzpSqKLzDsFF0/lkkbw==",
+      "sha512": "ryzJBUA3QL3BP9lR1Hk2wL2FZ7zgSaeaT7dQBX+fbHxirwvq5wArQW6kGzo8aoOGAqME7wYu5woaAVGz5Ozhgw==",
       "type": "package",
       "path": "microsoft.aspnetcore.hosting/2.2.0",
       "files": [
@@ -3828,6 +3841,19 @@
         "lib/netstandard2.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml",
         "microsoft.aspnetcore.identity.entityframeworkcore.2.2.0.nupkg.sha512",
         "microsoft.aspnetcore.identity.entityframeworkcore.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Mvc.Abstractions/2.2.0": {
+      "sha512": "ET6uZpfVbGR1NjCuLaLy197cQ3qZUjzl7EG5SL4GfJH/c9KRE89MMBrQegqWsh0w1iRUB/zQaK0anAjxa/pz4g==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.mvc.abstractions/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Abstractions.xml",
+        "microsoft.aspnetcore.mvc.abstractions.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.mvc.abstractions.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Razor/2.2.0": {
@@ -10356,6 +10382,7 @@
       "Microsoft.AspNetCore >= 2.2.0",
       "Microsoft.AspNetCore.Identity >= 2.2.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 2.2.0",
+      "Microsoft.AspNetCore.Mvc.Abstractions >= 2.2.0",
       "Microsoft.EntityFrameworkCore >= 3.1.4",
       "Microsoft.EntityFrameworkCore.Design >= 3.1.4",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.4",
@@ -10369,23 +10396,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hugog\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\juan-concentra\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Application\\RTM.Application.csproj",
+      "projectUniqueName": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Application\\RTM.Application.csproj",
       "projectName": "RTM.Application",
-      "projectPath": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Application\\RTM.Application.csproj",
-      "packagesPath": "C:\\Users\\hugog\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Application\\obj\\",
+      "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Application\\RTM.Application.csproj",
+      "packagesPath": "C:\\Users\\juan-concentra\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\hugog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\juan-concentra\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -10399,11 +10428,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj": {
-              "projectPath": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj"
+            "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj": {
+              "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj"
             },
-            "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Repository\\RTM.Repository.csproj": {
-              "projectPath": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Repository\\RTM.Repository.csproj"
+            "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Repository\\RTM.Repository.csproj": {
+              "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Repository\\RTM.Repository.csproj"
             }
           }
         }
@@ -10430,6 +10459,10 @@
             "version": "[2.2.0, )"
           },
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "Microsoft.AspNetCore.Mvc.Abstractions": {
             "target": "Package",
             "version": "[2.2.0, )"
           },
@@ -10488,7 +10521,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -26,8 +26,7 @@ namespace RTM.Models
         public int UsuarioID { get; set; }
         public int? RolID { get; set; }
         public int? EmpleadoID { get; set; }
-        //public string Nombre_Usuario { get; set; }
-       // public string Contrasena { get; set; }
+       
     
         public virtual Empleado Empleado { get; set; }
         public virtual Role Role { get; set; }
