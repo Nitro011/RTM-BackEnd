@@ -116,7 +116,6 @@ namespace RTM.Application.Controllers.Usuarios
 
         }
 
-
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> register([FromBody] Usuario usuario)
@@ -150,8 +149,6 @@ namespace RTM.Application.Controllers.Usuarios
 
 
         }
-
-
 
         // PUT: api/Usuarios/5
         [HttpPut]
