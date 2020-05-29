@@ -169,7 +169,6 @@ C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Persistence\bin\Debug\Microsoft.
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Persistence\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Persistence\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Persistence\bin\Debug\RTM.Models.pdb
-C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Persistence\bin\Debug\RTM.Models.dll.config
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Persistence\bin\Debug\EntityFramework.xml
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Persistence\bin\Debug\Microsoft.Extensions.Identity.Stores.xml
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Persistence\bin\Debug\Microsoft.Extensions.Identity.Core.xml

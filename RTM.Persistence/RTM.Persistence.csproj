@@ -55,9 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\RTM.Models\RTM.Models.csproj">
       <Project>{7C98FD69-0EF0-491A-A3C7-903FCB565E52}</Project>
       <Name>RTM.Models</Name>

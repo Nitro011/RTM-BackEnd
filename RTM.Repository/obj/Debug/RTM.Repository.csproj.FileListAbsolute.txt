@@ -256,7 +256,6 @@ C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\obj\Debug\RTM.Repository.cspro
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\obj\Debug\RTM.Repository.csproj.CopyComplete
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\obj\Debug\RTM.Repository.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\obj\Debug\RTM.Repository.pdb
-C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Repository.dll.config
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Repository.dll
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Repository.pdb
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\Microsoft.AspNetCore.Authentication.Abstractions.dll
@@ -319,7 +318,6 @@ C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\Microsoft.E
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\Microsoft.Data.SqlClient.dll
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\Microsoft.Identity.Client.dll
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Models.pdb
-C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Models.dll.config
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Persistence.pdb
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Persistence.dll.config
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\Microsoft.AspNetCore.Authentication.xml

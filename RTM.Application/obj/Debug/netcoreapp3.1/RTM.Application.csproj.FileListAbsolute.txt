@@ -277,9 +277,7 @@ C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Persistence.dll
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Repository.dll
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Models.pdb
-C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Models.dll.config
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Repository.pdb
-C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Repository.dll.config
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Persistence.pdb
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Persistence.dll.config
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csprojAssemblyReference.cache
