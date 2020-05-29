@@ -222,7 +222,6 @@ C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.csproj.CoreCo
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.csproj.CopyComplete
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.pdb
-C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\bin\Debug\RTM.Models.dll.config
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\bin\Debug\RTM.Models.dll
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\bin\Debug\RTM.Models.pdb
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\bin\Debug\EntityFramework.dll

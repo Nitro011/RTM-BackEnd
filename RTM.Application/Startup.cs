@@ -39,6 +39,16 @@ namespace RTM.Application
 
             services.AddDbContext<RTMDbContext>();
 
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AutomaticAuthentication = false;
+            });
+
+            services.Configure<IISOptions>(options =>
+            {
+                options.ForwardClientCertificate = false;
+            });
+
             IoC.AddDependecy(services);
         }
 
