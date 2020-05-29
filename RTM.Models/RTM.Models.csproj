@@ -327,8 +327,6 @@
     <Folder Include="DTO\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
     <EntityDeploy Include="RTMDataSource.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>RTMDataSource.Designer.cs</LastGenOutput>
