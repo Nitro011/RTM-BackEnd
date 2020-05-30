@@ -440,3 +440,4 @@ C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.A
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.genruntimeconfig.cache
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csproj.CoreCompileInputs.cache
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Repository.dll.config
