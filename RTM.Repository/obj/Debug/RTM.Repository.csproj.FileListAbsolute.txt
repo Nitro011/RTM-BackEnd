@@ -190,7 +190,6 @@ C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\Microsoft.EntityFram
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\Microsoft.Data.SqlClient.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\Microsoft.Identity.Client.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Models.pdb
-C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Models.dll.config
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Persistence.pdb
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Persistence.dll.config
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\Microsoft.AspNetCore.Authentication.xml

@@ -110,7 +110,6 @@ C:\Users\juan-concentra\source\repos\RayTrackingMobile\RTM.Models\bin\Debug\Enti
 C:\Users\juan-concentra\source\repos\RayTrackingMobile\RTM.Models\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\juan-concentra\source\repos\RayTrackingMobile\RTM.Models\bin\Debug\EntityFramework.xml
 C:\Users\juan-concentra\source\repos\RayTrackingMobile\RTM.Models\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Models\bin\Debug\RTM.Models.dll.config
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Models\bin\Debug\RTM.Models.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Models\bin\Debug\RTM.Models.pdb
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Models\bin\Debug\EntityFramework.dll

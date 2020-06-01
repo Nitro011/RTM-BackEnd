@@ -4372,7 +4372,7 @@
     "Microsoft.AspNetCore.Hosting/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ryzJBUA3QL3BP9lR1Hk2wL2FZ7zgSaeaT7dQBX+fbHxirwvq5wArQW6kGzo8aoOGAqME7wYu5woaAVGz5Ozhgw==",
+      "sha512": "sha512-7t4RbUGugpHtQmzAkc9fpDdYJg6t/jcB2VVnjensVYbZFnLDU8pNrG0hrekk1DQG7P2UzpSqKLzDsFF0/lkkbw==",
       "path": "microsoft.aspnetcore.hosting/2.2.0",
       "hashPath": "microsoft.aspnetcore.hosting.2.2.0.nupkg.sha512"
     },
