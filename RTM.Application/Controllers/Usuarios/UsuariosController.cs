@@ -97,8 +97,8 @@ namespace RTM.Application.Controllers.Usuarios
 
                 return Ok(new Request()
                 {
-                    status = true,
-                    message = (isValid == true) ? "El usuario se logueo correctamente" : "Por favor verificar si introdujo las credenciales correctamante",
+                    status = isValid,
+                    message = (isValid) ? "El usuario se logueo correctamente" : "Por favor verificar si introdujo las credenciales correctamante",
                     data = isValid
                 });
             }
@@ -189,8 +189,6 @@ namespace RTM.Application.Controllers.Usuarios
         public void Delete(int id)
         {
         }
-
-
         private async Task<bool> loguear(Usuario usuario)
         {
 
