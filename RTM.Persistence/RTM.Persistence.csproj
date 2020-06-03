@@ -54,6 +54,14 @@
     <Compile Include="Migrations\20200602235219_UpdateClientes.designer.cs">
       <DependentUpon>20200602235219_UpdateClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200603045201_UpdateTableEmpleado.cs" />
+    <Compile Include="Migrations\20200603045201_UpdateTableEmpleado.designer.cs">
+      <DependentUpon>20200603045201_UpdateTableEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200603051746_UpdateTableEmpleadoV2.cs" />
+    <Compile Include="Migrations\20200603051746_UpdateTableEmpleadoV2.designer.cs">
+      <DependentUpon>20200603051746_UpdateTableEmpleadoV2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\RTMDbContextModelSnapshot.cs" />
     <Compile Include="RTMDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

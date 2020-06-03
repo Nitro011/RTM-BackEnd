@@ -13,6 +13,7 @@ namespace RTM.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Usuario:IdentityUser
     {
@@ -24,12 +25,15 @@ namespace RTM.Models
 
         [Key]
         public int UsuarioID { get; set; }
+
+        [ForeignKey("Role")]
         public int? RolID { get; set; }
-        public int? EmpleadoID { get; set; }
-       
-    
+      
+        [ForeignKey("Empleado")]
+        public int? EmpleadoID { get; set; }     
         public virtual Empleado Empleado { get; set; }
         public virtual Role Role { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuarios_Almacen> Usuarios_Almacen { get; set; }
     }
