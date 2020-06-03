@@ -327,7 +327,6 @@ C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\bin\Debug\System.Memory.x
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\bin\Debug\System.Text.Encodings.Web.xml
-C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.csprojAssemblyReference.cache
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.csproj.CoreCompileInputs.cache
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.csproj.CopyComplete
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.dll
