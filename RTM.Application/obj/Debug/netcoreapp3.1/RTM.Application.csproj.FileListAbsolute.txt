@@ -421,7 +421,6 @@ C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.M
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Persistence.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Repository.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Models.pdb
-C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Models.dll.config
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Repository.pdb
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Repository.dll.config
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Persistence.pdb
