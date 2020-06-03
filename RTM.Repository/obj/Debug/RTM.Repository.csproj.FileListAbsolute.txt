@@ -255,6 +255,7 @@ C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\obj\Debug\RTM.Repository.cspro
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\obj\Debug\RTM.Repository.csproj.CopyComplete
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\obj\Debug\RTM.Repository.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Repository\obj\Debug\RTM.Repository.pdb
+C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Repository.dll.config
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Repository.dll
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Repository.pdb
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\Microsoft.AspNetCore.Authentication.Abstractions.dll
@@ -382,4 +383,3 @@ C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\obj\Debug\RTM.Reposit
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\obj\Debug\RTM.Repository.csproj.CopyComplete
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\obj\Debug\RTM.Repository.dll
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\obj\Debug\RTM.Repository.pdb
-C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Repository\bin\Debug\RTM.Repository.dll.config

@@ -26,7 +26,7 @@ namespace RTM.Persistence
 
         public DbSet<Area_Produccion_Control_Piezas> Area_Produccion_Control_Piezas { get; set; }
 
-        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
         public DbSet<Colore> Colores { get; set; }
 

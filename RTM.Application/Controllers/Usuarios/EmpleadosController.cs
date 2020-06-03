@@ -4,24 +4,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
 using RTM.Models.DTO;
-using RTM.Persistence;
 using RTM.Repository.Interface;
 
 namespace RTM.Application.Controllers.Usuarios
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class EmpleadosController : ControllerBase
     {
 
-        private readonly IUnitOfWork _UnitOfWork;
-        private readonly IGenericRepository<Usuario> _GenericRepository;
 
-        public UsuariosController(IUnitOfWork UnitOfWork, IGenericRepository<Usuario> GenericRepository)
+
+        private readonly IUnitOfWork _UnitOfWork;
+        private readonly IGenericRepository<Empleado> _GenericRepository;
+
+        public EmpleadosController(IUnitOfWork UnitOfWork, IGenericRepository<Empleado> GenericRepository)
         {
             this._UnitOfWork = UnitOfWork;
             this._GenericRepository = GenericRepository;
@@ -36,7 +36,7 @@ namespace RTM.Application.Controllers.Usuarios
             try
             {
 
-                var GetUser = await _UnitOfWork.context.Usuarios.Where(x => x.LockoutEnabled == true).ToListAsync();
+                var GetUser = await _UnitOfWork.context.Empleados.ToListAsync();
 
                 return Ok(new Request()
                 {
@@ -67,7 +67,7 @@ namespace RTM.Application.Controllers.Usuarios
             try
             {
 
-                var GetUser = await _UnitOfWork.context.Usuarios.Where(x => x.LockoutEnabled == true && x.UsuarioID == id).FirstOrDefaultAsync();
+                var GetUser = await _UnitOfWork.context.Empleados.Where(x => x.EmpleadoID == id).FirstOrDefaultAsync();
 
                 return Ok(new Request()
                 {
@@ -89,43 +89,13 @@ namespace RTM.Application.Controllers.Usuarios
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> login([FromBody] Usuario usuario)
-        {
-            try
-            {
-                var isValid = await loguear(usuario);
-
-
-                return Ok(new Request()
-                {
-                    status = isValid,
-                    message = (isValid) ? "El usuario se logueo correctamente" : "Por favor verificar si introdujo las credenciales correctamante",
-                    data = isValid
-                });
-            }
-            catch (Exception ex)
-            {
-
-                return Ok(new Request()
-                {
-                    status = true,
-                    message = "El usuario se registro correctamente",
-                    data = ex.Message
-                });
-            }
-
-
-        }
-
-
-        [HttpPost]
-        [Route("[action]")]
         public async Task<IActionResult> register([FromBody] UsuariosEmpleadosDTO usuario)
         {
             try
             {
 
-               
+
+
                 var empleado = new Empleado()
                 {
                     Nombres = usuario.Nombres,
@@ -156,7 +126,7 @@ namespace RTM.Application.Controllers.Usuarios
 
                 var pass = Encriptar(usuario.PasswordHash);
                 user.PasswordHash = pass;
-                await _GenericRepository.Add(user);
+                await _UnitOfWork.context.Usuarios.AddAsync(user);
                 _UnitOfWork.Commit();
 
 
@@ -164,7 +134,7 @@ namespace RTM.Application.Controllers.Usuarios
                 {
                     status = true,
                     message = "El usuario se registro correctamente",
-                    data = usuario
+                    data = empleado
                 });
             }
             catch (Exception ex)
@@ -180,26 +150,24 @@ namespace RTM.Application.Controllers.Usuarios
 
 
         }
-
-
 
         // PUT: api/Usuarios/5
         [HttpPut]
         [Route("[action]")]
-        public async Task<IActionResult> modificar([FromBody] Usuario usuario)
+        public async Task<IActionResult> modificar([FromBody] Empleado empleado)
         {
             try
             {
 
-                _UnitOfWork.context.Entry(usuario).State = EntityState.Modified;
-
-                await Task.CompletedTask;
+                await _GenericRepository.Update(empleado); 
+                 _UnitOfWork.Commit();
 
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "Esta accion se ejecuto correctamente"
-
+                    message = "Esta accion se ejecuto correctamente",
+                    data = empleado
+                    
                 });
             }
             catch (Exception ex)
@@ -213,31 +181,12 @@ namespace RTM.Application.Controllers.Usuarios
             }
 
         }
-
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
         }
-        private async Task<bool> loguear(Usuario usuario)
-        {
 
-            var pass = Encriptar(usuario.PasswordHash);
-
-            var isOne = await _UnitOfWork.context.Usuarios.Where(x => x.UserName == usuario.UserName && x.PasswordHash == pass && x.LockoutEnabled == true).CountAsync();
-
-
-            if (isOne == 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /// Encripta una cadena
         private string Encriptar(string _cadenaAencriptar)
         {
             string result = string.Empty;
@@ -245,17 +194,5 @@ namespace RTM.Application.Controllers.Usuarios
             result = Convert.ToBase64String(encryted);
             return result;
         }
-
-        /// Esta función desencripta la cadena que le envíamos en el parámentro de entrada.
-        private string DesEncriptar(string _cadenaAdesencriptar)
-        {
-            string result = string.Empty;
-            byte[] decryted = Convert.FromBase64String(_cadenaAdesencriptar);
-            //result = System.Text.Encoding.Unicode.GetString(decryted, 0, decryted.ToArray().Length);
-            result = System.Text.Encoding.Unicode.GetString(decryted);
-            return result;
-        }
-
-
     }
 }

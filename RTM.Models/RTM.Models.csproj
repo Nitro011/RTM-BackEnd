@@ -242,6 +242,7 @@
     <Compile Include="Dimensione.cs">
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\UsuariosEmpleadosDTO.cs" />
     <Compile Include="Empleado.cs">
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>
@@ -323,9 +324,7 @@
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EntityDeploy Include="RTMDataSource.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

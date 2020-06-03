@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RTM.Persistence;
 
 namespace RTM.Persistence.Migrations
 {
     [DbContext(typeof(RTMDbContext))]
-    partial class RTMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200603045201_UpdateTableEmpleado")]
+    partial class UpdateTableEmpleado
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,8 +232,8 @@ namespace RTM.Persistence.Migrations
                     b.Property<string>("Nombres")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Sexo")
-                        .HasColumnType("bit");
+                    b.Property<string>("Sexo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
