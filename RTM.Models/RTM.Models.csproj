@@ -242,6 +242,8 @@
     <Compile Include="Dimensione.cs">
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\EmpleadosListView.cs" />
+    <Compile Include="DTO\UsuarioById.cs" />
     <Compile Include="DTO\UsuariosEmpleadosDTO.cs" />
     <Compile Include="Empleado.cs">
       <DependentUpon>RTMDataSource.tt</DependentUpon>
