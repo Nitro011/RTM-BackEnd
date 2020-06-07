@@ -95,7 +95,6 @@ namespace RTM.Application.Controllers.Usuarios
             {
 
 
-
                 var empleado = new Empleado()
                 {
                     Nombres = usuario.Nombres,

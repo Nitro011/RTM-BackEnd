@@ -331,3 +331,4 @@ C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.cspr
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.csproj.CopyComplete
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.dll
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.pdb
+C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Models\obj\Debug\RTM.Models.csprojAssemblyReference.cache
