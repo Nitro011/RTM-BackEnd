@@ -36,7 +36,7 @@ namespace RTM.Application.Controllers.Usuarios
             try
             {
 
-                var GetUser = await _UnitOfWork.context.Empleados.ToListAsync();
+                var GetUser = await EmpleadosListViews();
 
                 return Ok(new Request()
                 {
@@ -67,7 +67,7 @@ namespace RTM.Application.Controllers.Usuarios
             try
             {
 
-                var GetUser = await _UnitOfWork.context.Empleados.Where(x => x.EmpleadoID == id).FirstOrDefaultAsync();
+                var GetUser = await UsuarioEmpleado(id);
 
                 return Ok(new Request()
                 {
@@ -158,15 +158,15 @@ namespace RTM.Application.Controllers.Usuarios
             try
             {
 
-                await _GenericRepository.Update(empleado); 
-                 _UnitOfWork.Commit();
+                await _GenericRepository.Update(empleado);
+                _UnitOfWork.Commit();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
                     data = empleado
-                    
+
                 });
             }
             catch (Exception ex)
@@ -186,6 +186,45 @@ namespace RTM.Application.Controllers.Usuarios
         {
         }
 
+        private async Task<List<EmpleadosListView>> EmpleadosListViews()
+        {
+            return await _UnitOfWork.context.Usuarios
+                .Include(x => x.Empleado)
+                .Include(x => x.Role)
+                .Select(x => new EmpleadosListView()
+                {
+
+                    Id = (x.Empleado != null) ? x.Empleado.EmpleadoID : 0,
+                    NombreCompleto = (x.Empleado != null) ? $"{x.Empleado.Nombres } {x.Empleado.Apellidos}" : "",
+                    Puesto = (x.Role != null) ? x.Role.Tipo_Usuario : ""
+
+                }).ToListAsync();
+
+        }
+
+        private async Task<UsuarioById> UsuarioEmpleado(int id)
+        {
+            return await _UnitOfWork.context.Usuarios
+                   .Include(x => x.Empleado)
+                   .Include(x => x.Role)
+                   .Where(x => x.EmpleadoID == id)
+                   .Select(x => new UsuarioById()
+                   {
+                       IdEmpleado = (x.Empleado != null) ? x.Empleado.EmpleadoID : 0,
+                       Nombre = (x.Empleado != null) ? $"{x.Empleado.Nombres} {x.Empleado.Nombres}" : "",
+                       sexo = (x.Empleado != null) ? (bool)x.Empleado.Sexo : true,
+                       cedula = (x.Empleado != null) ? x.Empleado.Cedula : "",
+                       fecha_nacimiento = (x.Empleado != null) ? x.Empleado.Fecha_Nacimiento:DateTime.MinValue,
+                       edad = (x.Empleado != null)?(int)x.Empleado.Edad:0,
+                       direccion = (x.Empleado != null)?x.Empleado.Direccion:"",
+                       telefono = (x.Empleado != null)?x.Empleado.Telefono:"",
+                       puesto = (x.Role != null)? x.Role.Tipo_Usuario:""
+
+
+                   }).FirstOrDefaultAsync();
+
+
+        }
         private string Encriptar(string _cadenaAencriptar)
         {
             string result = string.Empty;
