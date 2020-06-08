@@ -199,7 +199,7 @@ namespace RTM.Application.Controllers.Usuarios
         }
 
         // PUT: api/Usuarios/5
-        [HttpPut]
+        [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> modificar([FromBody] UsuariosEmpleadosDTO usuarios)
         {
@@ -271,7 +271,7 @@ namespace RTM.Application.Controllers.Usuarios
             return await _UnitOfWork.context.Usuarios
                 .Include(x => x.Empleado)
                 .Include(x => x.Role)
-                .Where(x=>x.UsuarioID != 1)
+                .Where(x=>x.UsuarioID != 1  && x.LockoutEnabled == true)
                 .Select(x => new EmpleadosListView()
                 {
 
