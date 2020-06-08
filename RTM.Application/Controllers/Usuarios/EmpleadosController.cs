@@ -184,6 +184,7 @@ namespace RTM.Application.Controllers.Usuarios
         {
         }
 
+        //Funciones
         private async Task<List<EmpleadosListView>> EmpleadosListViews()
         {
             return await _UnitOfWork.context.Usuarios
@@ -232,7 +233,7 @@ namespace RTM.Application.Controllers.Usuarios
             return await _UnitOfWork.context.Usuarios
                    .Include(x => x.Empleado)
                    .Include(x => x.Role)
-                   .Where(x => x.EmpleadoID == id)
+                   .Where(x => x.EmpleadoID == id && x.LockoutEnabled == true)
                    .Select(x => new UsuarioById()
                    {
                        IdEmpleado = (x.Empleado != null) ? x.Empleado.EmpleadoID : 0,
