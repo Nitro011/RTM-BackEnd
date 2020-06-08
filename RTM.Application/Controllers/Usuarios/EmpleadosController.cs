@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,8 +16,6 @@ namespace RTM.Application.Controllers.Usuarios
     [ApiController]
     public class EmpleadosController : ControllerBase
     {
-
-
 
         private readonly IUnitOfWork _UnitOfWork;
         private readonly IGenericRepository<Empleado> _GenericRepository;
@@ -62,6 +61,34 @@ namespace RTM.Application.Controllers.Usuarios
         // GET: api/Usuarios/5
         [HttpGet]
         [Route("[action]/{id}")]
+        public async Task<IActionResult> listaPorIdEmpleados(int id)
+        {
+            try
+            {
+
+                var GetUser = await EmpleadoPorId(id);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetUser
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "El usuario se registro correctamente",
+                    data = ex.Message
+                });
+            }
+        }
+
+        // GET: api/Usuarios/5
+        [HttpGet]
+        [Route("[action]/{id}")]
         public async Task<IActionResult> listaPorId(int id)
         {
             try
@@ -93,45 +120,69 @@ namespace RTM.Application.Controllers.Usuarios
         {
             try
             {
-                var empleado = new Empleado()
+                var empleado = new Empleado();
+
+                var isExist = await Validar(usuario.Cedula, usuario.Email, usuario.UserName);
+
+
+                if (!isExist)
                 {
-                    Nombres = usuario.Nombres,
-                    Apellidos = usuario.Apellidos,
-                    Sexo = usuario.Sexo,
-                    Cedula = usuario.Cedula,
-                    Fecha_Nacimiento = usuario.Fecha_Nacimiento,
-                    Edad = usuario.Edad,
-                    Direccion = usuario.Direccion,
-                    Telefono = usuario.Telefono
-                };
+                     empleado = new Empleado()
+                    {
+                        Nombres = usuario.Nombres,
+                        Apellidos = usuario.Apellidos,
+                        Sexo = usuario.Sexo,
+                        Cedula = usuario.Cedula,
+                        Fecha_Nacimiento = usuario.Fecha_Nacimiento,
+                        Edad = usuario.Edad,
+                        Direccion = usuario.Direccion,
+                        Telefono = usuario.Telefono
+                    };
 
-                await _UnitOfWork.context.Empleados.AddAsync(empleado);
-                _UnitOfWork.Commit();
+                    await _UnitOfWork.context.Empleados.AddAsync(empleado);
+                    _UnitOfWork.Commit();
 
 
-                var user = new Usuario()
+                    var user = new Usuario()
+                    {
+
+                        UserName = usuario.UserName,
+                        LockoutEnabled = true,
+                        Email = usuario.Email,
+                        RolID = usuario.RolID,
+                        EmpleadoID = empleado.EmpleadoID
+
+                    };
+
+                    var pass = Encriptar(usuario.PasswordHash);
+                    user.PasswordHash = pass;
+                    await _UnitOfWork.context.Usuarios.AddAsync(user);
+                    _UnitOfWork.Commit();
+
+
+                 
+                }
+
+                if (isExist)
                 {
-
-                    UserName = usuario.UserName,
-                    LockoutEnabled = true,
-                    Email = usuario.Email,
-                    RolID = usuario.RolID,
-                    EmpleadoID = empleado.EmpleadoID
-
-                };
-
-                var pass = Encriptar(usuario.PasswordHash);
-                user.PasswordHash = pass;
-                await _UnitOfWork.context.Usuarios.AddAsync(user);
-                _UnitOfWork.Commit();
-
-
-                return Ok(new Request()
+                    return Ok(new Request()
+                    {
+                        status = false,
+                        message = "Este usuario existe en nuestra base de datos"
+                       
+                    });
+                }
+                else
                 {
-                    status = true,
-                    message = "El usuario se registro correctamente",
-                    data = empleado
-                });
+                    return Ok(new Request()
+                    {
+                        status = true,
+                        message = "Este usuario se registro exitosamente",
+                        data = empleado
+
+                    });
+                }
+
             }
             catch (Exception ex)
             {
@@ -154,20 +205,26 @@ namespace RTM.Application.Controllers.Usuarios
         {
             try
             {
-                var pass = Encriptar(usuarios.PasswordHash);
+               // var empleado = new Empleado();
 
-                usuarios.PasswordHash = pass;
-                await modificarEmpleado(usuarios);
+              //  var isExist = await Validar(usuarios.Cedula, usuarios.Email, usuarios.UserName);
 
-                _UnitOfWork.Commit();
+                    var pass = Encriptar(usuarios.PasswordHash);
 
-                return Ok(new Request()
-                {
-                    status = true,
-                    message = "Esta accion se ejecuto correctamente"
-                    
+                    usuarios.PasswordHash = pass;
+                    await modificarEmpleado(usuarios);
 
-                });
+                    _UnitOfWork.Commit();
+
+              
+                
+                    return Ok(new Request()
+                    {
+                        status = true,
+                        message = "Usuario modificado exitosamente"
+                    });
+                
+              
             }
             catch (Exception ex)
             {
@@ -188,6 +245,27 @@ namespace RTM.Application.Controllers.Usuarios
         }
 
         //Funciones
+
+        private async Task<bool> Validar(string cedula, string email,string nombreUsuario)
+        {
+            bool isExist = true;
+
+         var existe =  await _UnitOfWork.context.Usuarios
+             .Include(x => x.Empleado)
+             .Include(x => x.Role)
+             .Where(x => x.Empleado.Cedula == cedula || x.Email == email || x.UserName == nombreUsuario).FirstOrDefaultAsync();
+
+            if (existe != null)
+            {
+              return  isExist = true;
+            }
+            else
+            {
+               return isExist = false;
+
+            }
+        }
+
         private async Task<List<EmpleadosListView>> EmpleadosListViews()
         {
             return await _UnitOfWork.context.Usuarios
@@ -205,6 +283,32 @@ namespace RTM.Application.Controllers.Usuarios
 
         }
 
+        private async Task<UsuariosEmpleadosDTO> EmpleadoPorId (int id) 
+        {
+            return await _UnitOfWork.context.Usuarios.Where(x => x.EmpleadoID == id)
+                    .Include(a => a.Empleado)
+                    
+                    .Select(r => new UsuariosEmpleadosDTO()
+                    {
+                        EmpleadoId = r.EmpleadoID,
+                        RolID = r.RolID,
+                        Nombres = (r.Empleado != null) ? r.Empleado.Nombres : "",
+                        Apellidos = (r.Empleado != null) ? r.Empleado.Apellidos : "",
+                        UserName = r.UserName,
+                        Email = r.Email,
+                        PasswordHash = r.PasswordHash,
+                        Sexo = (r.Empleado != null) ? r.Empleado.Sexo : true,
+                        Cedula = (r.Empleado != null) ? r.Empleado.Cedula : "",
+                        Edad = (r.Empleado != null) ? r.Empleado.Edad : 0,
+                        Direccion = (r.Empleado != null) ? r.Empleado.Direccion : "",
+                        Telefono = (r.Empleado != null) ? r.Empleado.Telefono : "",
+                        Fecha_Nacimiento = (r.Empleado != null) ? r.Empleado.Fecha_Nacimiento : DateTime.MinValue,
+                        LockoutEnabled = r.LockoutEnabled
+                    }).FirstOrDefaultAsync();
+        
+        
+        }
+
         private async Task modificarEmpleado(UsuariosEmpleadosDTO usuarioEmpleado)
         {
             var empleado = await _UnitOfWork.context.Empleados.Where(x => x.EmpleadoID == usuarioEmpleado.EmpleadoId).FirstOrDefaultAsync();
@@ -212,10 +316,12 @@ namespace RTM.Application.Controllers.Usuarios
 
             usuario.EmpleadoID = usuarioEmpleado.EmpleadoId;
             usuario.RolID = usuarioEmpleado.RolID;
-            usuario.LockoutEnabled = usuarioEmpleado.LockoutEnabled;
+            usuario.LockoutEnabled = (bool)usuarioEmpleado.LockoutEnabled;
             usuario.PasswordHash = usuarioEmpleado.PasswordHash;
             usuario.UserName = usuarioEmpleado.UserName;
             usuario.Email = usuarioEmpleado.Email;
+           
+
             empleado.Nombres = usuarioEmpleado.Nombres;
             empleado.Apellidos = usuarioEmpleado.Apellidos;
             empleado.Sexo = usuarioEmpleado.Sexo;
