@@ -285,7 +285,7 @@ namespace RTM.Application.Controllers.Usuarios
 
         private async Task<UsuariosEmpleadosDTO> EmpleadoPorId (int id) 
         {
-            return await _UnitOfWork.context.Usuarios.Where(x => x.EmpleadoID == id)
+            var usuario = await _UnitOfWork.context.Usuarios.Where(x => x.EmpleadoID == id)
                     .Include(a => a.Empleado)
                     
                     .Select(r => new UsuariosEmpleadosDTO()
@@ -305,8 +305,12 @@ namespace RTM.Application.Controllers.Usuarios
                         Fecha_Nacimiento = (r.Empleado != null) ? r.Empleado.Fecha_Nacimiento : DateTime.MinValue,
                         LockoutEnabled = r.LockoutEnabled
                     }).FirstOrDefaultAsync();
-        
-        
+
+                  usuario.PasswordHash = DesEncriptar(usuario.PasswordHash);
+
+            return usuario;
+
+
         }
 
         private async Task modificarEmpleado(UsuariosEmpleadosDTO usuarioEmpleado)
@@ -368,5 +372,15 @@ namespace RTM.Application.Controllers.Usuarios
             result = Convert.ToBase64String(encryted);
             return result;
         }
+
+        private string DesEncriptar(string _cadenaAdesencriptar)
+        {
+            string result = string.Empty;
+            byte[] decryted = Convert.FromBase64String(_cadenaAdesencriptar);
+           // result = System.Text.Encoding.Unicode.GetString(decryted, 0, decryted.ToArray().Length);
+            result = System.Text.Encoding.Unicode.GetString(decryted);
+            return result;
+        }
+
     }
 }
