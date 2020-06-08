@@ -93,8 +93,6 @@ namespace RTM.Application.Controllers.Usuarios
         {
             try
             {
-
-
                 var empleado = new Empleado()
                 {
                     Nombres = usuario.Nombres,
@@ -105,7 +103,6 @@ namespace RTM.Application.Controllers.Usuarios
                     Edad = usuario.Edad,
                     Direccion = usuario.Direccion,
                     Telefono = usuario.Telefono
-
                 };
 
                 await _UnitOfWork.context.Empleados.AddAsync(empleado);
@@ -153,19 +150,22 @@ namespace RTM.Application.Controllers.Usuarios
         // PUT: api/Usuarios/5
         [HttpPut]
         [Route("[action]")]
-        public async Task<IActionResult> modificar([FromBody] Empleado empleado)
+        public async Task<IActionResult> modificar([FromBody] UsuariosEmpleadosDTO usuarios)
         {
             try
             {
+                var pass = Encriptar(usuarios.PasswordHash);
 
-                await _GenericRepository.Update(empleado);
+                usuarios.PasswordHash = pass;
+                await modificarEmpleado(usuarios);
+
                 _UnitOfWork.Commit();
 
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "Esta accion se ejecuto correctamente",
-                    data = empleado
+                    message = "Esta accion se ejecuto correctamente"
+                    
 
                 });
             }
@@ -180,26 +180,55 @@ namespace RTM.Application.Controllers.Usuarios
             }
 
         }
+      
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
         }
 
+        //Funciones
         private async Task<List<EmpleadosListView>> EmpleadosListViews()
         {
             return await _UnitOfWork.context.Usuarios
                 .Include(x => x.Empleado)
                 .Include(x => x.Role)
+                .Where(x=>x.UsuarioID != 1)
                 .Select(x => new EmpleadosListView()
                 {
 
                     Id = (x.Empleado != null) ? x.Empleado.EmpleadoID : 0,
-                    NombreCompleto = (x.Empleado != null) ? $"{x.Empleado.Nombres } {x.Empleado.Apellidos}" : "",
-                    Puesto = (x.Role != null) ? x.Role.Tipo_Usuario : ""
+                    NombreCompleto = (x.Empleado != null) ? $"Nombre: {x.Empleado.Nombres } {x.Empleado.Apellidos}" : "",
+                    Puesto = (x.Role != null) ? $"Cargo ocupado: {x.Role.Tipo_Usuario}" : ""
 
                 }).ToListAsync();
 
+        }
+
+        private async Task modificarEmpleado(UsuariosEmpleadosDTO usuarioEmpleado)
+        {
+            var empleado = await _UnitOfWork.context.Empleados.Where(x => x.EmpleadoID == usuarioEmpleado.EmpleadoId).FirstOrDefaultAsync();
+            var usuario = await _UnitOfWork.context.Usuarios.Where(x => x.EmpleadoID == usuarioEmpleado.EmpleadoId).FirstOrDefaultAsync();
+
+            usuario.EmpleadoID = usuarioEmpleado.EmpleadoId;
+            usuario.RolID = usuarioEmpleado.RolID;
+            usuario.LockoutEnabled = usuarioEmpleado.LockoutEnabled;
+            usuario.PasswordHash = usuarioEmpleado.PasswordHash;
+            usuario.UserName = usuarioEmpleado.UserName;
+            usuario.Email = usuarioEmpleado.Email;
+            empleado.Nombres = usuarioEmpleado.Nombres;
+            empleado.Apellidos = usuarioEmpleado.Apellidos;
+            empleado.Sexo = usuarioEmpleado.Sexo;
+            empleado.Cedula = usuarioEmpleado.Cedula;
+            empleado.Fecha_Nacimiento = usuarioEmpleado.Fecha_Nacimiento;
+            empleado.Edad = usuarioEmpleado.Edad;
+            empleado.Direccion = usuarioEmpleado.Direccion;
+            empleado.Telefono = usuarioEmpleado.Telefono;
+
+            _UnitOfWork.context.Entry(empleado).State = EntityState.Modified;
+            _UnitOfWork.context.Entry(usuario).State = EntityState.Modified;
+
+            await Task.CompletedTask;
         }
 
         private async Task<UsuarioById> UsuarioEmpleado(int id)
@@ -207,24 +236,25 @@ namespace RTM.Application.Controllers.Usuarios
             return await _UnitOfWork.context.Usuarios
                    .Include(x => x.Empleado)
                    .Include(x => x.Role)
-                   .Where(x => x.EmpleadoID == id)
+                   .Where(x => x.EmpleadoID == id && x.LockoutEnabled == true)
                    .Select(x => new UsuarioById()
                    {
                        IdEmpleado = (x.Empleado != null) ? x.Empleado.EmpleadoID : 0,
-                       Nombre = (x.Empleado != null) ? $"{x.Empleado.Nombres} {x.Empleado.Nombres}" : "",
+                       Nombre = (x.Empleado != null) ? $"{x.Empleado.Nombres} {x.Empleado.Apellidos}" : "",
                        sexo = (x.Empleado != null) ? (bool)x.Empleado.Sexo : true,
                        cedula = (x.Empleado != null) ? x.Empleado.Cedula : "",
-                       fecha_nacimiento = (x.Empleado != null) ? x.Empleado.Fecha_Nacimiento:DateTime.MinValue,
-                       edad = (x.Empleado != null)?(int)x.Empleado.Edad:0,
-                       direccion = (x.Empleado != null)?x.Empleado.Direccion:"",
-                       telefono = (x.Empleado != null)?x.Empleado.Telefono:"",
-                       puesto = (x.Role != null)? x.Role.Tipo_Usuario:""
+                       fecha_nacimiento = (x.Empleado != null) ? x.Empleado.Fecha_Nacimiento : DateTime.MinValue,
+                       edad = (x.Empleado != null) ? (int)x.Empleado.Edad : 0,
+                       direccion = (x.Empleado != null) ? x.Empleado.Direccion : "",
+                       telefono = (x.Empleado != null) ? x.Empleado.Telefono : "",
+                       puesto = (x.Role != null) ? x.Role.Tipo_Usuario : ""
 
 
                    }).FirstOrDefaultAsync();
 
 
         }
+
         private string Encriptar(string _cadenaAencriptar)
         {
             string result = string.Empty;
