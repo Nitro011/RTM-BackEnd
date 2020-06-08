@@ -154,7 +154,9 @@ namespace RTM.Application.Controllers.Usuarios
         {
             try
             {
+                var pass = Encriptar(usuarios.PasswordHash);
 
+                usuarios.PasswordHash = pass;
                 await modificarEmpleado(usuarios);
 
                 _UnitOfWork.Commit();
@@ -178,6 +180,7 @@ namespace RTM.Application.Controllers.Usuarios
             }
 
         }
+      
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
