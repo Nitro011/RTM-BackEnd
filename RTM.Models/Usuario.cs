@@ -15,7 +15,7 @@ namespace RTM.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public partial class Usuario:IdentityUser
+    public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
@@ -31,6 +31,8 @@ namespace RTM.Models
       
         [ForeignKey("Empleado")]
         public int? EmpleadoID { get; set; }     
+
+
         public virtual Empleado Empleado { get; set; }
         public virtual Role Role { get; set; }
 

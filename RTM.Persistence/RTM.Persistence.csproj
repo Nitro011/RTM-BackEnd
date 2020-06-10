@@ -62,6 +62,10 @@
     <Compile Include="Migrations\20200603051746_UpdateTableEmpleadoV2.designer.cs">
       <DependentUpon>20200603051746_UpdateTableEmpleadoV2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200610050007_DeleteFieldsUsuarios.cs" />
+    <Compile Include="Migrations\20200610050007_DeleteFieldsUsuarios.designer.cs">
+      <DependentUpon>20200610050007_DeleteFieldsUsuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\RTMDbContextModelSnapshot.cs" />
     <Compile Include="RTMDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
