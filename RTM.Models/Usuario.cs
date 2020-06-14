@@ -30,11 +30,18 @@ namespace RTM.Models
         public int? RolID { get; set; }
       
         [ForeignKey("Empleado")]
-        public int? EmpleadoID { get; set; }     
+        public int? EmpleadoID { get; set; }
 
+        [ForeignKey("AreaProduccion")]
+        public int? AreaProduccionID { get; set; }
+
+        public string NombreDeUsuario { get; set; }
+        public string CorreoElectronico { get; set; }
+        public string Contrasena { get; set; }
 
         public virtual Empleado Empleado { get; set; }
         public virtual Role Role { get; set; }
+        public virtual AreaProduccion AreaProduccion { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuarios_Almacen> Usuarios_Almacen { get; set; }

@@ -159,7 +159,6 @@ C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\Entit
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\EntityFramework.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
-C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Server.Kestrel.Https.dll
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll

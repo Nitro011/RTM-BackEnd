@@ -22,10 +22,14 @@ namespace RTM.Models
         }
         [Key]
         public int SuplidorID { get; set; }
+        public string Empresa { get; set; }
         public string Nombre_Suplidor { get; set; }
         public string No_Telefono { get; set; }
         public string Correo_Electronico { get; set; }
+        public string Pais { get; set; }
+        public string Ciudad { get; set; }
         public string Direccion { get; set; }
+
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Suplidor_Materia_Prima> Suplidor_Materia_Prima { get; set; }

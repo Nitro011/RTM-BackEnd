@@ -37,22 +37,19 @@ namespace RTM.Persistence.Migrations
                     b.ToTable("Almacen");
                 });
 
-            modelBuilder.Entity("RTM.Models.Area_Produccion", b =>
+            modelBuilder.Entity("RTM.Models.AreaProduccion", b =>
                 {
-                    b.Property<int>("Area_ProduccionID")
+                    b.Property<int>("AreaProduccionID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Nombre_Area_Produccion")
+                    b.Property<string>("NombreAreaProduccion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UsuarioID")
-                        .HasColumnType("int");
+                    b.HasKey("AreaProduccionID");
 
-                    b.HasKey("Area_ProduccionID");
-
-                    b.ToTable("Area_Produccion");
+                    b.ToTable("AreaProduccion");
                 });
 
             modelBuilder.Entity("RTM.Models.Area_Produccion_Control_Piezas", b =>
@@ -62,6 +59,9 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AreaProduccionID")
+                        .HasColumnType("int");
+
                     b.Property<int?>("Area_ProduccionID")
                         .HasColumnType("int");
 
@@ -70,7 +70,7 @@ namespace RTM.Persistence.Migrations
 
                     b.HasKey("Area_Produccion_Control_PiezasID");
 
-                    b.HasIndex("Area_ProduccionID");
+                    b.HasIndex("AreaProduccionID");
 
                     b.ToTable("Area_Produccion_Control_Piezas");
                 });
@@ -82,7 +82,7 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Area_ProduccionID")
+                    b.Property<int?>("AreaProduccionID")
                         .HasColumnType("int");
 
                     b.Property<int?>("CantidadSaliente")
@@ -99,7 +99,7 @@ namespace RTM.Persistence.Migrations
 
                     b.HasKey("Area_Produccion_Materia_PrimaID");
 
-                    b.HasIndex("Area_ProduccionID");
+                    b.HasIndex("AreaProduccionID");
 
                     b.HasIndex("Materias_PrimasMateria_PrimaID");
 
@@ -152,7 +152,7 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Area_ProduccionID")
+                    b.Property<int?>("AreaProduccionID")
                         .HasColumnType("int");
 
                     b.Property<int?>("Cantidad_Piezas_Realizadas")
@@ -175,7 +175,7 @@ namespace RTM.Persistence.Migrations
 
                     b.HasKey("Control_Ubicacion_PiezaID");
 
-                    b.HasIndex("Area_ProduccionID");
+                    b.HasIndex("AreaProduccionID");
 
                     b.HasIndex("EstadoID");
 
@@ -568,16 +568,25 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Ciudad")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Correo_Electronico")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Empresa")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("No_Telefono")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre_Suplidor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pais")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SuplidorID");
@@ -622,13 +631,27 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AreaProduccionID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Contrasena")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CorreoElectronico")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("EmpleadoID")
                         .HasColumnType("int");
+
+                    b.Property<string>("NombreDeUsuario")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RolID")
                         .HasColumnType("int");
 
                     b.HasKey("UsuarioID");
+
+                    b.HasIndex("AreaProduccionID");
 
                     b.HasIndex("EmpleadoID");
 
@@ -669,16 +692,16 @@ namespace RTM.Persistence.Migrations
 
             modelBuilder.Entity("RTM.Models.Area_Produccion_Control_Piezas", b =>
                 {
-                    b.HasOne("RTM.Models.Area_Produccion", "Area_Produccion")
-                        .WithMany("Area_Produccion_Control_Piezas")
-                        .HasForeignKey("Area_ProduccionID");
+                    b.HasOne("RTM.Models.AreaProduccion", "AreaProduccion")
+                        .WithMany()
+                        .HasForeignKey("AreaProduccionID");
                 });
 
             modelBuilder.Entity("RTM.Models.Area_Produccion_Materias_Primas", b =>
                 {
-                    b.HasOne("RTM.Models.Area_Produccion", "Area_Produccion")
-                        .WithMany("Area_Produccion_Materias_Primas")
-                        .HasForeignKey("Area_ProduccionID");
+                    b.HasOne("RTM.Models.AreaProduccion", "AreaProduccion")
+                        .WithMany()
+                        .HasForeignKey("AreaProduccionID");
 
                     b.HasOne("RTM.Models.Materias_Primas", "Materias_Primas")
                         .WithMany("Area_Produccion_Materias_Primas")
@@ -687,9 +710,9 @@ namespace RTM.Persistence.Migrations
 
             modelBuilder.Entity("RTM.Models.Control_Ubicacion_Piezas", b =>
                 {
-                    b.HasOne("RTM.Models.Area_Produccion", "Area_Produccion")
-                        .WithMany("Control_Ubicacion_Piezas")
-                        .HasForeignKey("Area_ProduccionID");
+                    b.HasOne("RTM.Models.AreaProduccion", "AreaProduccion")
+                        .WithMany()
+                        .HasForeignKey("AreaProduccionID");
 
                     b.HasOne("RTM.Models.Estado", "Estado")
                         .WithMany("Control_Ubicacion_Piezas")
@@ -793,6 +816,10 @@ namespace RTM.Persistence.Migrations
 
             modelBuilder.Entity("RTM.Models.Usuario", b =>
                 {
+                    b.HasOne("RTM.Models.AreaProduccion", "AreaProduccion")
+                        .WithMany()
+                        .HasForeignKey("AreaProduccionID");
+
                     b.HasOne("RTM.Models.Empleado", "Empleado")
                         .WithMany()
                         .HasForeignKey("EmpleadoID");

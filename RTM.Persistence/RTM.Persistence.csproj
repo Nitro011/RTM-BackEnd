@@ -66,6 +66,14 @@
     <Compile Include="Migrations\20200610050007_DeleteFieldsUsuarios.designer.cs">
       <DependentUpon>20200610050007_DeleteFieldsUsuarios.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200610053225_Usuarios.cs" />
+    <Compile Include="Migrations\20200610053225_Usuarios.designer.cs">
+      <DependentUpon>20200610053225_Usuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200611021557_Suplidore.cs" />
+    <Compile Include="Migrations\20200611021557_Suplidore.designer.cs">
+      <DependentUpon>20200611021557_Suplidore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\RTMDbContextModelSnapshot.cs" />
     <Compile Include="RTMDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

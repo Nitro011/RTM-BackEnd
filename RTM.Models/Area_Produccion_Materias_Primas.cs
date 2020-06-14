@@ -17,12 +17,12 @@ namespace RTM.Models
     {
         [Key]
         public int Area_Produccion_Materia_PrimaID { get; set; }
-        public int? Area_ProduccionID { get; set; }
+        public int? AreaProduccionID { get; set; }
         public int? Materia_PrimaID { get; set; }
         public int? CantidadSaliente { get; set; }
         public System.DateTime? FechaDeSalida { get; set; }
     
-        public virtual Area_Produccion Area_Produccion { get; set; }
+        public virtual AreaProduccion AreaProduccion { get; set; }
         public virtual Materias_Primas Materias_Primas { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace RTM.Persistence
     public class RTMDbContext : DbContext
     {
 
-        string cn = "server=148.101.43.9;database=RayTrackingMobile;uid=Arquimedes;password=123456;";
+        string cn = "server=148.0.119.64;database=RayTrackingMobile;uid=Arquimedes;password=123456;";
 
 
 
@@ -22,7 +22,7 @@ namespace RTM.Persistence
         }
         public DbSet<Almacen> Almacen { get; set; }
       
-        public DbSet<Area_Produccion> Area_Produccion { get; set; }
+        public DbSet<AreaProduccion> AreaProduccion { get; set; }
 
         public DbSet<Area_Produccion_Control_Piezas> Area_Produccion_Control_Piezas { get; set; }
 

@@ -20,6 +20,6 @@ namespace RTM.Models
         public int? Area_ProduccionID { get; set; }
         public int? Control_Ubicacion_PiezaID { get; set; }
     
-        public virtual Area_Produccion Area_Produccion { get; set; }
+        public virtual AreaProduccion AreaProduccion { get; set; }
     }
 }

@@ -23,13 +23,13 @@ namespace RTM.Models
         [Key]
         public int Control_Ubicacion_PiezaID { get; set; }
         public int? Orden_ClienteID { get; set; }
-        public int? Area_ProduccionID { get; set; }
+        public int? AreaProduccionID { get; set; }
         public int? EstadoID { get; set; }
         public System.DateTime? Tiempo_Inicio { get; set; }
         public System.DateTime? Tiempo_Finalizacion { get; set; }
         public int? Cantidad_Piezas_Realizadas { get; set; }
     
-        public virtual Area_Produccion Area_Produccion { get; set; }
+        public virtual AreaProduccion AreaProduccion { get; set; }
         public virtual Estado Estado { get; set; }
         public virtual Ordenes_Clientes Ordenes_Clientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
