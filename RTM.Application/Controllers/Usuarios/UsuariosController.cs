@@ -47,8 +47,8 @@ namespace RTM.Application.Controllers.Usuarios
             {
                 return Ok(new Request()
                 {
-                    status = true,
-                    message = "El usuario se registro correctamente",
+                    status = false,
+                    message = "Esta accion no se ejecuto correctamente",
                     data = ex.Message
                 });
             }
@@ -79,8 +79,8 @@ namespace RTM.Application.Controllers.Usuarios
             {
                 return Ok(new Request()
                 {
-                    status = true,
-                    message = "El usuario se registro correctamente",
+                    status = false,
+                    message = "Esta accion no se ejecuto correctamente",
                     data = ex.Message
                 });
             }
@@ -109,8 +109,8 @@ namespace RTM.Application.Controllers.Usuarios
             {
                 return Ok(new Request()
                 {
-                    status = true,
-                    message = "El usuario se registro correctamente",
+                    status = false,
+                    message = "Esta accion no se ejecuto correctamente",
                     data = ex.Message
                 });
             }
@@ -140,8 +140,8 @@ namespace RTM.Application.Controllers.Usuarios
 
                 return Ok(new Request()
                 {
-                    status = true,
-                    message = "El usuario se registro correctamente",
+                    status = false,
+                    message = "El usuario no se registro correctamente",
                     data = ex.Message
                 });
             }
@@ -172,8 +172,8 @@ namespace RTM.Application.Controllers.Usuarios
             {
                 return Ok(new Request()
                 {
-                    status = true,
-                    message = "El usuario se registro correctamente",
+                    status = false,
+                    message = "Esta accion no se ejecuto correctamente",
                     data = ex.Message
                 });
             }
