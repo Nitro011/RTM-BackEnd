@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using RTM.Repository.Interface;
 using RTM.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using RTM.Models.DTO;
 
 namespace RTM.Application.Controllers.Usuarios
 {
@@ -55,6 +57,37 @@ namespace RTM.Application.Controllers.Usuarios
 
         }
 
+        // GET: api/Usuarios
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> IniciarSesionApi([FromBody] IniciarSesion iniciarSesion)
+        {
+            try
+            {
+
+
+                var esValido = await IniciarSesion(iniciarSesion.NombreUsuario, iniciarSesion.contrasena);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = esValido
+                }) ;
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "El usuario se registro correctamente",
+                    data = ex.Message
+                });
+            }
+
+
+
+        }
         // GET: api/Usuarios/5
         [HttpGet]
         [Route("[action]/{id}")]
@@ -150,6 +183,36 @@ namespace RTM.Application.Controllers.Usuarios
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+
+        //Metodos Funcionalidas Especifica
+       
+        private async Task<bool> IniciarSesion(string nombreUsuario,string contrasena) 
+        {
+            bool valor =false;
+
+            var esValida = await _UnitOfWork.context.Usuarios.Where(x => x.NombreDeUsuario == nombreUsuario && x.Contrasena == contrasena).CountAsync();
+
+            //var esValidaLinq = await (from s in _UnitOfWork.context.Usuarios
+            //                    where s.NombreDeUsuario == nombreUsuario && s.Contrasena == contrasena           
+            //                    select s.NombreDeUsuario).CountAsync();
+                               
+
+
+
+            if (esValida == 1)
+            {
+                valor= true;
+            }
+            else if(esValida == 0)
+            {
+               valor =false;
+            }
+            
+            return valor;
+
+        
         }
     }
 }

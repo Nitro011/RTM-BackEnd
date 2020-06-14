@@ -12,6 +12,7 @@ namespace RTM.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Ordenes_Clientes
     {
@@ -24,6 +25,8 @@ namespace RTM.Models
     
         [Key]
         public int Orden_ClienteID { get; set; }
+
+        [ForeignKey("Cliente")]
         public int? ClienteID { get; set; }
         public string CodigoQR { get; set; }
         public int? Cantidad_Calzado_Realizar { get; set; }

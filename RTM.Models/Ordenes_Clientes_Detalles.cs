@@ -12,6 +12,7 @@ namespace RTM.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Ordenes_Clientes_Detalles
     {
@@ -26,7 +27,11 @@ namespace RTM.Models
     
         [Key]
         public int Orden_Cliente_DetalleID { get; set; }
+       
+        [ForeignKey("Ordenes_Clientes")]
         public int? Orden_ClienteID { get; set; }
+
+        [ForeignKey("Marca")]
         public int? MarcaID { get; set; }
     
         public virtual Marca Marca { get; set; }

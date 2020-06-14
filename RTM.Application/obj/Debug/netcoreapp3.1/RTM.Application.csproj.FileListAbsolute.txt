@@ -427,8 +427,6 @@ C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Persistence.pdb
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Persistence.dll.config
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csprojAssemblyReference.cache
-C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csproj.CoreCompileInputs.cache
-C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.AssemblyInfoInputs.cache
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.AssemblyInfo.cs
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.RazorTargetAssemblyInfo.cache
@@ -438,3 +436,5 @@ C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.dll
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.pdb
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.genruntimeconfig.cache
+C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csproj.CoreCompileInputs.cache
+C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.MvcApplicationPartsAssemblyInfo.cache

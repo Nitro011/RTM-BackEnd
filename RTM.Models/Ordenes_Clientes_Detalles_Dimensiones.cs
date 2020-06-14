@@ -12,12 +12,17 @@ namespace RTM.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Ordenes_Clientes_Detalles_Dimensiones
     {
         [Key]
         public int Orden_Cliente_Detalle_DimensionID { get; set; }
+
+        [ForeignKey("Ordenes_Clientes_Detalles")]
         public int? Orden_Cliente_DetalleID { get; set; }
+
+        [ForeignKey("Dimensione")]
         public int? DimensionID { get; set; }
     
         public virtual Dimensione Dimensione { get; set; }
