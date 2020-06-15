@@ -57,6 +57,36 @@ namespace RTM.Application.Controllers.EmpleadosController
 
         }
 
+        // GET: api/Empleados
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> EmpleadoPorCodigo([FromRoute]int id)
+        {
+            try
+            {
+
+                var GetEmpleado = await EmpleadosCodigo(id);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetEmpleado
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+
+
+
+        }
 
         // GET: api/Empleados
         [HttpGet]
@@ -192,7 +222,6 @@ namespace RTM.Application.Controllers.EmpleadosController
         private async Task<List<EmpleadosListView>> EmpleadosListViews()
         {
 
-
             var EmpleadoList = new List<EmpleadosListView>();
 
 
@@ -207,6 +236,35 @@ namespace RTM.Application.Controllers.EmpleadosController
             return EmpleadoList;
 
         }
+
+        private async Task<UsuarioById> EmpleadosCodigo(int id)
+        {
+
+            var EmpleadoList = new UsuarioById();
+
+
+            EmpleadoList = await _UnitOfWork.context.Empleados
+               .Where(a => a.EmpleadoID == id)
+                .Select(a => new UsuarioById()
+                {
+                    EmpleadoID = a.EmpleadoID,
+                    NombresApellidos = $"{a.Nombres} {a.Apellidos}",
+                    Sexo = (a.Sexo == true) ? "Masculino" : "Femenino",
+                    Cedula = a.Cedula,
+                    Fecha_Nacimiento = a.Fecha_Nacimiento,
+                    Edad = a.Edad,
+                    Direccion = a.Direccion,
+                    Telefono = a.Telefono,
+                    Puesto = _UnitOfWork.context.Usuarios.Include(x => x.AreaProduccion).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.AreaProduccion.NombreAreaProduccion).FirstOrDefault(),
+                    Rol = _UnitOfWork.context.Usuarios.Include(x => x.Role).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.Role.Tipo_Usuario).FirstOrDefault(),
+                    NombreUsuario = _UnitOfWork.context.Usuarios.Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.NombreDeUsuario).FirstOrDefault()
+
+                }).FirstOrDefaultAsync();
+
+            return EmpleadoList;
+
+        }
+
 
     }
 }
