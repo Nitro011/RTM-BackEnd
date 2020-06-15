@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
+using RTM.Models.DTO;
 using RTM.Repository.Interface;
 
 namespace RTM.Application.Controllers.EmpleadosController
@@ -15,142 +16,197 @@ namespace RTM.Application.Controllers.EmpleadosController
     public class EmpleadosController : ControllerBase
     {
 
-            private readonly IUnitOfWork _UnitOfWork;
-            private readonly IGenericRepository<Empleado> _GenericRepository;
+        private readonly IUnitOfWork _UnitOfWork;
+        private readonly IGenericRepository<Empleado> _GenericRepository;
 
-            public EmpleadosController(IUnitOfWork UnitOfWork, IGenericRepository<Empleado> GenericRepository)
+        public EmpleadosController(IUnitOfWork UnitOfWork, IGenericRepository<Empleado> GenericRepository)
+        {
+            this._UnitOfWork = UnitOfWork;
+            this._GenericRepository = GenericRepository;
+        }
+
+
+        // GET: api/Empleados
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> lista()
+        {
+            try
             {
-                this._UnitOfWork = UnitOfWork;
-                this._GenericRepository = GenericRepository;
+
+                var GetEmpleado = await _UnitOfWork.context.Empleados.ToListAsync();
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetEmpleado
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
             }
 
 
-            // GET: api/Empleados
-            [HttpGet]
-            [Route("[action]")]
-            public async Task<IActionResult> lista()
+
+        }
+
+
+        // GET: api/Empleados
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> EmpleadosList()
+        {
+            try
             {
-                try
+
+                var GetEmpleado = await EmpleadosListViews();
+
+                return Ok(new Request()
                 {
-
-                    var GetEmpleado = await _UnitOfWork.context.Empleados.ToListAsync();
-
-                    return Ok(new Request()
-                    {
-                        status = true,
-                        message = "Esta accion se ejecuto correctamente",
-                        data = GetEmpleado
-                    });
-                }
-                catch (Exception ex)
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetEmpleado
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
                 {
-                    return Ok(new Request()
-                    {
-                        status = false,
-                        message = "Ocurrio un error inesperado!!",
-                        data = ex.Message
-                    });
-                }
-
-
-
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
             }
 
-            // GET: api/Empleados/5
-            [HttpGet]
-            [Route("[action]/{id}")]
-            public async Task<IActionResult> listaPorId(int id)
+
+
+        }
+
+        // GET: api/Empleados/5
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> listaPorId(int id)
+        {
+            try
             {
-                try
-                {
 
-                    var GetEmpleados = await _UnitOfWork.context.Empleados.Where(x => x.EmpleadoID == id).FirstOrDefaultAsync();
+                var GetEmpleados = await _UnitOfWork.context.Empleados.Where(x => x.EmpleadoID == id).FirstOrDefaultAsync();
 
-                    return Ok(new Request()
-                    {
-                        status = true,
-                        message = "Esta accion se ejecuto correctamente",
-                        data = GetEmpleados
-                    });
-                }
-                catch (Exception ex)
+                return Ok(new Request()
                 {
-                    return Ok(new Request()
-                    {
-                        status = false,
-                        message = "Ocurrio un error inesperado!!",
-                        data = ex.Message
-                    });
-                }
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetEmpleados
+                });
             }
-
-            [HttpPost]
-            [Route("[action]")]
-            public async Task<IActionResult> registrar([FromBody] Empleado empleado)
+            catch (Exception ex)
             {
-                try
+                return Ok(new Request()
                 {
-
-
-                    await _GenericRepository.Add(empleado);
-                    _UnitOfWork.Commit();
-
-
-                    return Ok(new Request()
-                    {
-                        status = true,
-                        message = "El empleado se registro correctamente",
-                        data = empleado
-                    });
-                }
-                catch (Exception ex)
-                {
-
-                    return Ok(new Request()
-                    {
-                        status = false,
-                        message = "El empleado no se registro correctamente!!",
-                        data = ex.Message
-                    });
-                }
-
-
-            }
-
-            // PUT: api/Usuarios/5
-            [HttpPost]
-            [Route("[action]")]
-            public async Task<IActionResult> modificar([FromBody] Empleado empleado)
-            {
-                try
-                {
-
-                    await _GenericRepository.Update(empleado);
-                    _UnitOfWork.Commit();
-
-                    return Ok(new Request()
-                    {
-                        status = true,
-                        message = "Esta accion se ejecuto correctamente",
-                        data = empleado
-
-                    });
-                }
-                catch (Exception ex)
-                {
-                    return Ok(new Request()
-                    {
-                        status = false,
-                        message = "Ocurrio un error inesperado!!",
-                        data = ex.Message
-                    });
-                }
-
-            }
-            // DELETE: api/ApiWithActions/5
-            [HttpDelete("{id}")]
-            public void Delete(int id)
-            {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
             }
         }
+
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> registrar([FromBody] Empleado empleado)
+        {
+            try
+            {
+
+
+                await _GenericRepository.Add(empleado);
+                _UnitOfWork.Commit();
+
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "El empleado se registro correctamente",
+                    data = empleado
+                });
+            }
+            catch (Exception ex)
+            {
+
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "El empleado no se registro correctamente!!",
+                    data = ex.Message
+                });
+            }
+
+
+        }
+
+        // PUT: api/Usuarios/5
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> modificar([FromBody] Empleado empleado)
+        {
+            try
+            {
+
+                await _GenericRepository.Update(empleado);
+                _UnitOfWork.Commit();
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = empleado
+
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+
+        }
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
+
+
+
+        //Funciones
+        private async Task<List<EmpleadosListView>> EmpleadosListViews()
+        {
+
+
+            var EmpleadoList = new List<EmpleadosListView>();
+
+
+            EmpleadoList = await _UnitOfWork.context.Empleados.Select(a => new EmpleadosListView()
+            {
+                Id = a.EmpleadoID,
+                NombreCompleto = $"{a.Nombres} {a.Apellidos}",
+                Puesto = "Supervisor de calzado"
+
+            }).ToListAsync();
+
+            return EmpleadoList;
+
+        }
+
     }
+}
