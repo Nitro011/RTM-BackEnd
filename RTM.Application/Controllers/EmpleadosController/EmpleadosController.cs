@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
 using RTM.Models.DTO;
+using RTM.Models.DTO.Empleados;
 using RTM.Repository.Interface;
 
 namespace RTM.Application.Controllers.EmpleadosController
@@ -86,6 +87,36 @@ namespace RTM.Application.Controllers.EmpleadosController
 
 
 
+        }
+
+        //Get: api/Empleados:
+        //Api para buscar empleado por su cedula:
+        //Buscar empleado por su cedula:
+        [HttpGet]
+        [Route("[action]/{cedula}")]
+        public async Task<IActionResult> EmpleadoPorCedula([FromRoute]string cedula)
+        {
+            try
+            {
+
+                var GetEmpleado = await EmpleadoCedula(cedula);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetEmpleado
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
         }
 
         // GET: api/Empleados
@@ -229,7 +260,7 @@ namespace RTM.Application.Controllers.EmpleadosController
             {
                 Id = a.EmpleadoID,
                 NombreCompleto = $"{a.Nombres} {a.Apellidos}",
-                Puesto = "Supervisor de calzado"
+                Puesto = _UnitOfWork.context.Usuarios.Include(x => x.AreaProduccion).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.AreaProduccion.NombreAreaProduccion).FirstOrDefault()
 
             }).ToListAsync();
 
@@ -263,6 +294,25 @@ namespace RTM.Application.Controllers.EmpleadosController
 
             return EmpleadoList;
 
+        }
+
+        private async Task<EmpleadoByCedula> EmpleadoCedula(string Cedula)
+        {
+
+            var EmpleadoList = new EmpleadoByCedula();
+
+
+            EmpleadoList = await _UnitOfWork.context.Empleados
+               .Where(a => a.Cedula == Cedula)
+                .Select(a => new EmpleadoByCedula()
+                {
+                    EmpleadoID = a.EmpleadoID,
+                    cedula = a.Cedula,
+                    nombreCompleto = $"{a.Nombres} {a.Apellidos}",
+
+                }).FirstOrDefaultAsync();
+
+            return EmpleadoList;
         }
 
 

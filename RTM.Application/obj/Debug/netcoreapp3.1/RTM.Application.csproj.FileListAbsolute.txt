@@ -436,3 +436,5 @@ C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.genruntimeconfig.cache
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csproj.CoreCompileInputs.cache
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csproj.CoreCompileInputs.cache
+C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.MvcApplicationPartsAssemblyInfo.cache

@@ -242,10 +242,15 @@
     <Compile Include="Dimensione.cs">
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\AreaProduccion\AreaProduccionListView.cs" />
     <Compile Include="DTO\EmpleadosListView.cs" />
+    <Compile Include="DTO\Empleados\EmpleadoByCedula.cs" />
     <Compile Include="DTO\IniciarSesion.cs" />
+    <Compile Include="DTO\Suplidores\SuplidorById.cs" />
+    <Compile Include="DTO\Suplidores\SuplidoresListView.cs" />
     <Compile Include="DTO\UsuarioById.cs" />
     <Compile Include="DTO\UsuariosEmpleadosDTO.cs" />
+    <Compile Include="DTO\Usuarios\UsuariosListView.cs" />
     <Compile Include="Empleado.cs">
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>

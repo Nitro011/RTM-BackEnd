@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using RTM.Repository.Interface;
 using RTM.Models;
 using Microsoft.EntityFrameworkCore;
+using RTM.Models.DTO.Suplidores;
 
 namespace RTM.Application.Controllers.Suplidores
 {
@@ -46,6 +47,68 @@ namespace RTM.Application.Controllers.Suplidores
                 return Ok(new Request()
                 {
                     status = true,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+
+
+
+        }
+
+        // GET: api/Empleados
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> SuplidorPorCodigo([FromRoute]int id)
+        {
+            try
+            {
+
+                var GetSuplidor = await SuplidoresCodigo(id);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetSuplidor
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+
+
+
+        }
+
+        // GET: api/Suplidores
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> SuplidoresList()
+        {
+            try
+            {
+
+                var GetSuplidores = await SuplidoresListViews();
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetSuplidores
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
                     message = "Ocurrio un error inesperado!!",
                     data = ex.Message
                 });
@@ -150,6 +213,51 @@ namespace RTM.Application.Controllers.Suplidores
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        //Funciones:
+        private async Task<List<SuplidoresListView>> SuplidoresListViews()
+        {
+
+            var SuplidoresList = new List<SuplidoresListView>();
+
+
+            SuplidoresList = await _UnitOfWork.context.Suplidores.Select(a => new SuplidoresListView()
+            {
+                ID=a.SuplidorID,
+                Empresa = a.Empresa,
+                Nombre_Suplidor=a.Nombre_Suplidor,
+                No_Telefono = a.No_Telefono
+
+            }).ToListAsync();
+
+            return SuplidoresList;
+
+        }
+
+        private async Task<SuplidorById> SuplidoresCodigo(int id)
+        {
+
+            var SuplidorList = new SuplidorById();
+
+
+            SuplidorList = await _UnitOfWork.context.Suplidores
+               .Where(a => a.SuplidorID == id)
+                .Select(a => new SuplidorById()
+                {
+                    SuplidorID = a.SuplidorID,
+                    Empresa=a.Empresa,
+                    Nombre_Suplidor=a.Nombre_Suplidor,
+                    No_Telefono=a.No_Telefono,
+                    Correo_Electronico=a.Correo_Electronico,
+                    Pais=a.Pais,
+                    Ciudad=a.Ciudad,
+                    Direccion=a.Direccion
+
+                }).FirstOrDefaultAsync();
+
+            return SuplidorList;
+
         }
     }
 }

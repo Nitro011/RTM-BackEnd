@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RTM.Repository.Interface;
 using RTM.Models;
+using RTM.Models.DTO.Usuarios;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using RTM.Models.DTO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace RTM.Application.Controllers.Usuarios
 {
@@ -49,6 +51,37 @@ namespace RTM.Application.Controllers.Usuarios
                 {
                     status = false,
                     message = "Esta accion no se ejecuto correctamente",
+                    data = ex.Message
+                });
+            }
+
+
+
+        }
+
+        // GET: api/Empleados
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> UsuariosList()
+        {
+            try
+            {
+
+                var GetUsuarios = await UsuarioListView();
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetUsuarios
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
                     data = ex.Message
                 });
             }
@@ -213,6 +246,24 @@ namespace RTM.Application.Controllers.Usuarios
             return valor;
 
         
+        }
+
+        //Obtener datos del Usuario:
+        private async Task<List<UsuariosListView>> UsuarioListView()
+        {
+
+            var UsuarioList = new List<UsuariosListView>();
+
+
+            UsuarioList = await _UnitOfWork.context.Usuarios
+                .Select(a => new UsuariosListView()
+                {
+                    UsuarioID = a.UsuarioID,
+                    NombreDeUsuario = a.NombreDeUsuario,
+                    Rol = _UnitOfWork.context.Usuarios.Include(x => x.Role).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.Role.Tipo_Usuario).FirstOrDefault(),
+                }).ToListAsync();
+            return UsuarioList;
+
         }
     }
 }
