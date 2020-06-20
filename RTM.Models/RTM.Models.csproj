@@ -243,11 +243,17 @@
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\AreaProduccion\AreaProduccionListView.cs" />
+    <Compile Include="DTO\Colores\ColoresListView.cs" />
+    <Compile Include="DTO\Dimensiones\DimensionesListView.cs" />
     <Compile Include="DTO\EmpleadosListView.cs" />
     <Compile Include="DTO\Empleados\EmpleadoByCedula.cs" />
     <Compile Include="DTO\IniciarSesion.cs" />
+    <Compile Include="DTO\Marcas\MarcasListView.cs" />
+    <Compile Include="DTO\Modelos\ModelosListView.cs" />
     <Compile Include="DTO\Suplidores\SuplidorById.cs" />
     <Compile Include="DTO\Suplidores\SuplidoresListView.cs" />
+    <Compile Include="DTO\TiposCalzados\TiposCalzadosListView.cs" />
+    <Compile Include="DTO\TiposMateriales\TiposMateriales.cs" />
     <Compile Include="DTO\UsuarioById.cs" />
     <Compile Include="DTO\UsuariosEmpleadosDTO.cs" />
     <Compile Include="DTO\Usuarios\UsuariosListView.cs" />
