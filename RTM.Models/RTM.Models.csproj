@@ -250,6 +250,12 @@
     <Compile Include="DTO\IniciarSesion.cs" />
     <Compile Include="DTO\Marcas\MarcasListView.cs" />
     <Compile Include="DTO\Modelos\ModelosListView.cs" />
+    <Compile Include="DTO\Orden_Cliente\DetallesCalzado.cs" />
+    <Compile Include="DTO\Orden_Cliente\DetallesColores.cs" />
+    <Compile Include="DTO\Orden_Cliente\DetallesDimension.cs" />
+    <Compile Include="DTO\Orden_Cliente\DetallesModelos.cs" />
+    <Compile Include="DTO\Orden_Cliente\OrdenCliente.cs" />
+    <Compile Include="DTO\Orden_Cliente\OrdenesClientesDetalles.cs" />
     <Compile Include="DTO\Suplidores\SuplidorById.cs" />
     <Compile Include="DTO\Suplidores\SuplidoresListView.cs" />
     <Compile Include="DTO\TiposCalzados\TiposCalzadosListView.cs" />

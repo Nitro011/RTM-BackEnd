@@ -20,7 +20,6 @@ namespace RTM.Models
         public Ordenes_Clientes()
         {
             this.Control_Ubicacion_Piezas = new HashSet<Control_Ubicacion_Piezas>();
-            this.Ordenes_Clientes_Detalles = new HashSet<Ordenes_Clientes_Detalles>();
         }
     
         [Key]
@@ -35,8 +34,8 @@ namespace RTM.Models
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Control_Ubicacion_Piezas> Control_Ubicacion_Piezas { get; set; }
+        public virtual IEnumerable<Control_Ubicacion_Piezas> Control_Ubicacion_Piezas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ordenes_Clientes_Detalles> Ordenes_Clientes_Detalles { get; set; }
+        public virtual Ordenes_Clientes_Detalles Ordenes_Clientes_Detalles { get; set; }
     }
 }

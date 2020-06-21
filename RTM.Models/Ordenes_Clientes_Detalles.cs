@@ -37,12 +37,12 @@ namespace RTM.Models
         public virtual Marca Marca { get; set; }
         public virtual Ordenes_Clientes Ordenes_Clientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ordenes_Clientes_Detalles_Colores> Ordenes_Clientes_Detalles_Colores { get; set; }
+        public virtual IEnumerable<Ordenes_Clientes_Detalles_Colores> Ordenes_Clientes_Detalles_Colores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ordenes_Clientes_Detalles_Dimensiones> Ordenes_Clientes_Detalles_Dimensiones { get; set; }
+        public virtual IEnumerable<Ordenes_Clientes_Detalles_Dimensiones> Ordenes_Clientes_Detalles_Dimensiones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ordenes_Clientes_Detalles_Modelos> Ordenes_Clientes_Detalles_Modelos { get; set; }
+        public virtual IEnumerable<Ordenes_Clientes_Detalles_Modelos> Ordenes_Clientes_Detalles_Modelos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ordenes_Clientes_Detalles_Tipos_Calzados> Ordenes_Clientes_Detalles_Tipos_Calzados { get; set; }
+        public virtual IEnumerable<Ordenes_Clientes_Detalles_Tipos_Calzados> Ordenes_Clientes_Detalles_Tipos_Calzados { get; set; }
     }
 }
