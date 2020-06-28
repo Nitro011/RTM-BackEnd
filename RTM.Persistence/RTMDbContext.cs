@@ -12,7 +12,7 @@ namespace RTM.Persistence
     public class RTMDbContext : DbContext
     {
 
-        string cn = "server=148.0.119.64;database=RayTrackingMobile;uid=Arquimedes;password=123456;";
+        string cn = "server=179.52.193.231;database=RayTrackingMobile;uid=Arquimedes;password=123456;";
 
 
 
