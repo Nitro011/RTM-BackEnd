@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RTM.Models;
 using RTM.Repository.Interface;
 
-namespace RTM.Application.Controllers.Usuarios
+namespace RTM.Application.Controllers.ClientesController
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -24,7 +24,7 @@ namespace RTM.Application.Controllers.Usuarios
         }
 
 
-        // GET: api/Usuarios
+        // GET: api/Clientes
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> lista()
@@ -32,13 +32,13 @@ namespace RTM.Application.Controllers.Usuarios
             try
             {
 
-                var GetUser = await _UnitOfWork.context.Clientes.ToListAsync();
+                var GetClientes = await _UnitOfWork.context.Clientes.ToListAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetUser
+                    data = GetClientes
                 });
             }
             catch (Exception ex)
@@ -46,7 +46,7 @@ namespace RTM.Application.Controllers.Usuarios
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "El usuario se registro correctamente",
+                    message = "Ocurrio un error inesperado!!",
                     data = ex.Message
                 });
             }
@@ -55,7 +55,7 @@ namespace RTM.Application.Controllers.Usuarios
 
         }
 
-        // GET: api/Usuarios/5
+        // GET: api/Clientes/5
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> listaPorId(int id)
@@ -63,21 +63,21 @@ namespace RTM.Application.Controllers.Usuarios
             try
             {
 
-                var GetUser = await _UnitOfWork.context.Clientes.Where(x => x.ClienteID == id).FirstOrDefaultAsync();
+                var GetClientes = await _UnitOfWork.context.Clientes.Where(x => x.ClienteID == id).FirstOrDefaultAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetUser
+                    data = GetClientes
                 });
             }
             catch (Exception ex)
             {
                 return Ok(new Request()
                 {
-                    status = true,
-                    message = "El usuario se registro correctamente",
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
                     data = ex.Message
                 });
             }
@@ -85,7 +85,7 @@ namespace RTM.Application.Controllers.Usuarios
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> register([FromBody] Cliente cliente)
+        public async Task<IActionResult> registrar([FromBody] Cliente cliente)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace RTM.Application.Controllers.Usuarios
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "El usuario se registro correctamente",
+                    message = "El Cliente se registro correctamente",
                     data = cliente
                 });
             }
@@ -107,8 +107,8 @@ namespace RTM.Application.Controllers.Usuarios
 
                 return Ok(new Request()
                 {
-                    status = true,
-                    message = "El usuario se registro correctamente",
+                    status = false,
+                    message = "El Cliente no se registro correctamente!!",
                     data = ex.Message
                 });
             }
@@ -116,15 +116,15 @@ namespace RTM.Application.Controllers.Usuarios
 
         }
 
-        // PUT: api/Usuarios/5
-        [HttpPut]
+        // PUT: api/Clientes/5
+        [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> modificar([FromBody] Cliente cliente)
         {
             try
             {
 
-                await _GenericRepository.Update( cliente);
+                await _GenericRepository.Update(cliente);
                 _UnitOfWork.Commit();
 
                 return Ok(new Request()
@@ -139,8 +139,8 @@ namespace RTM.Application.Controllers.Usuarios
             {
                 return Ok(new Request()
                 {
-                    status = true,
-                    message = "El usuario se registro correctamente",
+                    status = false,
+                    message = "Se produjo un error inesperado!!",
                     data = ex.Message
                 });
             }
