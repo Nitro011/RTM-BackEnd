@@ -12,6 +12,7 @@ namespace RTM.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Control_Ubicacion_Piezas
     {
@@ -22,8 +23,14 @@ namespace RTM.Models
         }
         [Key]
         public int Control_Ubicacion_PiezaID { get; set; }
+      
+        [ForeignKey("Ordenes_Clientes")]
         public int? Orden_ClienteID { get; set; }
+
+        [ForeignKey("AreaProduccion")]
         public int? AreaProduccionID { get; set; }
+
+        [ForeignKey("Estado")]
         public int? EstadoID { get; set; }
         public System.DateTime? Tiempo_Inicio { get; set; }
         public System.DateTime? Tiempo_Finalizacion { get; set; }

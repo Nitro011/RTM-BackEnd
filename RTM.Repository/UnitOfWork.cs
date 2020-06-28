@@ -20,7 +20,7 @@ namespace RTM.Repository
         }
         public void Commit()
         {
-            context.SaveChanges();
+         var e=  context.SaveChanges();
         }
 
         public void Dispose()
