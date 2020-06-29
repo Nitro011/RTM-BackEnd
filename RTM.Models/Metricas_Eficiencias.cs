@@ -12,11 +12,13 @@ namespace RTM.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Metricas_Eficiencias
     {
         [Key]
         public int Metrica_EficienciaID { get; set; }
+        [ForeignKey("Control_Ubicacion_Piezas")]
         public int? Control_Ubicacion_PiezaID { get; set; }
         public int? Resultado_Metricas_Eficiencia { get; set; }
     

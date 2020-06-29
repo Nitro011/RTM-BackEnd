@@ -85,6 +85,34 @@ namespace RTM.Application.Controllers.OrdenesClientesController
             }
         }
 
+        // GET: api/OrdenesClientes/5
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> BuscarOrdenClienteId(int id)
+        {
+            try
+            {
+
+                var GetOrdenesClientes = await OrdenCliente(id);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetOrdenesClientes
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> registrar([FromBody] Ordenes_Clientes ordenes_Clientes)
@@ -100,8 +128,8 @@ namespace RTM.Application.Controllers.OrdenesClientesController
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "La Orden del Cliente se registro correctamente",
-                    data = ordenes_Clientes
+                    message = "La Orden del Cliente se registro correctamente"
+                   
                 });
             }
             catch (Exception ex)
@@ -159,7 +187,7 @@ namespace RTM.Application.Controllers.OrdenesClientesController
         {
             var orderncliente = new OrdenCliente();
 
-            orderncliente = await _UnitOfWork.context.Ordenes_Clientes.Include(s => s.Cliente).Where(x => x.ClienteID == id).Select(s => new OrdenCliente()
+            orderncliente = await _UnitOfWork.context.Ordenes_Clientes.Include(s => s.Cliente).Where(x => x.Orden_ClienteID == id).Select(s => new OrdenCliente()
             {
 
                 Orden_ClienteID = s.Orden_ClienteID,

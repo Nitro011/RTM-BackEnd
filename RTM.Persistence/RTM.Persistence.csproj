@@ -74,6 +74,10 @@
     <Compile Include="Migrations\20200611021557_Suplidore.designer.cs">
       <DependentUpon>20200611021557_Suplidore.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200628050834_UpdateOrdenCliente.cs" />
+    <Compile Include="Migrations\20200628050834_UpdateOrdenCliente.designer.cs">
+      <DependentUpon>20200628050834_UpdateOrdenCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\RTMDbContextModelSnapshot.cs" />
     <Compile Include="RTMDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
