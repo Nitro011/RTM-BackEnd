@@ -1,6 +1,7 @@
 ﻿//using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
+using RTM.Models.TableDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace RTM.Persistence
 
         public DbSet<Control_Ubicacion_Piezas> Control_Ubicacion_Piezas { get; set; }
 
-        public DbSet<Dimensione> Dimensiones { get; set; }
+        public DbSet<Size> Sizes { get; set; }
        
         public DbSet<Empleado> Empleados { get; set; }
 
@@ -73,6 +74,10 @@ namespace RTM.Persistence
         public DbSet<Usuario> Usuarios { get; set; }
 
         public DbSet<Usuarios_Almacen> Usuarios_Almacen { get; set; }
+
+        public DbSet<BOM> BOMs { get; set; }
+        public DbSet<OperacionesCalzados> OperacionesCalzados { get; set; }
+        public DbSet<CategoriaSize> categoriaSizes { get; set; }
 
 
 

@@ -22,10 +22,10 @@ namespace RTM.Models
         [ForeignKey("Ordenes_Clientes_Detalles")]
         public int? Orden_Cliente_DetalleID { get; set; }
 
-        [ForeignKey("Dimensione")]
-        public int? DimensionID { get; set; }
+        [ForeignKey("Size")]
+        public int? SizeID { get; set; }
     
-        public virtual Dimensione Dimensione { get; set; }
+        public virtual Size Size { get; set; }
         public virtual Ordenes_Clientes_Detalles Ordenes_Clientes_Detalles { get; set; }
     }
 }

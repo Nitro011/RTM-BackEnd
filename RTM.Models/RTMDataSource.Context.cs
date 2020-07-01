@@ -9,6 +9,7 @@
 
 namespace RTM.Models
 {
+    using RTM.Models.TableDB;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -32,7 +33,7 @@ namespace RTM.Models
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<Colore> Colores { get; set; }
         public virtual DbSet<Control_Ubicacion_Piezas> Control_Ubicacion_Piezas { get; set; }
-        public virtual DbSet<Dimensione> Dimensiones { get; set; }
+        public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<Empleado> Empleados { get; set; }
         public virtual DbSet<Estado> Estados { get; set; }
         public virtual DbSet<Estados_Usuarios_Almacen> Estados_Usuarios_Almacen { get; set; }
@@ -54,5 +55,7 @@ namespace RTM.Models
         public virtual DbSet<Tipo_Material> Tipo_Material { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Usuarios_Almacen> Usuarios_Almacen { get; set; }
+        public virtual DbSet<BOM> BOMs { get; set; }
+        public virtual DbSet<OperacionesCalzados> OperacionesCalzados { get; set; }
     }
 }

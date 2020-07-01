@@ -12,12 +12,12 @@ namespace RTM.Application.Controllers.DimensionesController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DimensionesController : ControllerBase
+    public class SizeController : ControllerBase
     {
         private readonly IUnitOfWork _UnitOfWork;
-        private readonly IGenericRepository<Dimensione> _GenericRepository;
+        private readonly IGenericRepository<Size> _GenericRepository;
 
-        public DimensionesController(IUnitOfWork UnitOfWork, IGenericRepository<Dimensione> GenericRepository)
+        public SizeController(IUnitOfWork UnitOfWork, IGenericRepository<Size> GenericRepository)
         {
             this._UnitOfWork = UnitOfWork;
             this._GenericRepository = GenericRepository;
@@ -32,13 +32,13 @@ namespace RTM.Application.Controllers.DimensionesController
             try
             {
 
-                var GetDimensiones = await _UnitOfWork.context.Dimensiones.ToListAsync();
+                var GetSizes = await _UnitOfWork.context.Sizes.ToListAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetDimensiones
+                    data = GetSizes 
                 });
             }
             catch (Exception ex)
@@ -55,7 +55,7 @@ namespace RTM.Application.Controllers.DimensionesController
 
         }
 
-        // GET: api/Dimensiones/5
+        // GET: api/Size/5
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> listaPorId(int id)
@@ -63,13 +63,13 @@ namespace RTM.Application.Controllers.DimensionesController
             try
             {
 
-                var GetDimensiones = await _UnitOfWork.context.Dimensiones.Where(x => x.DimensionID == id).FirstOrDefaultAsync();
+                var GetSizes = await _UnitOfWork.context.Sizes.Where(x => x.SizeID == id).FirstOrDefaultAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetDimensiones
+                    data = GetSizes
                 });
             }
             catch (Exception ex)
@@ -85,21 +85,21 @@ namespace RTM.Application.Controllers.DimensionesController
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> registrar([FromBody] Dimensione dimensione)
+        public async Task<IActionResult> registrar([FromBody] Size size)
         {
             try
             {
 
 
-                await _GenericRepository.Add(dimensione);
+                await _GenericRepository.Add(size);
                 _UnitOfWork.Commit();
 
 
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "La Dimension se registro correctamente",
-                    data = dimensione
+                    message = "El Size se registro correctamente",
+                    data = size
                 });
             }
             catch (Exception ex)
@@ -108,7 +108,7 @@ namespace RTM.Application.Controllers.DimensionesController
                 return Ok(new Request()
                 {
                     status = false,
-                    message = "La Dimension no se registro correctamente!!",
+                    message = "El Size no se registro correctamente!!",
                     data = ex.Message
                 });
             }
@@ -119,19 +119,19 @@ namespace RTM.Application.Controllers.DimensionesController
         // PUT: api/Colores/5
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> modificar([FromBody] Dimensione dimensione)
+        public async Task<IActionResult> modificar([FromBody] Size size)
         {
             try
             {
 
-                await _GenericRepository.Update(dimensione);
+                await _GenericRepository.Update(size);
                 _UnitOfWork.Commit();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = dimensione
+                    data = size
 
                 });
             }

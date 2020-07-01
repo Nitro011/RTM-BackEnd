@@ -213,17 +213,17 @@ namespace RTM.Application.Controllers.OrdenesClientesController
                         Color = (e.Colore != null) ? e.Colore.Color : ""
 
                     }).ToList(),
-                    Ordenes_Clientes_Detalles_Dimensiones = _UnitOfWork.context.Ordenes_Clientes_Detalles_Dimensiones.Include(d => d.Dimensione).Where(a => a.Orden_Cliente_DetalleID == r.Orden_Cliente_DetalleID).Select(x => new DetallesDimension()
-                    {
-                        Orden_Cliente_Detalle_DimensionID = x.Orden_Cliente_Detalle_DimensionID,
-                        Orden_Cliente_DetalleID = r.Orden_Cliente_DetalleID,
-                        DimensionID = x.DimensionID,
-                        Longitud = (x.Dimensione != null) ? x.Dimensione.Longitud : 0,
-                        Anchura = (x.Dimensione != null) ? x.Dimensione.Anchura : 0,
-                        Altura = (x.Dimensione != null) ? x.Dimensione.Altura : 0
+                    ////Ordenes_Clientes_Detalles_Dimensiones = _UnitOfWork.context.Ordenes_Clientes_Detalles_Dimensiones.Include(d => d.Size).Where(a => a.Orden_Cliente_DetalleID == r.Orden_Cliente_DetalleID).Select(x => new DetallesDimension()
+                    ////{
+                    ////    Orden_Cliente_Detalle_DimensionID = x.Orden_Cliente_Detalle_DimensionID,
+                    ////    Orden_Cliente_DetalleID = r.Orden_Cliente_DetalleID,
+                    ////    DimensionID = x.DimensionID,
+                    ////    Longitud = (x.Dimensione != null) ? x.Dimensione.Longitud : 0,
+                    ////    Anchura = (x.Dimensione != null) ? x.Dimensione.Anchura : 0,
+                    ////    Altura = (x.Dimensione != null) ? x.Dimensione.Altura : 0
 
 
-                    }).ToList(),
+                    //}).ToList(),
                     Ordenes_Clientes_Detalles_Modelos = _UnitOfWork.context.Ordenes_Clientes_Detalles_Modelos.Include(w => w.Modelo).Where(t => t.Orden_Cliente_DetalleID == r.Orden_Cliente_DetalleID).Select(q => new DetallesModelos()
                     {
                         Orden_Cliente_Detalle_ModeloID = q.Orden_Cliente_Detalle_ModeloID,
