@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
+using RTM.Models.TableDB;
 using RTM.Repository.Interface;
 
-namespace RTM.Application.Controllers.ColoresController
+namespace RTM.Application.Controllers.OperacionesCalzadosController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ColoresController : ControllerBase
+    public class OperacionesCalzadosController : ControllerBase
     {
         private readonly IUnitOfWork _UnitOfWork;
-        private readonly IGenericRepository<Colore> _GenericRepository;
+        private readonly IGenericRepository<OperacionesCalzados> _GenericRepository;
 
-        public ColoresController(IUnitOfWork UnitOfWork, IGenericRepository<Colore> GenericRepository)
+        public OperacionesCalzadosController(IUnitOfWork UnitOfWork, IGenericRepository<OperacionesCalzados> GenericRepository)
         {
             this._UnitOfWork = UnitOfWork;
             this._GenericRepository = GenericRepository;
         }
 
 
-        // GET: api/Colores
+        // GET: api/OperacionesCalzados
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> lista()
@@ -33,13 +33,13 @@ namespace RTM.Application.Controllers.ColoresController
             try
             {
 
-                var GetColores = await _UnitOfWork.context.Colores.ToListAsync();
+                var GetOperacionesCalzados = await _UnitOfWork.context.OperacionesCalzados.ToListAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetColores
+                    data = GetOperacionesCalzados
                 });
             }
             catch (Exception ex)
@@ -56,7 +56,7 @@ namespace RTM.Application.Controllers.ColoresController
 
         }
 
-        // GET: api/Colores/5
+        // GET: api/OperacionesCalzados/5
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> listaPorId(int id)
@@ -64,13 +64,13 @@ namespace RTM.Application.Controllers.ColoresController
             try
             {
 
-                var GetColores = await _UnitOfWork.context.Colores.Where(x => x.ColorID == id).FirstOrDefaultAsync();
+                var GetOperacionesCalzados = await _UnitOfWork.context.OperacionesCalzados.Where(x => x.OperacionesCalzadosID == id).FirstOrDefaultAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetColores
+                    data = GetOperacionesCalzados
                 });
             }
             catch (Exception ex)
@@ -86,21 +86,21 @@ namespace RTM.Application.Controllers.ColoresController
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> registrar([FromBody] Colore colore)
+        public async Task<IActionResult> registrar([FromBody] OperacionesCalzados operacionesCalzados)
         {
             try
             {
 
 
-                await _GenericRepository.Add(colore);
+                await _GenericRepository.Add(operacionesCalzados);
                 _UnitOfWork.Commit();
 
 
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "El Color se registro correctamente",
-                    data = colore
+                    message = "La Operación de Calzado se registro correctamente",
+                    data = operacionesCalzados
                 });
             }
             catch (Exception ex)
@@ -109,7 +109,7 @@ namespace RTM.Application.Controllers.ColoresController
                 return Ok(new Request()
                 {
                     status = false,
-                    message = "El Color no se registro correctamente!!",
+                    message = "La Operación de Calzado no se registro correctamente!!",
                     data = ex.Message
                 });
             }
@@ -117,22 +117,22 @@ namespace RTM.Application.Controllers.ColoresController
 
         }
 
-        // PUT: api/Colores/5
+        // PUT: api/OperacionesCalzados/5
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> modificar([FromBody] Colore colore)
+        public async Task<IActionResult> modificar([FromBody] OperacionesCalzados operacionesCalzados)
         {
             try
             {
 
-                await _GenericRepository.Update(colore);
+                await _GenericRepository.Update(operacionesCalzados);
                 _UnitOfWork.Commit();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = colore
+                    data = operacionesCalzados
 
                 });
             }

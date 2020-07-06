@@ -82,6 +82,10 @@
     <Compile Include="Migrations\20200701035029_addSize.designer.cs">
       <DependentUpon>20200701035029_addSize.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200704171231_ModificacionClientes.cs" />
+    <Compile Include="Migrations\20200704171231_ModificacionClientes.designer.cs">
+      <DependentUpon>20200704171231_ModificacionClientes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\RTMDbContextModelSnapshot.cs" />
     <Compile Include="RTMDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
