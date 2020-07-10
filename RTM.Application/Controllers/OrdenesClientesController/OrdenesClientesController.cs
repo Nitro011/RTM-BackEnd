@@ -129,7 +129,7 @@ namespace RTM.Application.Controllers.OrdenesClientesController
                 {
                     status = true,
                     message = "La Orden del Cliente se registro correctamente"
-                   
+
                 });
             }
             catch (Exception ex)
@@ -187,7 +187,7 @@ namespace RTM.Application.Controllers.OrdenesClientesController
         {
             var orderncliente = new OrdenCliente();
 
-            orderncliente = await _UnitOfWork.context.Ordenes_Clientes.Include(s => s.Cliente).Where(x => x.Orden_ClienteID == id).Select(s => new OrdenCliente()
+            orderncliente = await _UnitOfWork.context.Ordenes_Clientes.Include(s => s.Cliente).Where(x => x.ClienteID == id).Select(s => new OrdenCliente()
             {
 
                 Orden_ClienteID = s.Orden_ClienteID,
@@ -197,53 +197,61 @@ namespace RTM.Application.Controllers.OrdenesClientesController
                 NombreCliente = (s.Cliente != null) ? $"{s.Cliente.Nombre_Cliente}" : "",
                 Fecha_Entrega = s.Fecha_Entrega,
                 Fecha_Inicio = s.Fecha_Inicio,
-                Ordenes_Clientes_Detalles =  _UnitOfWork.context.Ordenes_Clientes_Detalles.Include(q => q.Marca).Where(d => d.Orden_ClienteID == s.Orden_ClienteID).Select(r => new OrdenesClientesDetalles()
+                Ordenes_Clientes_Detalles = _UnitOfWork.context.Ordenes_Clientes_Detalles.Include(q => q.Marca).Where(d => d.Orden_ClienteID == s.Orden_ClienteID).Select(r => new OrdenesClientesDetalles()
                 {
 
                     Orden_Cliente_DetalleID = r.Orden_Cliente_DetalleID,
                     Orden_ClienteID = s.Orden_ClienteID,
                     MarcaID = r.MarcaID,
-                    Marcar = (r.Marca != null) ? r.Marca.Marca1 : "",
+                    Marcar = (r.Marca != null) ? r.Marca.Marca1 : ""
 
-                    Ordenes_Clientes_Detalles_Colores = _UnitOfWork.context.Ordenes_Clientes_Detalles_Colores.Include(a => a.Colore).Where(g => g.Orden_Cliente_DetalleID == r.Orden_Cliente_DetalleID).Select(e => new DetallesColores()
-                    {
-                        Orden_Cliente_DetalleID = r.Orden_Cliente_DetalleID,
-                        Orden_Cliente_Detalle_ColorID = e.Orden_Cliente_Detalle_ColorID,
-                        ColorID = e.ColorID,
-                        Color = (e.Colore != null) ? e.Colore.Color : ""
-
-                    }).ToList(),
-                    ////Ordenes_Clientes_Detalles_Dimensiones = _UnitOfWork.context.Ordenes_Clientes_Detalles_Dimensiones.Include(d => d.Size).Where(a => a.Orden_Cliente_DetalleID == r.Orden_Cliente_DetalleID).Select(x => new DetallesDimension()
-                    ////{
-                    ////    Orden_Cliente_Detalle_DimensionID = x.Orden_Cliente_Detalle_DimensionID,
-                    ////    Orden_Cliente_DetalleID = r.Orden_Cliente_DetalleID,
-                    ////    DimensionID = x.DimensionID,
-                    ////    Longitud = (x.Dimensione != null) ? x.Dimensione.Longitud : 0,
-                    ////    Anchura = (x.Dimensione != null) ? x.Dimensione.Anchura : 0,
-                    ////    Altura = (x.Dimensione != null) ? x.Dimensione.Altura : 0
-
-
-                    //}).ToList(),
-                    Ordenes_Clientes_Detalles_Modelos = _UnitOfWork.context.Ordenes_Clientes_Detalles_Modelos.Include(w => w.Modelo).Where(t => t.Orden_Cliente_DetalleID == r.Orden_Cliente_DetalleID).Select(q => new DetallesModelos()
-                    {
-                        Orden_Cliente_Detalle_ModeloID = q.Orden_Cliente_Detalle_ModeloID,
-                        Orden_Cliente_DetalleID = r.Orden_Cliente_DetalleID,
-                        ModeloID = q.ModeloID,
-                        Modelo = (q.Modelo != null) ? q.Modelo.Modelo1 : ""
-
-                    }).ToList(),
-                    Ordenes_Clientes_Detalles_Tipos_Calzados = _UnitOfWork.context.Ordenes_Clientes_Detalles_Tipos_Calzados.Include(p => p.Tipo_Calzados).Where(g => g.Orden_Cliente_DetalleID == r.Orden_Cliente_DetalleID).Select(b => new DetallesCalzado()
-                    {
-                        Orden_Cliente_Detalle_Tipo_CalzadoID = b.Orden_Cliente_Detalle_Tipo_CalzadoID,
-                        Orden_Cliente_DetalleID = r.Orden_Cliente_DetalleID,
-                        Tipo_CalzadoID = b.Tipo_CalzadoID,
-                        Calzado = (b.Tipo_Calzados != null) ? b.Tipo_Calzados.Tipo_Calzado : ""
-
-                    }).ToList()
 
                 }).FirstOrDefault()
 
             }).FirstOrDefaultAsync();
+
+            orderncliente.Ordenes_Clientes_Detalles.Ordenes_Clientes_Detalles_Colores = _UnitOfWork.context.Ordenes_Clientes_Detalles_Colores.Where(g => g.Orden_Cliente_DetalleID == orderncliente.Ordenes_Clientes_Detalles.Orden_Cliente_DetalleID).Select(e => new DetallesColores()
+            {
+                Orden_Cliente_DetalleID = e.Orden_Cliente_DetalleID,
+                Orden_Cliente_Detalle_ColorID = e.Orden_Cliente_Detalle_ColorID,
+                ColorID = e.ColorID,
+                Color = (e.Colore != null) ? e.Colore.Color : ""
+
+            }).ToList();
+
+            orderncliente.Ordenes_Clientes_Detalles.Ordenes_Clientes_Detalles_Size = _UnitOfWork.context.Ordenes_Clientes_Detalles_Dimensiones
+                .Include(d => d.Size)
+                .Include(d => d.Size.CategoriaSize)
+                .Where(a => a.Orden_Cliente_DetalleID == orderncliente.Ordenes_Clientes_Detalles.Orden_Cliente_DetalleID).Select(x => new DetallesDimension()
+                {
+                    Orden_Cliente_Detalle_DimensionID = x.Orden_Cliente_Detalle_DimensionID,
+                    Orden_Cliente_DetalleID = x.Orden_Cliente_DetalleID,
+                    SizeID = x.SizeID,
+                    USA = (x.Size != null) ? x.Size.USA : "",
+                    UK = (x.Size != null) ? x.Size.UK : "",
+                    CM = (x.Size != null) ? x.Size.CM : "",
+                    EURO = (x.Size != null) ? x.Size.EURO : "",
+                    CategoriaSize = (x.Size.CategoriaSize != null) ? x.Size.CategoriaSize.Clasificaciones : ""
+
+                }).ToList();
+
+            orderncliente.Ordenes_Clientes_Detalles.Ordenes_Clientes_Detalles_Modelos = _UnitOfWork.context.Ordenes_Clientes_Detalles_Modelos.Include(w => w.Modelo).Where(t => t.Orden_Cliente_DetalleID == orderncliente.Ordenes_Clientes_Detalles.Orden_Cliente_DetalleID).Select(q => new DetallesModelos()
+            {
+                Orden_Cliente_Detalle_ModeloID = q.Orden_Cliente_Detalle_ModeloID,
+                Orden_Cliente_DetalleID = q.Orden_Cliente_DetalleID,
+                ModeloID = q.ModeloID,
+                Modelo = (q.Modelo != null) ? q.Modelo.Modelo1 : ""
+
+            }).ToList();
+
+            orderncliente.Ordenes_Clientes_Detalles.Ordenes_Clientes_Detalles_Tipos_Calzados = _UnitOfWork.context.Ordenes_Clientes_Detalles_Tipos_Calzados.Include(p => p.Tipo_Calzados).Where(g => g.Orden_Cliente_DetalleID == orderncliente.Ordenes_Clientes_Detalles.Orden_Cliente_DetalleID).Select(b => new DetallesCalzado()
+            {
+                Orden_Cliente_Detalle_Tipo_CalzadoID = b.Orden_Cliente_Detalle_Tipo_CalzadoID,
+                Orden_Cliente_DetalleID = b.Orden_Cliente_DetalleID,
+                Tipo_CalzadoID = b.Tipo_CalzadoID,
+                Calzado = (b.Tipo_Calzados != null) ? b.Tipo_Calzados.Tipo_Calzado : ""
+
+            }).ToList();
 
             return orderncliente;
         }

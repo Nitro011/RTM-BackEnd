@@ -13,9 +13,9 @@ namespace RTM.Models.DTO.Orden_Cliente
         public int? MarcaID { get; set; }
         public string Marcar { get; set; }
 
-        public virtual List<DetallesColores> Ordenes_Clientes_Detalles_Colores { get; set; }
-        public virtual List<DetallesDimension> Ordenes_Clientes_Detalles_Dimensiones { get; set; }
-        public virtual List<DetallesModelos> Ordenes_Clientes_Detalles_Modelos { get; set; }
-        public virtual List<DetallesCalzado> Ordenes_Clientes_Detalles_Tipos_Calzados { get; set; }
+        public  List<DetallesColores> Ordenes_Clientes_Detalles_Colores { get; set; }
+        public  List<DetallesDimension> Ordenes_Clientes_Detalles_Size { get; set; }
+        public  List<DetallesModelos> Ordenes_Clientes_Detalles_Modelos { get; set; }
+        public  List<DetallesCalzado> Ordenes_Clientes_Detalles_Tipos_Calzados { get; set; }
     }
 }

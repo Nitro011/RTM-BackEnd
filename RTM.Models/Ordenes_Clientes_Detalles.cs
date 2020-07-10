@@ -16,13 +16,9 @@ namespace RTM.Models
 
     public partial class Ordenes_Clientes_Detalles
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ordenes_Clientes_Detalles()
         {
-            this.Ordenes_Clientes_Detalles_Colores = new HashSet<Ordenes_Clientes_Detalles_Colores>();
-            this.Ordenes_Clientes_Detalles_Dimensiones = new HashSet<Ordenes_Clientes_Detalles_Dimensiones>();
-            this.Ordenes_Clientes_Detalles_Modelos = new HashSet<Ordenes_Clientes_Detalles_Modelos>();
-            this.Ordenes_Clientes_Detalles_Tipos_Calzados = new HashSet<Ordenes_Clientes_Detalles_Tipos_Calzados>();
+           
         }
     
         [Key]
@@ -36,13 +32,9 @@ namespace RTM.Models
     
         public virtual Marca Marca { get; set; }
         public virtual Ordenes_Clientes Ordenes_Clientes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual IEnumerable<Ordenes_Clientes_Detalles_Colores> Ordenes_Clientes_Detalles_Colores { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual IEnumerable<Ordenes_Clientes_Detalles_Dimensiones> Ordenes_Clientes_Detalles_Dimensiones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual IEnumerable<Ordenes_Clientes_Detalles_Modelos> Ordenes_Clientes_Detalles_Modelos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual IEnumerable<Ordenes_Clientes_Detalles_Tipos_Calzados> Ordenes_Clientes_Detalles_Tipos_Calzados { get; set; }
     }
 }
