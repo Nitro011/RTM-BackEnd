@@ -331,6 +331,9 @@
     <Compile Include="sysdiagram.cs">
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>
+    <Compile Include="TableDB\BOM.cs" />
+    <Compile Include="TableDB\CategoriaSize.cs" />
+    <Compile Include="TableDB\OperacionesCalzados.cs" />
     <Compile Include="Tipo_Calzados.cs">
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -9,23 +8,23 @@ using Microsoft.EntityFrameworkCore;
 using RTM.Models;
 using RTM.Repository.Interface;
 
-namespace RTM.Application.Controllers.ColoresController
+namespace RTM.Application.Controllers.DimensionesController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ColoresController : ControllerBase
+    public class SizeController : ControllerBase
     {
         private readonly IUnitOfWork _UnitOfWork;
-        private readonly IGenericRepository<Colore> _GenericRepository;
+        private readonly IGenericRepository<Size> _GenericRepository;
 
-        public ColoresController(IUnitOfWork UnitOfWork, IGenericRepository<Colore> GenericRepository)
+        public SizeController(IUnitOfWork UnitOfWork, IGenericRepository<Size> GenericRepository)
         {
             this._UnitOfWork = UnitOfWork;
             this._GenericRepository = GenericRepository;
         }
 
 
-        // GET: api/Colores
+        // GET: api/Dimensiones
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> lista()
@@ -33,20 +32,20 @@ namespace RTM.Application.Controllers.ColoresController
             try
             {
 
-                var GetColores = await _UnitOfWork.context.Colores.ToListAsync();
+                var GetSizes = await _UnitOfWork.context.Sizes.ToListAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetColores
+                    data = GetSizes 
                 });
             }
             catch (Exception ex)
             {
                 return Ok(new Request()
                 {
-                    status = false,
+                    status = true,
                     message = "Ocurrio un error inesperado!!",
                     data = ex.Message
                 });
@@ -56,7 +55,7 @@ namespace RTM.Application.Controllers.ColoresController
 
         }
 
-        // GET: api/Colores/5
+        // GET: api/Size/5
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> listaPorId(int id)
@@ -64,13 +63,13 @@ namespace RTM.Application.Controllers.ColoresController
             try
             {
 
-                var GetColores = await _UnitOfWork.context.Colores.Where(x => x.ColorID == id).FirstOrDefaultAsync();
+                var GetSizes = await _UnitOfWork.context.Sizes.Where(x => x.SizeID == id).FirstOrDefaultAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetColores
+                    data = GetSizes
                 });
             }
             catch (Exception ex)
@@ -86,21 +85,21 @@ namespace RTM.Application.Controllers.ColoresController
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> registrar([FromBody] Colore colore)
+        public async Task<IActionResult> registrar([FromBody] Size size)
         {
             try
             {
 
 
-                await _GenericRepository.Add(colore);
+                await _GenericRepository.Add(size);
                 _UnitOfWork.Commit();
 
 
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "El Color se registro correctamente",
-                    data = colore
+                    message = "El Size se registro correctamente",
+                    data = size
                 });
             }
             catch (Exception ex)
@@ -109,7 +108,7 @@ namespace RTM.Application.Controllers.ColoresController
                 return Ok(new Request()
                 {
                     status = false,
-                    message = "El Color no se registro correctamente!!",
+                    message = "El Size no se registro correctamente!!",
                     data = ex.Message
                 });
             }
@@ -120,19 +119,19 @@ namespace RTM.Application.Controllers.ColoresController
         // PUT: api/Colores/5
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> modificar([FromBody] Colore colore)
+        public async Task<IActionResult> modificar([FromBody] Size size)
         {
             try
             {
 
-                await _GenericRepository.Update(colore);
+                await _GenericRepository.Update(size);
                 _UnitOfWork.Commit();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = colore
+                    data = size
 
                 });
             }

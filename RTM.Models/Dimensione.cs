@@ -9,25 +9,33 @@
 
 namespace RTM.Models
 {
+    using RTM.Models.TableDB;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-    public partial class Dimensione
+    public partial class Size
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Dimensione()
+        public Size()
         {
             this.Ordenes_Clientes_Detalles_Dimensiones = new HashSet<Ordenes_Clientes_Detalles_Dimensiones>();
         }
-    
+
         [Key]
-        public int DimensionID { get; set; }
-        public int? Longitud { get; set; }
-        public int? Anchura { get; set; }
-        public int? Altura { get; set; }
-    
+        public int SizeID { get; set; }
+        public string USA { get; set; }
+        public string UK { get; set; }
+        public string EURO { get; set; }
+        public string CM { get; set; }
+
+        [ForeignKey("CategoriaSize")]
+        public int CategoriaSizeID { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ordenes_Clientes_Detalles_Dimensiones> Ordenes_Clientes_Detalles_Dimensiones { get; set; }
+
+        public virtual CategoriaSize CategoriaSize {get; set;}
     }
 }

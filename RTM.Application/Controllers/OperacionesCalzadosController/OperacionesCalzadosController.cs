@@ -6,25 +6,26 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
+using RTM.Models.TableDB;
 using RTM.Repository.Interface;
 
-namespace RTM.Application.Controllers.DimensionesController
+namespace RTM.Application.Controllers.OperacionesCalzadosController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DimensionesController : ControllerBase
+    public class OperacionesCalzadosController : ControllerBase
     {
         private readonly IUnitOfWork _UnitOfWork;
-        private readonly IGenericRepository<Dimensione> _GenericRepository;
+        private readonly IGenericRepository<OperacionesCalzados> _GenericRepository;
 
-        public DimensionesController(IUnitOfWork UnitOfWork, IGenericRepository<Dimensione> GenericRepository)
+        public OperacionesCalzadosController(IUnitOfWork UnitOfWork, IGenericRepository<OperacionesCalzados> GenericRepository)
         {
             this._UnitOfWork = UnitOfWork;
             this._GenericRepository = GenericRepository;
         }
 
 
-        // GET: api/Dimensiones
+        // GET: api/OperacionesCalzados
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> lista()
@@ -32,20 +33,20 @@ namespace RTM.Application.Controllers.DimensionesController
             try
             {
 
-                var GetDimensiones = await _UnitOfWork.context.Dimensiones.ToListAsync();
+                var GetOperacionesCalzados = await _UnitOfWork.context.OperacionesCalzados.ToListAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetDimensiones
+                    data = GetOperacionesCalzados
                 });
             }
             catch (Exception ex)
             {
                 return Ok(new Request()
                 {
-                    status = true,
+                    status = false,
                     message = "Ocurrio un error inesperado!!",
                     data = ex.Message
                 });
@@ -55,7 +56,7 @@ namespace RTM.Application.Controllers.DimensionesController
 
         }
 
-        // GET: api/Dimensiones/5
+        // GET: api/OperacionesCalzados/5
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> listaPorId(int id)
@@ -63,13 +64,13 @@ namespace RTM.Application.Controllers.DimensionesController
             try
             {
 
-                var GetDimensiones = await _UnitOfWork.context.Dimensiones.Where(x => x.DimensionID == id).FirstOrDefaultAsync();
+                var GetOperacionesCalzados = await _UnitOfWork.context.OperacionesCalzados.Where(x => x.OperacionesCalzadosID == id).FirstOrDefaultAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetDimensiones
+                    data = GetOperacionesCalzados
                 });
             }
             catch (Exception ex)
@@ -85,21 +86,21 @@ namespace RTM.Application.Controllers.DimensionesController
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> registrar([FromBody] Dimensione dimensione)
+        public async Task<IActionResult> registrar([FromBody] OperacionesCalzados operacionesCalzados)
         {
             try
             {
 
 
-                await _GenericRepository.Add(dimensione);
+                await _GenericRepository.Add(operacionesCalzados);
                 _UnitOfWork.Commit();
 
 
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "La Dimension se registro correctamente",
-                    data = dimensione
+                    message = "La Operación de Calzado se registro correctamente",
+                    data = operacionesCalzados
                 });
             }
             catch (Exception ex)
@@ -108,7 +109,7 @@ namespace RTM.Application.Controllers.DimensionesController
                 return Ok(new Request()
                 {
                     status = false,
-                    message = "La Dimension no se registro correctamente!!",
+                    message = "La Operación de Calzado no se registro correctamente!!",
                     data = ex.Message
                 });
             }
@@ -116,22 +117,22 @@ namespace RTM.Application.Controllers.DimensionesController
 
         }
 
-        // PUT: api/Colores/5
+        // PUT: api/OperacionesCalzados/5
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> modificar([FromBody] Dimensione dimensione)
+        public async Task<IActionResult> modificar([FromBody] OperacionesCalzados operacionesCalzados)
         {
             try
             {
 
-                await _GenericRepository.Update(dimensione);
+                await _GenericRepository.Update(operacionesCalzados);
                 _UnitOfWork.Commit();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = dimensione
+                    data = operacionesCalzados
 
                 });
             }

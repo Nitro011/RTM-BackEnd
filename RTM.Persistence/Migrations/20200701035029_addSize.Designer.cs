@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RTM.Persistence;
 
 namespace RTM.Persistence.Migrations
 {
     [DbContext(typeof(RTMDbContext))]
-    partial class RTMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200701035029_addSize")]
+    partial class addSize
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,9 +115,6 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CodigoCliente")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Correo_Electronico")
                         .HasColumnType("nvarchar(max)");
 
@@ -126,12 +125,6 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre_Cliente")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Pais")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RNC")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ClienteID");
