@@ -119,6 +119,32 @@ namespace RTM.Application.Controllers.EmpleadosController
             }
         }
 
+        [HttpGet]
+        [Route("[action]/{Nombres}/{Apellidos}/{Cedula}/{CodigoEmpleado}")]
+        public async Task<IActionResult> EmpleadoPorNombresApellidosCedulaCodigoEmpleado([FromRoute]string Nombres, string Apellidos, string Cedula, string CodigoEmpleado)
+        {
+            try
+            {
+                var GetEmpleado = await EmpleadoPorNombres_Apellidos_Cedula_CodigoEmpleado(Nombres, Apellidos, Cedula, CodigoEmpleado);
+
+                return Ok(new Request()
+                {
+                    status=true,
+                    message="Esta accion se ejecuto correctamente",
+                    data=GetEmpleado
+                });
+            }
+            catch(Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
         // GET: api/Empleados
         [HttpGet]
         [Route("[action]")]
@@ -260,7 +286,9 @@ namespace RTM.Application.Controllers.EmpleadosController
             {
                 Id = a.EmpleadoID,
                 NombreCompleto = $"{a.Nombres} {a.Apellidos}",
-                Puesto = _UnitOfWork.context.Usuarios.Include(x => x.AreaProduccion).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.AreaProduccion.NombreAreaProduccion).FirstOrDefault()
+                Puesto = _UnitOfWork.context.Empleados.Include(x => x.AreaProduccion).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.AreaProduccion.NombreAreaProduccion).FirstOrDefault(),
+                Posicion = _UnitOfWork.context.Empleados.Include(x => x.Role).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.Role.Tipo_Usuario).FirstOrDefault(),
+                FechaIngreso = a.FechaIngreso.ToString()
 
             }).ToListAsync();
 
@@ -311,6 +339,36 @@ namespace RTM.Application.Controllers.EmpleadosController
                     nombreCompleto = $"{a.Nombres} {a.Apellidos}",
 
                 }).FirstOrDefaultAsync();
+
+            return EmpleadoList;
+        }
+
+        private async Task<List<EmpleadoByNombreCompleto_Cedula_CodigoEmpleado>> EmpleadoPorNombres_Apellidos_Cedula_CodigoEmpleado(string Nombres, string Apellidos, string Cedula, string CodigoEmpleado)
+        {
+            var EmpleadoList = new List<EmpleadoByNombreCompleto_Cedula_CodigoEmpleado>();
+
+            EmpleadoList = await _UnitOfWork.context.Empleados
+                .Where(a => a.Nombres == Nombres || a.Apellidos == Apellidos || a.Cedula == Cedula || a.CodigoEmpleado == CodigoEmpleado || a.Nombres == Nombres && a.Apellidos == Apellidos)
+                .Select(a => new EmpleadoByNombreCompleto_Cedula_CodigoEmpleado()
+                {
+                    Id = a.EmpleadoID,
+                    RolID=a.RolID,
+                    AreaProduccionID=a.AreaProduccionID,
+                    CodigoEmpleado = a.CodigoEmpleado,
+                    Nombres=a.Nombres,
+                    Apellidos=a.Apellidos,
+                    nombreCompleto = $"{a.Nombres} {a.Apellidos}",
+                    Sexo=a.Sexo,
+                    Cedula=a.Cedula,
+                    Fecha_Nacimiento=a.Fecha_Nacimiento,
+                    Edad=a.Edad,
+                    Direccion=a.Direccion,
+                    Telefono=a.Telefono,
+                    FechaIngreso=a.FechaIngreso,
+                    Posicion = _UnitOfWork.context.Empleados.Include(x => x.Role).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.Role.Tipo_Usuario).FirstOrDefault(),
+                    Puesto = _UnitOfWork.context.Empleados.Include(x => x.AreaProduccion).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.AreaProduccion.NombreAreaProduccion).FirstOrDefault(),
+
+                }).ToListAsync();
 
             return EmpleadoList;
         }

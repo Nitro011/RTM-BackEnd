@@ -12,6 +12,7 @@ namespace RTM.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Empleado
     {
@@ -22,6 +23,13 @@ namespace RTM.Models
     
         [Key]
         public int EmpleadoID { get; set; }
+
+        [ForeignKey("Role")]
+        public int? RolID { get; set; }
+
+        [ForeignKey("AreaProduccion")]
+        public int? AreaProduccionID { get; set; }
+        public string CodigoEmpleado { get; set; }
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public bool? Sexo { get; set; }
@@ -30,6 +38,9 @@ namespace RTM.Models
         public int? Edad { get; set; }
         public string Direccion { get; set; }
         public string Telefono { get; set; }
-    
+        public System.DateTime? FechaIngreso { get; set; }
+
+        public virtual Role Role { get; set; }
+        public virtual AreaProduccion AreaProduccion { get; set; }
     }
 }

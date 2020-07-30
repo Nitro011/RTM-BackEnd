@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
+using RTM.Models.DTO.Marcas;
 using RTM.Repository.Interface;
 
 namespace RTM.Application.Controllers.MarcasController
@@ -83,6 +84,32 @@ namespace RTM.Application.Controllers.MarcasController
             }
         }
 
+        [HttpGet]
+        [Route("[action]/{Marca}")]
+        public async Task<IActionResult> ConsultarMarcasPorMarca([FromRoute]string Marca)
+        {
+            try
+            {
+                var GetMarcas = await MarcasPorNombreMarca(Marca);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetMarcas
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> registrar([FromBody] Marca marca)
@@ -150,6 +177,23 @@ namespace RTM.Application.Controllers.MarcasController
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        //Funciones:
+        private async Task<List<MarcasListView>> MarcasPorNombreMarca(string Marca)
+        {
+            var MarcasList = new List<MarcasListView>();
+
+            MarcasList = await _UnitOfWork.context.Marcas
+                .Where(a => a.Marca1 == Marca)
+                .Select(a => new MarcasListView()
+                {
+                    MarcaID=a.MarcaID,
+                    Marca1=a.Marca1
+
+                }).ToListAsync();
+
+            return MarcasList;
         }
     }
 }

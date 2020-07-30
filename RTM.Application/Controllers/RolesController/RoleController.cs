@@ -5,27 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RTM.Repository.Interface;
 using RTM.Models;
-using RTM.Models.DTO.TiposCalzados;
+using RTM.Models.DTO.Roles;
+using RTM.Repository.Interface;
 
-namespace RTM.Application.Controllers.TiposCalzadosController
+namespace RTM.Application.Controllers.RolesController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TiposCalzadosController : ControllerBase
+    public class RoleController : ControllerBase
     {
         private readonly IUnitOfWork _UnitOfWork;
-        private readonly IGenericRepository<Tipo_Calzados> _GenericRepository;
+        private readonly IGenericRepository<Role> _GenericRepository;
 
-        public TiposCalzadosController(IUnitOfWork UnitOfWork, IGenericRepository<Tipo_Calzados> GenericRepository)
+        public RoleController(IUnitOfWork UnitOfWork, IGenericRepository<Role> GenericRepository)
         {
             this._UnitOfWork = UnitOfWork;
             this._GenericRepository = GenericRepository;
         }
 
 
-        // GET: api/TiposCalzados
+        // GET: api/Roles
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> lista()
@@ -33,20 +33,20 @@ namespace RTM.Application.Controllers.TiposCalzadosController
             try
             {
 
-                var GetTiposCalzados = await _UnitOfWork.context.Tipo_Calzados.ToListAsync();
+                var GetRoles = await _UnitOfWork.context.Roles.ToListAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetTiposCalzados
+                    data = GetRoles
                 });
             }
             catch (Exception ex)
             {
                 return Ok(new Request()
                 {
-                    status = true,
+                    status = false,
                     message = "Ocurrio un error inesperado!!",
                     data = ex.Message
                 });
@@ -56,7 +56,7 @@ namespace RTM.Application.Controllers.TiposCalzadosController
 
         }
 
-        // GET: api/TiposCalzados/5
+        // GET: api/Roles/5
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> listaPorId(int id)
@@ -64,13 +64,13 @@ namespace RTM.Application.Controllers.TiposCalzadosController
             try
             {
 
-                var GetTiposCalzados = await _UnitOfWork.context.Tipo_Calzados.Where(x => x.Tipo_CalzadoID == id).FirstOrDefaultAsync();
+                var GetRoles = await _UnitOfWork.context.Roles.Where(x => x.RolID == id).FirstOrDefaultAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetTiposCalzados
+                    data = GetRoles
                 });
             }
             catch (Exception ex)
@@ -84,19 +84,20 @@ namespace RTM.Application.Controllers.TiposCalzadosController
             }
         }
 
+        //Get: api/Roles/TipoUsuario:
         [HttpGet]
-        [Route("[action]/{TipoCalzado}")]
-        public async Task<IActionResult> ConsultarTiposCalzadosPorTiposCalzados([FromRoute]string TipoCalzado)
+        [Route("[action]/{TipoUsuario}")]
+        public async Task<IActionResult> BuscarRolesPorTipoUsuario([FromRoute]string TipoUsuario)
         {
             try
             {
-                var GetTiposCalzados = await BuscarTiposCalzadosPorTiposCalzados(TipoCalzado);
+                var GetRoles = await BuscarRolPorTipoUsuario(TipoUsuario);
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetTiposCalzados
+                    data = GetRoles
                 });
             }
             catch (Exception ex)
@@ -112,21 +113,21 @@ namespace RTM.Application.Controllers.TiposCalzadosController
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> registrar([FromBody] Tipo_Calzados tipo_Calzados)
+        public async Task<IActionResult> registrar([FromBody] Role role)
         {
             try
             {
 
 
-                await _GenericRepository.Add(tipo_Calzados);
+                await _GenericRepository.Add(role);
                 _UnitOfWork.Commit();
 
 
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "El Tipo de Calzado se registro correctamente",
-                    data = tipo_Calzados
+                    message = "El Rol se registro correctamente",
+                    data = role
                 });
             }
             catch (Exception ex)
@@ -135,7 +136,7 @@ namespace RTM.Application.Controllers.TiposCalzadosController
                 return Ok(new Request()
                 {
                     status = false,
-                    message = "El Tipo de Calzado no se registro correctamente!!",
+                    message = "El Rol no se registro correctamente!!",
                     data = ex.Message
                 });
             }
@@ -143,22 +144,22 @@ namespace RTM.Application.Controllers.TiposCalzadosController
 
         }
 
-        // PUT: api/TiposCalzados/5
+        // PUT: api/Roles/5
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> modificar([FromBody]Tipo_Calzados tipo_Calzados)
+        public async Task<IActionResult> modificar([FromBody] Role role)
         {
             try
             {
 
-                await _GenericRepository.Update(tipo_Calzados);
+                await _GenericRepository.Update(role);
                 _UnitOfWork.Commit();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = tipo_Calzados
+                    data = role
 
                 });
             }
@@ -180,20 +181,20 @@ namespace RTM.Application.Controllers.TiposCalzadosController
         }
 
         //Funciones:
-        private async Task<List<TiposCalzadosListView>> BuscarTiposCalzadosPorTiposCalzados(string TipoCalzado)
+        private async Task<List<RolesByTipoUsuario>> BuscarRolPorTipoUsuario(string TipoUsuario)
         {
-            var TiposCalzadosList = new List<TiposCalzadosListView>();
+            var RolesList = new List<RolesByTipoUsuario>();
 
-            TiposCalzadosList = await _UnitOfWork.context.Tipo_Calzados
-                .Where(a => a.Tipo_Calzado==TipoCalzado)
-                .Select(a => new TiposCalzadosListView()
+            RolesList = await _UnitOfWork.context.Roles
+                .Where(a => a.Tipo_Usuario==TipoUsuario)
+                .Select(a => new RolesByTipoUsuario()
                 {
-                    Tipo_CalzadoID=a.Tipo_CalzadoID,
-                    Tipo_Calzado=a.Tipo_Calzado
+                    RolID = a.RolID,
+                    Tipo_Usuario = a.Tipo_Usuario,
 
                 }).ToListAsync();
 
-            return TiposCalzadosList;
+            return RolesList;
         }
     }
 }

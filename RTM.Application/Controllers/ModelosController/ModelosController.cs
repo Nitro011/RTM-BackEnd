@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
+using RTM.Models.DTO.Modelos;
 using RTM.Repository.Interface;
 
 namespace RTM.Application.Controllers.ModelosController
@@ -64,6 +65,32 @@ namespace RTM.Application.Controllers.ModelosController
             {
 
                 var GetModelos = await _UnitOfWork.context.Modelos.Where(x => x.ModeloID == id).FirstOrDefaultAsync();
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetModelos
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]/{Modelos}")]
+        public async Task<IActionResult> ConsultarModelosPorModelos([FromRoute]string Modelos)
+        {
+            try
+            {
+                var GetModelos = await BuscarModelosPorModelos(Modelos);
 
                 return Ok(new Request()
                 {
@@ -150,6 +177,23 @@ namespace RTM.Application.Controllers.ModelosController
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        //Funciones:
+        private async Task<List<ModelosListView>> BuscarModelosPorModelos(string Modelo)
+        {
+            var ModelosList = new List<ModelosListView>();
+
+                ModelosList = await _UnitOfWork.context.Modelos
+                .Where(a => a.Modelo1==Modelo)
+                .Select(a => new ModelosListView()
+                {
+                   ModeloID=a.ModeloID,
+                   Modelo1=a.Modelo1,
+
+                }).ToListAsync();
+
+            return ModelosList;
         }
     }
 }

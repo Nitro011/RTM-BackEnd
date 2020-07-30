@@ -86,6 +86,10 @@
     <Compile Include="Migrations\20200704171231_ModificacionClientes.designer.cs">
       <DependentUpon>20200704171231_ModificacionClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200721035658_updateEmpleado.cs" />
+    <Compile Include="Migrations\20200721035658_updateEmpleado.designer.cs">
+      <DependentUpon>20200721035658_updateEmpleado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\RTMDbContextModelSnapshot.cs" />
     <Compile Include="RTMDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

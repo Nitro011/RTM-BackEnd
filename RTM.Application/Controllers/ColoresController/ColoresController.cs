@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
+using RTM.Models.DTO.Colores;
 using RTM.Repository.Interface;
 
 namespace RTM.Application.Controllers.ColoresController
@@ -65,6 +66,32 @@ namespace RTM.Application.Controllers.ColoresController
             {
 
                 var GetColores = await _UnitOfWork.context.Colores.Where(x => x.ColorID == id).FirstOrDefaultAsync();
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetColores
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]/{Colores}")]
+        public async Task<IActionResult> ConsultarColoresPorColores([FromRoute]string Colores)
+        {
+            try
+            {
+                var GetColores = await BuscarColoresPorColores(Colores);
 
                 return Ok(new Request()
                 {
@@ -151,6 +178,24 @@ namespace RTM.Application.Controllers.ColoresController
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        //Funciones:
+
+        private async Task<List<ColoresListView>> BuscarColoresPorColores(string Colores)
+        {
+            var ColoresList = new List<ColoresListView>();
+
+                 ColoresList = await _UnitOfWork.context.Colores
+                .Where(a => a.Color==Colores)
+                .Select(a => new ColoresListView()
+                {
+                    ColorID=a.ColorID,
+                    Color=a.Color
+
+                }).ToListAsync();
+
+            return ColoresList;
         }
     }
 }

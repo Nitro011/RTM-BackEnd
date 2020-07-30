@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
+using RTM.Models.DTO.OperacionesCalzados;
 using RTM.Models.TableDB;
 using RTM.Repository.Interface;
 
@@ -65,6 +66,32 @@ namespace RTM.Application.Controllers.OperacionesCalzadosController
             {
 
                 var GetOperacionesCalzados = await _UnitOfWork.context.OperacionesCalzados.Where(x => x.OperacionesCalzadosID == id).FirstOrDefaultAsync();
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetOperacionesCalzados
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]/{PartNo}")]
+        public async Task<IActionResult> ConsultarOperacionesCalzadosPorPartNo([FromRoute]string PartNo)
+        {
+            try
+            {
+                var GetOperacionesCalzados = await OperacionesCalzadosPorPartNo(PartNo);
 
                 return Ok(new Request()
                 {
@@ -151,6 +178,26 @@ namespace RTM.Application.Controllers.OperacionesCalzadosController
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        //Funciones:
+        private async Task<List<OperacionesCalzadosListView>> OperacionesCalzadosPorPartNo(string PartNo)
+        {
+            var OperacionesCalzadosList = new List<OperacionesCalzadosListView>();
+
+            OperacionesCalzadosList = await _UnitOfWork.context.OperacionesCalzados
+                .Where(a => a.PartNo==PartNo)
+                .Select(a => new OperacionesCalzadosListView()
+                {
+                    OperacionesCalzadosID=a.OperacionesCalzadosID,
+                    PartNo=a.PartNo,
+                    CantidadOperaciones=a.CantidadOperaciones,
+                    Descripcion=a.Descripcion,
+                    CostoOperacional=a.CostoOperacional
+
+                }).ToListAsync();
+
+            return OperacionesCalzadosList;
         }
     }
 }

@@ -12,5 +12,8 @@ namespace RTM.Models.DTO
         public int Id { get; set; }
         public string NombreCompleto { get; set; }
         public string Puesto { get; set; }
+        public string Posicion { get; set; }
+        public string FechaIngreso { get; set; }
+
     }
 }
