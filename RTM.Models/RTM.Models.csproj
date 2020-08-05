@@ -243,13 +243,16 @@
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\AreaProduccion\AreaProduccionListView.cs" />
+    <Compile Include="DTO\Clientes2\ClientesListView.cs" />
     <Compile Include="DTO\Colores\ColoresListView.cs" />
+    <Compile Include="DTO\Departamentos\DepartamentosListView.cs" />
     <Compile Include="DTO\Dimensiones\DimensionesListView.cs" />
     <Compile Include="DTO\EmpleadosListView.cs" />
     <Compile Include="DTO\Empleados\EmpleadoByCedula.cs" />
     <Compile Include="DTO\Empleados\EmpleadoByNombreCompleto_Cedula_CodigoEmpleado.cs" />
     <Compile Include="DTO\IniciarSesion.cs" />
     <Compile Include="DTO\Marcas\MarcasListView.cs" />
+    <Compile Include="DTO\MateriasPrimas\MateriasPrimasListView.cs" />
     <Compile Include="DTO\Modelos\ModelosListView.cs" />
     <Compile Include="DTO\OperacionesCalzados\OperacionesCalzadosListView.cs" />
     <Compile Include="DTO\Orden_Cliente\DetallesCalzado.cs" />
@@ -258,10 +261,13 @@
     <Compile Include="DTO\Orden_Cliente\DetallesModelos.cs" />
     <Compile Include="DTO\Orden_Cliente\OrdenCliente.cs" />
     <Compile Include="DTO\Orden_Cliente\OrdenesClientesDetalles.cs" />
+    <Compile Include="DTO\Posiciones\PosicionesListView.cs" />
     <Compile Include="DTO\Roles\RolesByTipoUsuario.cs" />
+    <Compile Include="DTO\SubDepartamentos\SubDepartamentosListView.cs" />
     <Compile Include="DTO\Suplidores\SuplidorById.cs" />
     <Compile Include="DTO\Suplidores\SuplidoresListView.cs" />
     <Compile Include="DTO\TiposCalzados\TiposCalzadosListView.cs" />
+    <Compile Include="DTO\TiposDepartamentos\TiposDepartamentosListView.cs" />
     <Compile Include="DTO\TiposMateriales\TiposMateriales.cs" />
     <Compile Include="DTO\UsuarioById.cs" />
     <Compile Include="DTO\UsuariosEmpleadosDTO.cs" />
@@ -335,8 +341,22 @@
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>
     <Compile Include="TableDB\BOM.cs" />
+    <Compile Include="TableDB\CategoriasEstilos.cs" />
     <Compile Include="TableDB\CategoriaSize.cs" />
+    <Compile Include="TableDB\Divisiones.cs" />
+    <Compile Include="TableDB\Estilos.cs" />
+    <Compile Include="TableDB\Estilos_CategoriasEstilos.cs" />
+    <Compile Include="TableDB\Estilos_Colores.cs" />
+    <Compile Include="TableDB\Estilos_MateriasPrimas.cs" />
+    <Compile Include="TableDB\Estilos_Modelos.cs" />
+    <Compile Include="TableDB\Estilos_PesosEstilos.cs" />
+    <Compile Include="TableDB\Estilos_TiposEstilos.cs" />
     <Compile Include="TableDB\OperacionesCalzados.cs" />
+    <Compile Include="TableDB\PesosEstilos.cs" />
+    <Compile Include="TableDB\Posiciones.cs" />
+    <Compile Include="TableDB\SubDepartamentos.cs" />
+    <Compile Include="TableDB\TiposDepartamentos.cs" />
+    <Compile Include="TableDB\UnidadesMedidasEstilos.cs" />
     <Compile Include="Tipo_Calzados.cs">
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>

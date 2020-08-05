@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
+using RTM.Models.DTO.MateriasPrimas;
 using RTM.Repository.Interface;
 
 namespace RTM.Application.Controllers.MateriasPrimasController
@@ -83,6 +84,63 @@ namespace RTM.Application.Controllers.MateriasPrimasController
             }
         }
 
+        // GET: api/Empleados
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> MateriasPrimasList()
+        {
+            try
+            {
+
+                var GetMateriasPrimas = await MateriasPrimasListViews();
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetMateriasPrimas
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+
+
+
+        }
+
+        [HttpGet]
+        [Route("[action]/{PartNo}/{MateriaPrima}")]
+        public async Task<IActionResult> ConsultarMateriasPrimasPorPartNoMateriaPrima([FromRoute]string PartNo, string MateriaPrima)
+        {
+            try
+            {
+                var GetMateriasPrimas = await MateriasPrimasPorPartNoMateriasPrimas(PartNo,MateriaPrima);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetMateriasPrimas
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> registrar([FromBody] Materias_Primas materias_Primas)
@@ -150,6 +208,47 @@ namespace RTM.Application.Controllers.MateriasPrimasController
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        //Funciones:
+        private async Task<List<MateriasPrimasListView>> MateriasPrimasListViews()
+        {
+
+            var MateriasPrimasList = new List<MateriasPrimasListView>();
+
+
+            MateriasPrimasList = await _UnitOfWork.context.Materias_Primas.Select(a => new MateriasPrimasListView()
+            {
+                Materia_PrimaID=a.Materia_PrimaID,
+                PartNo=a.PartNo,
+                Nombre_Materia_Prima=a.Nombre_Materia_Prima,
+                TipoMaterial= _UnitOfWork.context.Materias_Primas.Include(x => x.Tipo_Material).Where(x => x.Materia_PrimaID == a.Materia_PrimaID).Select(a => a.Tipo_Material.Nombre_Material).FirstOrDefault(),
+                Descripcion=a.Descripcion
+
+            }).ToListAsync();
+
+            return MateriasPrimasList;
+
+        }
+
+        //Consultar Materias Primas por PartNo y Nombre de la Materia Prima:
+        private async Task<List<MateriasPrimasListView>> MateriasPrimasPorPartNoMateriasPrimas(string PartNo, string MateriaPrima)
+        {
+            var MateriasPrimasList = new List<MateriasPrimasListView>();
+
+                 MateriasPrimasList = await _UnitOfWork.context.Materias_Primas
+                .Where(a => a.PartNo==PartNo || a.Nombre_Materia_Prima==MateriaPrima)
+                .Select(a => new MateriasPrimasListView()
+                {
+                    Materia_PrimaID=a.Materia_PrimaID,
+                    PartNo=a.PartNo,
+                    Nombre_Materia_Prima=a.Nombre_Materia_Prima,
+                    TipoMaterial = _UnitOfWork.context.Materias_Primas.Include(x => x.Tipo_Material).Where(x => x.Materia_PrimaID == a.Materia_PrimaID).Select(a => a.Tipo_Material.Nombre_Material).FirstOrDefault(),
+                    Descripcion = a.Descripcion
+
+                }).ToListAsync();
+
+            return MateriasPrimasList;
         }
     }
 }

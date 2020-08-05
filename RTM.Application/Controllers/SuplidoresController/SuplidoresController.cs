@@ -146,6 +146,32 @@ namespace RTM.Application.Controllers.Suplidores
             }
         }
 
+        [HttpGet]
+        [Route("[action]/{SuplidorID}/{Empresa}/{Representante}")]
+        public async Task<IActionResult> ConsultarSuplidorPorSuplidorIDEmpresaRepresentante([FromRoute]int SuplidorID, string Empresa, string Representante)
+        {
+            try
+            {
+                var GetSuplidores = await BuscarSuplidoresPorEmpresaRepresentante(SuplidorID, Empresa, Representante);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetSuplidores
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> registrar([FromBody] Suplidore suplidore)
@@ -224,7 +250,7 @@ namespace RTM.Application.Controllers.Suplidores
 
             SuplidoresList = await _UnitOfWork.context.Suplidores.Select(a => new SuplidoresListView()
             {
-                ID=a.SuplidorID,
+                SuplidorID=a.SuplidorID,
                 Empresa = a.Empresa,
                 Nombre_Suplidor=a.Nombre_Suplidor,
                 No_Telefono = a.No_Telefono
@@ -258,6 +284,27 @@ namespace RTM.Application.Controllers.Suplidores
 
             return SuplidorList;
 
+        }
+
+        private async Task<List<SuplidoresListView>> BuscarSuplidoresPorEmpresaRepresentante(int SuplidorID,string Empresa, string Representante)
+        {
+            var SuplidoresList = new List<SuplidoresListView>();
+
+            SuplidoresList = await _UnitOfWork.context.Suplidores
+           .Where(a => a.SuplidorID==SuplidorID || a.Empresa == Empresa || a.Nombre_Suplidor == Representante)
+           .Select(a => new SuplidoresListView()
+           {
+               SuplidorID=a.SuplidorID,
+               Empresa=a.Empresa,
+               Nombre_Suplidor=a.Nombre_Suplidor,
+               No_Telefono=a.No_Telefono,
+               Correo_Electronico=a.Correo_Electronico,
+               Pais=a.Pais,
+               Ciudad=a.Ciudad,
+               Direccion=a.Direccion
+           }).ToListAsync();
+
+            return SuplidoresList;
         }
     }
 }

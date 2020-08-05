@@ -25,7 +25,9 @@ namespace RTM.Models
          [Key]
         public int Materia_PrimaID { get; set; }
         public int? Tipo_MaterialID { get; set; }
+        public string PartNo { get; set; }
         public string Nombre_Materia_Prima { get; set; }
+        public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Area_Produccion_Materias_Primas> Area_Produccion_Materias_Primas { get; set; }

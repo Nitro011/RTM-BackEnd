@@ -27,7 +27,7 @@ namespace RTM.Models
         }
     
         public virtual DbSet<Almacen> Almacens { get; set; }
-        public virtual DbSet<AreaProduccion> AreaProduccion { get; set; }
+        public virtual DbSet<Departamentos> Departamentos { get; set; }
         public virtual DbSet<Area_Produccion_Control_Piezas> Area_Produccion_Control_Piezas { get; set; }
         public virtual DbSet<Area_Produccion_Materias_Primas> Area_Produccion_Materias_Primas { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }

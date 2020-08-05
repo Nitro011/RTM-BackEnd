@@ -12,14 +12,17 @@ namespace RTM.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Area_Produccion_Control_Piezas
     {
         [Key]
         public int Area_Produccion_Control_PiezasID { get; set; }
-        public int? Area_ProduccionID { get; set; }
+
+        [ForeignKey("Departamentos")]
+        public int? DepartamentoID { get; set; }
         public int? Control_Ubicacion_PiezaID { get; set; }
     
-        public virtual AreaProduccion AreaProduccion { get; set; }
+        public virtual Departamentos Departamentos { get; set; }
     }
 }

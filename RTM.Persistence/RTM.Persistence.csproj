@@ -90,6 +90,42 @@
     <Compile Include="Migrations\20200721035658_updateEmpleado.designer.cs">
       <DependentUpon>20200721035658_updateEmpleado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200801022209_UpdateMateriasPrimas.cs" />
+    <Compile Include="Migrations\20200801022209_UpdateMateriasPrimas.designer.cs">
+      <DependentUpon>20200801022209_UpdateMateriasPrimas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200802224743_CreatePosiciones.cs" />
+    <Compile Include="Migrations\20200802224743_CreatePosiciones.designer.cs">
+      <DependentUpon>20200802224743_CreatePosiciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200802232150_CambiarRolesPorPosicionAEmpleados.cs" />
+    <Compile Include="Migrations\20200802232150_CambiarRolesPorPosicionAEmpleados.designer.cs">
+      <DependentUpon>20200802232150_CambiarRolesPorPosicionAEmpleados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200803011915_AgregarTiposDepartamentos.cs" />
+    <Compile Include="Migrations\20200803011915_AgregarTiposDepartamentos.designer.cs">
+      <DependentUpon>20200803011915_AgregarTiposDepartamentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200803024052_AgregarSubDepartamentos.cs" />
+    <Compile Include="Migrations\20200803024052_AgregarSubDepartamentos.designer.cs">
+      <DependentUpon>20200803024052_AgregarSubDepartamentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200803024820_AgregarRelacionesDeSubDepartamentos.cs" />
+    <Compile Include="Migrations\20200803024820_AgregarRelacionesDeSubDepartamentos.designer.cs">
+      <DependentUpon>20200803024820_AgregarRelacionesDeSubDepartamentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200803030522_ModificarRelacionDeDepartamentosASubDepartamentos.cs" />
+    <Compile Include="Migrations\20200803030522_ModificarRelacionDeDepartamentosASubDepartamentos.designer.cs">
+      <DependentUpon>20200803030522_ModificarRelacionDeDepartamentosASubDepartamentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200803145124_UpdateRelacionesSubDepartamentos.cs" />
+    <Compile Include="Migrations\20200803145124_UpdateRelacionesSubDepartamentos.designer.cs">
+      <DependentUpon>20200803145124_UpdateRelacionesSubDepartamentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200805054113_AgregarEstilos.cs" />
+    <Compile Include="Migrations\20200805054113_AgregarEstilos.designer.cs">
+      <DependentUpon>20200805054113_AgregarEstilos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\RTMDbContextModelSnapshot.cs" />
     <Compile Include="RTMDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

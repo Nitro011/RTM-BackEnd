@@ -9,8 +9,8 @@ namespace RTM.Models.DTO.Empleados
     public class EmpleadoByNombreCompleto_Cedula_CodigoEmpleado
     {
         public int Id { get; set; }
-        public int? RolID { get; set; }
-        public int? AreaProduccionID { get; set; }
+        public int? PosicionID { get; set; }
+        public int? DepartamentoID { get; set; }
         public string CodigoEmpleado { get; set; }
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
@@ -23,7 +23,8 @@ namespace RTM.Models.DTO.Empleados
         public string Telefono { get; set; }
         public System.DateTime? FechaIngreso { get; set; }
         public string Rol { get; set; }
-        public string Puesto { get; set; }
+        public string Departamento { get; set; }
         public string Posicion { get; set; }
+        public string SubDepartamento { get; set; }
     }
 }

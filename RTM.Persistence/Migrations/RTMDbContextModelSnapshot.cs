@@ -37,21 +37,6 @@ namespace RTM.Persistence.Migrations
                     b.ToTable("Almacen");
                 });
 
-            modelBuilder.Entity("RTM.Models.AreaProduccion", b =>
-                {
-                    b.Property<int>("AreaProduccionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("NombreAreaProduccion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AreaProduccionID");
-
-                    b.ToTable("AreaProduccion");
-                });
-
             modelBuilder.Entity("RTM.Models.Area_Produccion_Control_Piezas", b =>
                 {
                     b.Property<int>("Area_Produccion_Control_PiezasID")
@@ -59,18 +44,15 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AreaProduccionID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Area_ProduccionID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("Control_Ubicacion_PiezaID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DepartamentoID")
                         .HasColumnType("int");
 
                     b.HasKey("Area_Produccion_Control_PiezasID");
 
-                    b.HasIndex("AreaProduccionID");
+                    b.HasIndex("DepartamentoID");
 
                     b.ToTable("Area_Produccion_Control_Piezas");
                 });
@@ -82,9 +64,6 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AreaProduccionID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("CantidadSaliente")
                         .HasColumnType("int");
 
@@ -94,14 +73,14 @@ namespace RTM.Persistence.Migrations
                     b.Property<int?>("Materia_PrimaID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Materias_PrimasMateria_PrimaID")
+                    b.Property<int?>("SubDepartamentoID")
                         .HasColumnType("int");
 
                     b.HasKey("Area_Produccion_Materia_PrimaID");
 
-                    b.HasIndex("AreaProduccionID");
+                    b.HasIndex("Materia_PrimaID");
 
-                    b.HasIndex("Materias_PrimasMateria_PrimaID");
+                    b.HasIndex("SubDepartamentoID");
 
                     b.ToTable("Area_Produccion_Materias_Primas");
                 });
@@ -161,9 +140,6 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AreaProduccionID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("Cantidad_Piezas_Realizadas")
                         .HasColumnType("int");
 
@@ -171,6 +147,9 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("Orden_ClienteID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SubDepartamentoID")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("Tiempo_Finalizacion")
@@ -181,13 +160,33 @@ namespace RTM.Persistence.Migrations
 
                     b.HasKey("Control_Ubicacion_PiezaID");
 
-                    b.HasIndex("AreaProduccionID");
-
                     b.HasIndex("EstadoID");
 
                     b.HasIndex("Orden_ClienteID");
 
+                    b.HasIndex("SubDepartamentoID");
+
                     b.ToTable("Control_Ubicacion_Piezas");
+                });
+
+            modelBuilder.Entity("RTM.Models.Departamentos", b =>
+                {
+                    b.Property<int>("DepartamentoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Departamento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TipoDepartamentoID")
+                        .HasColumnType("int");
+
+                    b.HasKey("DepartamentoID");
+
+                    b.HasIndex("TipoDepartamentoID");
+
+                    b.ToTable("Departamentos");
                 });
 
             modelBuilder.Entity("RTM.Models.Empleado", b =>
@@ -199,9 +198,6 @@ namespace RTM.Persistence.Migrations
 
                     b.Property<string>("Apellidos")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("AreaProduccionID")
-                        .HasColumnType("int");
 
                     b.Property<string>("Cedula")
                         .HasColumnType("nvarchar(max)");
@@ -224,20 +220,23 @@ namespace RTM.Persistence.Migrations
                     b.Property<string>("Nombres")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RolID")
+                    b.Property<int?>("PosicionID")
                         .HasColumnType("int");
 
                     b.Property<bool?>("Sexo")
                         .HasColumnType("bit");
+
+                    b.Property<int?>("SubDepartamentoID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EmpleadoID");
 
-                    b.HasIndex("AreaProduccionID");
+                    b.HasIndex("PosicionID");
 
-                    b.HasIndex("RolID");
+                    b.HasIndex("SubDepartamentoID");
 
                     b.ToTable("Empleados");
                 });
@@ -294,7 +293,13 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nombre_Materia_Prima")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartNo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Tipo_MaterialID")
@@ -681,6 +686,224 @@ namespace RTM.Persistence.Migrations
                     b.ToTable("categoriaSizes");
                 });
 
+            modelBuilder.Entity("RTM.Models.TableDB.CategoriasEstilos", b =>
+                {
+                    b.Property<int>("CategoriaEstiloID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CategoriaEstilo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoriaEstiloID");
+
+                    b.ToTable("CategoriasEstilos");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Divisiones", b =>
+                {
+                    b.Property<int>("DivisionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Division")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DivisionID");
+
+                    b.ToTable("Divisiones");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos", b =>
+                {
+                    b.Property<int>("EstiloID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comentarios")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("CostoSTD")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DivisionID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EstadoID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Estilo_No")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Ganancia")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Last")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MarcaID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PattenNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UnidadMedidaEstiloID")
+                        .HasColumnType("int");
+
+                    b.HasKey("EstiloID");
+
+                    b.HasIndex("DivisionID");
+
+                    b.HasIndex("EstadoID");
+
+                    b.HasIndex("MarcaID");
+
+                    b.HasIndex("UnidadMedidaEstiloID");
+
+                    b.ToTable("Estilos");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos_CategoriasEstilos", b =>
+                {
+                    b.Property<int>("Estilo_CategoriaID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CategoriaEstiloID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EstiloID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Estilo_CategoriaID");
+
+                    b.HasIndex("CategoriaEstiloID");
+
+                    b.HasIndex("EstiloID");
+
+                    b.ToTable("Estilos_CategoriasEstilos");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos_Colores", b =>
+                {
+                    b.Property<int>("Estilo_ColorID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ColorID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EstiloID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Estilo_ColorID");
+
+                    b.HasIndex("ColorID");
+
+                    b.HasIndex("EstiloID");
+
+                    b.ToTable("Estilos_Colores");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos_MateriasPrimas", b =>
+                {
+                    b.Property<int>("Estilo_MateriaPrimaID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("EstiloID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Materia_PrimaID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Estilo_MateriaPrimaID");
+
+                    b.HasIndex("EstiloID");
+
+                    b.HasIndex("Materia_PrimaID");
+
+                    b.ToTable("Estilos_MateriasPrimas");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos_Modelos", b =>
+                {
+                    b.Property<int>("Estilo_ModeloID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("EstiloID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ModeloID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Estilo_ModeloID");
+
+                    b.HasIndex("EstiloID");
+
+                    b.HasIndex("ModeloID");
+
+                    b.ToTable("Estilos_Modelos");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos_PesosEstilos", b =>
+                {
+                    b.Property<int>("Estilo_PesoEstiloID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("EstiloID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PesoEstiloID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Estilo_PesoEstiloID");
+
+                    b.HasIndex("EstiloID");
+
+                    b.HasIndex("PesoEstiloID");
+
+                    b.ToTable("Estilos_PesosEstilos");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos_TiposEstilos", b =>
+                {
+                    b.Property<int>("Estilo_TiposEstiloID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("EstiloID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Tipo_CalzadoID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Estilo_TiposEstiloID");
+
+                    b.HasIndex("EstiloID");
+
+                    b.HasIndex("Tipo_CalzadoID");
+
+                    b.ToTable("Estilos_TiposEstilos");
+                });
+
             modelBuilder.Entity("RTM.Models.TableDB.OperacionesCalzados", b =>
                 {
                     b.Property<int>("OperacionesCalzadosID")
@@ -703,6 +926,86 @@ namespace RTM.Persistence.Migrations
                     b.HasKey("OperacionesCalzadosID");
 
                     b.ToTable("OperacionesCalzados");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.PesosEstilos", b =>
+                {
+                    b.Property<int>("PesoEstiloID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PesoEstilo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PesoEstiloID");
+
+                    b.ToTable("PesosEstilos");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Posiciones", b =>
+                {
+                    b.Property<int>("PosicionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Posicion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PosicionID");
+
+                    b.ToTable("Posiciones");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.SubDepartamentos", b =>
+                {
+                    b.Property<int>("SubDepartamentoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("DepartamentoID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubDepartamento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SubDepartamentoID");
+
+                    b.HasIndex("DepartamentoID");
+
+                    b.ToTable("SubDepartamentos");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.TiposDepartamentos", b =>
+                {
+                    b.Property<int>("TipoDepartamentoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("TipoDepartamento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TipoDepartamentoID");
+
+                    b.ToTable("TiposDepartamentos");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.UnidadesMedidasEstilos", b =>
+                {
+                    b.Property<int>("UnidadMedidaEstiloID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("UnidadMedidaEstilo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UnidadMedidaEstiloID");
+
+                    b.ToTable("UnidadesMedidasEstilos");
                 });
 
             modelBuilder.Entity("RTM.Models.Tipo_Calzados", b =>
@@ -742,9 +1045,6 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AreaProduccionID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Contrasena")
                         .HasColumnType("nvarchar(max)");
 
@@ -760,13 +1060,16 @@ namespace RTM.Persistence.Migrations
                     b.Property<int?>("RolID")
                         .HasColumnType("int");
 
-                    b.HasKey("UsuarioID");
+                    b.Property<int?>("SubDepartamentoID")
+                        .HasColumnType("int");
 
-                    b.HasIndex("AreaProduccionID");
+                    b.HasKey("UsuarioID");
 
                     b.HasIndex("EmpleadoID");
 
                     b.HasIndex("RolID");
+
+                    b.HasIndex("SubDepartamentoID");
 
                     b.ToTable("Usuarios");
                 });
@@ -803,28 +1106,24 @@ namespace RTM.Persistence.Migrations
 
             modelBuilder.Entity("RTM.Models.Area_Produccion_Control_Piezas", b =>
                 {
-                    b.HasOne("RTM.Models.AreaProduccion", "AreaProduccion")
+                    b.HasOne("RTM.Models.Departamentos", "Departamentos")
                         .WithMany()
-                        .HasForeignKey("AreaProduccionID");
+                        .HasForeignKey("DepartamentoID");
                 });
 
             modelBuilder.Entity("RTM.Models.Area_Produccion_Materias_Primas", b =>
                 {
-                    b.HasOne("RTM.Models.AreaProduccion", "AreaProduccion")
-                        .WithMany()
-                        .HasForeignKey("AreaProduccionID");
-
                     b.HasOne("RTM.Models.Materias_Primas", "Materias_Primas")
                         .WithMany("Area_Produccion_Materias_Primas")
-                        .HasForeignKey("Materias_PrimasMateria_PrimaID");
+                        .HasForeignKey("Materia_PrimaID");
+
+                    b.HasOne("RTM.Models.TableDB.SubDepartamentos", "SubDepartamentos")
+                        .WithMany()
+                        .HasForeignKey("SubDepartamentoID");
                 });
 
             modelBuilder.Entity("RTM.Models.Control_Ubicacion_Piezas", b =>
                 {
-                    b.HasOne("RTM.Models.AreaProduccion", "AreaProduccion")
-                        .WithMany()
-                        .HasForeignKey("AreaProduccionID");
-
                     b.HasOne("RTM.Models.Estado", "Estado")
                         .WithMany("Control_Ubicacion_Piezas")
                         .HasForeignKey("EstadoID");
@@ -832,17 +1131,28 @@ namespace RTM.Persistence.Migrations
                     b.HasOne("RTM.Models.Ordenes_Clientes", "Ordenes_Clientes")
                         .WithMany("Control_Ubicacion_Piezas")
                         .HasForeignKey("Orden_ClienteID");
+
+                    b.HasOne("RTM.Models.TableDB.SubDepartamentos", "SubDepartamentos")
+                        .WithMany()
+                        .HasForeignKey("SubDepartamentoID");
+                });
+
+            modelBuilder.Entity("RTM.Models.Departamentos", b =>
+                {
+                    b.HasOne("RTM.Models.TableDB.TiposDepartamentos", "TiposDepartamentos")
+                        .WithMany()
+                        .HasForeignKey("TipoDepartamentoID");
                 });
 
             modelBuilder.Entity("RTM.Models.Empleado", b =>
                 {
-                    b.HasOne("RTM.Models.AreaProduccion", "AreaProduccion")
+                    b.HasOne("RTM.Models.TableDB.Posiciones", "Posiciones")
                         .WithMany()
-                        .HasForeignKey("AreaProduccionID");
+                        .HasForeignKey("PosicionID");
 
-                    b.HasOne("RTM.Models.Role", "Role")
+                    b.HasOne("RTM.Models.TableDB.SubDepartamentos", "SubDepartamentos")
                         .WithMany()
-                        .HasForeignKey("RolID");
+                        .HasForeignKey("SubDepartamentoID");
                 });
 
             modelBuilder.Entity("RTM.Models.Materias_Primas", b =>
@@ -956,12 +1266,104 @@ namespace RTM.Persistence.Migrations
                         .HasForeignKey("SizeID");
                 });
 
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos", b =>
+                {
+                    b.HasOne("RTM.Models.TableDB.Divisiones", "Divisiones")
+                        .WithMany()
+                        .HasForeignKey("DivisionID");
+
+                    b.HasOne("RTM.Models.Estado", "Estado")
+                        .WithMany()
+                        .HasForeignKey("EstadoID");
+
+                    b.HasOne("RTM.Models.Marca", "Marca")
+                        .WithMany()
+                        .HasForeignKey("MarcaID");
+
+                    b.HasOne("RTM.Models.TableDB.UnidadesMedidasEstilos", "UnidadesMedidasEstilos")
+                        .WithMany()
+                        .HasForeignKey("UnidadMedidaEstiloID");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos_CategoriasEstilos", b =>
+                {
+                    b.HasOne("RTM.Models.TableDB.CategoriasEstilos", "CategoriasEstilos")
+                        .WithMany()
+                        .HasForeignKey("CategoriaEstiloID");
+
+                    b.HasOne("RTM.Models.TableDB.Estilos", "Estilos")
+                        .WithMany()
+                        .HasForeignKey("EstiloID");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos_Colores", b =>
+                {
+                    b.HasOne("RTM.Models.Colore", "Colore")
+                        .WithMany()
+                        .HasForeignKey("ColorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RTM.Models.TableDB.Estilos", "Estilos")
+                        .WithMany()
+                        .HasForeignKey("EstiloID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos_MateriasPrimas", b =>
+                {
+                    b.HasOne("RTM.Models.TableDB.Estilos", "Estilos")
+                        .WithMany()
+                        .HasForeignKey("EstiloID");
+
+                    b.HasOne("RTM.Models.Materias_Primas", "Materias_Primas")
+                        .WithMany()
+                        .HasForeignKey("Materia_PrimaID");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos_Modelos", b =>
+                {
+                    b.HasOne("RTM.Models.TableDB.Estilos", "Estilos")
+                        .WithMany()
+                        .HasForeignKey("EstiloID");
+
+                    b.HasOne("RTM.Models.Modelo", "Modelo")
+                        .WithMany()
+                        .HasForeignKey("ModeloID");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos_PesosEstilos", b =>
+                {
+                    b.HasOne("RTM.Models.TableDB.Estilos", "Estilos")
+                        .WithMany()
+                        .HasForeignKey("EstiloID");
+
+                    b.HasOne("RTM.Models.TableDB.PesosEstilos", "PesosEstilos")
+                        .WithMany()
+                        .HasForeignKey("PesoEstiloID");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.Estilos_TiposEstilos", b =>
+                {
+                    b.HasOne("RTM.Models.TableDB.Estilos", "Estilos")
+                        .WithMany()
+                        .HasForeignKey("EstiloID");
+
+                    b.HasOne("RTM.Models.Tipo_Calzados", "Tipo_Calzados")
+                        .WithMany()
+                        .HasForeignKey("Tipo_CalzadoID");
+                });
+
+            modelBuilder.Entity("RTM.Models.TableDB.SubDepartamentos", b =>
+                {
+                    b.HasOne("RTM.Models.Departamentos", "Departamentos")
+                        .WithMany()
+                        .HasForeignKey("DepartamentoID");
+                });
+
             modelBuilder.Entity("RTM.Models.Usuario", b =>
                 {
-                    b.HasOne("RTM.Models.AreaProduccion", "AreaProduccion")
-                        .WithMany()
-                        .HasForeignKey("AreaProduccionID");
-
                     b.HasOne("RTM.Models.Empleado", "Empleado")
                         .WithMany()
                         .HasForeignKey("EmpleadoID");
@@ -969,6 +1371,10 @@ namespace RTM.Persistence.Migrations
                     b.HasOne("RTM.Models.Role", "Role")
                         .WithMany("Usuarios")
                         .HasForeignKey("RolID");
+
+                    b.HasOne("RTM.Models.TableDB.SubDepartamentos", "SubDepartamentos")
+                        .WithMany()
+                        .HasForeignKey("SubDepartamentoID");
                 });
 
             modelBuilder.Entity("RTM.Models.Usuarios_Almacen", b =>

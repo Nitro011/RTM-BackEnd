@@ -4,6 +4,7 @@ using RTM.Models;
 using RTM.Models.TableDB;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace RTM.Persistence
     public class RTMDbContext : DbContext
     {
 
-        string cn = "server=179.52.193.231;database=RayTrackingMobile;uid=AndresGc;password=A04071997;";
+        string cn = "server=148.101.61.208;database=RayTrackingMobile;uid=AndresGc;password=A04071997;";
 
 
 
@@ -23,7 +24,7 @@ namespace RTM.Persistence
         }
         public DbSet<Almacen> Almacen { get; set; }
       
-        public DbSet<AreaProduccion> AreaProduccion { get; set; }
+        public DbSet<Departamentos> Departamentos { get; set; }
 
         public DbSet<Area_Produccion_Control_Piezas> Area_Produccion_Control_Piezas { get; set; }
 
@@ -78,8 +79,20 @@ namespace RTM.Persistence
         public DbSet<BOM> BOMs { get; set; }
         public DbSet<OperacionesCalzados> OperacionesCalzados { get; set; }
         public DbSet<CategoriaSize> categoriaSizes { get; set; }
-
-
+        public DbSet<Posiciones> Posiciones { get; set; }
+        public DbSet<SubDepartamentos> SubDepartamentos { get; set; }
+        public DbSet<TiposDepartamentos> TiposDepartamentos { get; set; }
+        public DbSet<Estilos> Estilos { get; set; }
+        public DbSet<CategoriasEstilos> CategoriasEstilos { get; set; }
+        public DbSet<Divisiones> Divisiones { get; set; }
+        public DbSet<PesosEstilos> PesosEstilos { get; set; }
+        public DbSet<UnidadesMedidasEstilos> UnidadesMedidasEstilos { get; set; }
+        public DbSet<Estilos_CategoriasEstilos> Estilos_CategoriasEstilos { get; set; }
+        public DbSet<Estilos_Colores> Estilos_Colores { get; set; }
+        public DbSet<Estilos_MateriasPrimas> Estilos_MateriasPrimas { get; set; }
+        public DbSet<Estilos_Modelos> Estilos_Modelos { get; set; }
+        public DbSet<Estilos_PesosEstilos> Estilos_PesosEstilos { get; set; }
+        public DbSet<Estilos_TiposEstilos> Estilos_TiposEstilos { get; set; }
 
 
 

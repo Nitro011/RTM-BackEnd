@@ -9,6 +9,7 @@
 
 namespace RTM.Models
 {
+    using RTM.Models.TableDB;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -24,11 +25,11 @@ namespace RTM.Models
         [Key]
         public int EmpleadoID { get; set; }
 
-        [ForeignKey("Role")]
-        public int? RolID { get; set; }
+        [ForeignKey("Posiciones")]
+        public int? PosicionID { get; set; }
 
-        [ForeignKey("AreaProduccion")]
-        public int? AreaProduccionID { get; set; }
+        [ForeignKey("SubDepartamentos")]
+        public int? SubDepartamentoID { get; set; }
         public string CodigoEmpleado { get; set; }
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
@@ -40,7 +41,7 @@ namespace RTM.Models
         public string Telefono { get; set; }
         public System.DateTime? FechaIngreso { get; set; }
 
-        public virtual Role Role { get; set; }
-        public virtual AreaProduccion AreaProduccion { get; set; }
+        public virtual Posiciones Posiciones { get; set; }
+        public virtual SubDepartamentos SubDepartamentos { get; set; }
     }
 }

@@ -9,6 +9,7 @@
 
 namespace RTM.Models
 {
+    using RTM.Models.TableDB;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -27,8 +28,8 @@ namespace RTM.Models
         [ForeignKey("Ordenes_Clientes")]
         public int? Orden_ClienteID { get; set; }
 
-        [ForeignKey("AreaProduccion")]
-        public int? AreaProduccionID { get; set; }
+        [ForeignKey("SubDepartamentos")]
+        public int? SubDepartamentoID { get; set; }
 
         [ForeignKey("Estado")]
         public int? EstadoID { get; set; }
@@ -36,7 +37,7 @@ namespace RTM.Models
         public System.DateTime? Tiempo_Finalizacion { get; set; }
         public int? Cantidad_Piezas_Realizadas { get; set; }
     
-        public virtual AreaProduccion AreaProduccion { get; set; }
+        public virtual SubDepartamentos SubDepartamentos { get; set; }
         public virtual Estado Estado { get; set; }
         public virtual Ordenes_Clientes Ordenes_Clientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

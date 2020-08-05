@@ -9,16 +9,22 @@
 
 namespace RTM.Models
 {
+    using RTM.Models.TableDB;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-    public partial class AreaProduccion
+    public partial class Departamentos
     {
 
         [Key]
-        public int AreaProduccionID { get; set; }
-        public string NombreAreaProduccion { get; set; }
-    
+        public int DepartamentoID { get; set; }
+
+        [ForeignKey("TiposDepartamentos")]
+        public int? TipoDepartamentoID { get; set; }
+        public string Departamento { get; set; }
+
+        public virtual TiposDepartamentos TiposDepartamentos { get; set; }
     }
 }

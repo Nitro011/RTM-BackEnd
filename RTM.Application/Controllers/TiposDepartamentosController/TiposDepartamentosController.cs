@@ -6,27 +6,27 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
-using RTM.Models.DTO.AreaProduccion;
+using RTM.Models.DTO.TiposDepartamentos;
+using RTM.Models.TableDB;
 using RTM.Repository.Interface;
 
-
-namespace RTM.Application.Controllers.AreaProduccionController
+namespace RTM.Application.Controllers.TiposDepartamentosController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AreaProduccionController : ControllerBase
+    public class TiposDepartamentosController : ControllerBase
     {
         private readonly IUnitOfWork _UnitOfWork;
-        private readonly IGenericRepository<AreaProduccion> _GenericRepository;
+        private readonly IGenericRepository<TiposDepartamentos> _GenericRepository;
 
-        public AreaProduccionController(IUnitOfWork UnitOfWork, IGenericRepository<AreaProduccion> GenericRepository)
+        public TiposDepartamentosController(IUnitOfWork UnitOfWork, IGenericRepository<TiposDepartamentos> GenericRepository)
         {
             this._UnitOfWork = UnitOfWork;
             this._GenericRepository = GenericRepository;
         }
 
 
-        // GET: api/AreaProduccion
+        // GET: api/TiposDepartamentos
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> lista()
@@ -34,13 +34,13 @@ namespace RTM.Application.Controllers.AreaProduccionController
             try
             {
 
-                var GetAreaProduccion = await _UnitOfWork.context.AreaProduccion.ToListAsync();
+                var GetTiposDepartamentos = await _UnitOfWork.context.TiposDepartamentos.ToListAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetAreaProduccion
+                    data = GetTiposDepartamentos
                 });
             }
             catch (Exception ex)
@@ -57,7 +57,7 @@ namespace RTM.Application.Controllers.AreaProduccionController
 
         }
 
-        // GET: api/AreaProduccion/5
+        // GET: api/TiposDepartamentos/5
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> listaPorId(int id)
@@ -65,13 +65,13 @@ namespace RTM.Application.Controllers.AreaProduccionController
             try
             {
 
-                var GetAreaProduccion = await _UnitOfWork.context.AreaProduccion.Where(x => x.AreaProduccionID == id).FirstOrDefaultAsync();
+                var GetTiposDepartamentos = await _UnitOfWork.context.TiposDepartamentos.Where(x => x.TipoDepartamentoID == id).FirstOrDefaultAsync();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetAreaProduccion
+                    data = GetTiposDepartamentos
                 });
             }
             catch (Exception ex)
@@ -86,18 +86,18 @@ namespace RTM.Application.Controllers.AreaProduccionController
         }
 
         [HttpGet]
-        [Route("[action]/{NombreAreaProduccion}")]
-        public async Task<IActionResult> BuscarAreaProduccionPorNombre([FromRoute]string NombreAreaProduccion)
+        [Route("[action]/{TipoDepartamento}")]
+        public async Task<IActionResult> ConsultarTiposDepartamentosPorTipoDepartamento([FromRoute]string TipoDepartamento)
         {
             try
             {
-                var GetAreaProduccion = await AreasProduccionPorNombre(NombreAreaProduccion);
+                var GetTiposDepartamentos = await BuscarTiposDepartamentosPorTipoDepartamento(TipoDepartamento);
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = GetAreaProduccion
+                    data = GetTiposDepartamentos
                 });
             }
             catch (Exception ex)
@@ -111,23 +111,54 @@ namespace RTM.Application.Controllers.AreaProduccionController
             }
         }
 
+        // GET: api/Departamentos
+        //[HttpGet]
+        //[Route("[action]")]
+        //public async Task<IActionResult> DepartamentosList()
+        //{
+        //    try
+        //    {
+
+        //        var GetDepartamentos = await DepartamentosListViews();
+
+        //        return Ok(new Request()
+        //        {
+        //            status = true,
+        //            message = "Esta accion se ejecuto correctamente",
+        //            data = GetDepartamentos
+        //        });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Ok(new Request()
+        //        {
+        //            status = false,
+        //            message = "Ocurrio un error inesperado!!",
+        //            data = ex.Message
+        //        });
+        //    }
+
+
+
+        //}
+
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> registrar([FromBody] AreaProduccion areaProduccion)
+        public async Task<IActionResult> registrar([FromBody] TiposDepartamentos tiposDepartamentos)
         {
             try
             {
 
 
-                await _GenericRepository.Add(areaProduccion);
+                await _GenericRepository.Add(tiposDepartamentos);
                 _UnitOfWork.Commit();
 
 
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "El Area de Produccion se registro correctamente",
-                    data = areaProduccion
+                    message = "El Tipo de Departamento se registro correctamente",
+                    data = tiposDepartamentos
                 });
             }
             catch (Exception ex)
@@ -136,7 +167,7 @@ namespace RTM.Application.Controllers.AreaProduccionController
                 return Ok(new Request()
                 {
                     status = false,
-                    message = "El Area de Produccion no se registro correctamente!!",
+                    message = "El Tipo de Departamento no se registro correctamente!!",
                     data = ex.Message
                 });
             }
@@ -144,22 +175,22 @@ namespace RTM.Application.Controllers.AreaProduccionController
 
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/TiposDepartamentos/5
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> modificar([FromBody] AreaProduccion areaProduccion)
+        public async Task<IActionResult> modificar([FromBody] TiposDepartamentos tiposDepartamentos)
         {
             try
             {
 
-                await _GenericRepository.Update(areaProduccion);
+                await _GenericRepository.Update(tiposDepartamentos);
                 _UnitOfWork.Commit();
 
                 return Ok(new Request()
                 {
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
-                    data = areaProduccion
+                    data = tiposDepartamentos
 
                 });
             }
@@ -181,19 +212,20 @@ namespace RTM.Application.Controllers.AreaProduccionController
         }
 
         //Funciones:
-        private async Task<List<AreaProduccionListView>> AreasProduccionPorNombre(string NombreAreaProduccion)
+        private async Task<List<TiposDepartamentosListView>> BuscarTiposDepartamentosPorTipoDepartamento(string TipoDepartamento)
         {
-            var AreaProduccionList = new List<AreaProduccionListView>();
+            var TiposDepartamentosList = new List<TiposDepartamentosListView>();
 
-                 AreaProduccionList = await _UnitOfWork.context.AreaProduccion
-                .Where(a => a.NombreAreaProduccion==NombreAreaProduccion)
-                .Select(a => new AreaProduccionListView()
-                {
-                    AreaProduccionID=a.AreaProduccionID,
-                    NombreAreaProduccion=a.NombreAreaProduccion
-                }).ToListAsync();
+            TiposDepartamentosList = await _UnitOfWork.context.TiposDepartamentos
+           .Where(a => a.TipoDepartamento == TipoDepartamento)
+           .Select(a => new TiposDepartamentosListView()
+           {
+               TipoDepartamentoID = a.TipoDepartamentoID,
+               TipoDepartamento=a.TipoDepartamento,
 
-            return AreaProduccionList;
+           }).ToListAsync();
+
+            return TiposDepartamentosList;
         }
     }
 }

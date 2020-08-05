@@ -9,20 +9,26 @@
 
 namespace RTM.Models
 {
+    using RTM.Models.TableDB;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Area_Produccion_Materias_Primas
     {
         [Key]
         public int Area_Produccion_Materia_PrimaID { get; set; }
-        public int? AreaProduccionID { get; set; }
+
+        [ForeignKey("SubDepartamentos")]
+        public int? SubDepartamentoID { get; set; }
+
+        [ForeignKey("Materias_Primas")]
         public int? Materia_PrimaID { get; set; }
         public int? CantidadSaliente { get; set; }
         public System.DateTime? FechaDeSalida { get; set; }
     
-        public virtual AreaProduccion AreaProduccion { get; set; }
+        public virtual SubDepartamentos SubDepartamentos { get; set; }
         public virtual Materias_Primas Materias_Primas { get; set; }
     }
 }

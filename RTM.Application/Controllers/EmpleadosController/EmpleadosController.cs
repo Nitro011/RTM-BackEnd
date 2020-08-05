@@ -285,9 +285,11 @@ namespace RTM.Application.Controllers.EmpleadosController
             EmpleadoList = await _UnitOfWork.context.Empleados.Select(a => new EmpleadosListView()
             {
                 Id = a.EmpleadoID,
+                CodigoEmpleado=a.CodigoEmpleado,
                 NombreCompleto = $"{a.Nombres} {a.Apellidos}",
-                Puesto = _UnitOfWork.context.Empleados.Include(x => x.AreaProduccion).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.AreaProduccion.NombreAreaProduccion).FirstOrDefault(),
-                Posicion = _UnitOfWork.context.Empleados.Include(x => x.Role).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.Role.Tipo_Usuario).FirstOrDefault(),
+                Departamento = _UnitOfWork.context.Empleados.Include(x => x.SubDepartamentos).ThenInclude(x => x.Departamentos).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.SubDepartamentos.Departamentos.Departamento).FirstOrDefault(),
+                SubDepartamento = _UnitOfWork.context.Empleados.Include(x => x.SubDepartamentos).Where(x => x.SubDepartamentoID == a.SubDepartamentoID).Select(a => a.SubDepartamentos.SubDepartamento).FirstOrDefault(),
+                Posicion = _UnitOfWork.context.Empleados.Include(x => x.Posiciones).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.Posiciones.Posicion).FirstOrDefault(),
                 FechaIngreso = a.FechaIngreso.ToString()
 
             }).ToListAsync();
@@ -314,7 +316,8 @@ namespace RTM.Application.Controllers.EmpleadosController
                     Edad = a.Edad,
                     Direccion = a.Direccion,
                     Telefono = a.Telefono,
-                    Puesto = _UnitOfWork.context.Usuarios.Include(x => x.AreaProduccion).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.AreaProduccion.NombreAreaProduccion).FirstOrDefault(),
+                    Departamento = _UnitOfWork.context.Empleados.Include(x => x.SubDepartamentos).ThenInclude(x => x.Departamentos).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.SubDepartamentos.Departamentos.Departamento).FirstOrDefault(),
+                    SubDepartamento = _UnitOfWork.context.Empleados.Include(x => x.SubDepartamentos).Where(x => x.SubDepartamentoID == a.SubDepartamentoID).Select(a => a.SubDepartamentos.SubDepartamento).FirstOrDefault(),
                     Rol = _UnitOfWork.context.Usuarios.Include(x => x.Role).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.Role.Tipo_Usuario).FirstOrDefault(),
                     NombreUsuario = _UnitOfWork.context.Usuarios.Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.NombreDeUsuario).FirstOrDefault()
 
@@ -352,8 +355,7 @@ namespace RTM.Application.Controllers.EmpleadosController
                 .Select(a => new EmpleadoByNombreCompleto_Cedula_CodigoEmpleado()
                 {
                     Id = a.EmpleadoID,
-                    RolID=a.RolID,
-                    AreaProduccionID=a.AreaProduccionID,
+                    PosicionID=a.PosicionID,
                     CodigoEmpleado = a.CodigoEmpleado,
                     Nombres=a.Nombres,
                     Apellidos=a.Apellidos,
@@ -365,9 +367,9 @@ namespace RTM.Application.Controllers.EmpleadosController
                     Direccion=a.Direccion,
                     Telefono=a.Telefono,
                     FechaIngreso=a.FechaIngreso,
-                    Posicion = _UnitOfWork.context.Empleados.Include(x => x.Role).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.Role.Tipo_Usuario).FirstOrDefault(),
-                    Puesto = _UnitOfWork.context.Empleados.Include(x => x.AreaProduccion).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.AreaProduccion.NombreAreaProduccion).FirstOrDefault(),
-
+                    Posicion = _UnitOfWork.context.Empleados.Include(x => x.Posiciones).Where(x => x.EmpleadoID == a.EmpleadoID).Select(a => a.Posiciones.Posicion).FirstOrDefault(),
+                    Departamento = _UnitOfWork.context.Empleados.Include(x => x.SubDepartamentos).ThenInclude(x=>x.Departamentos).Where(x=>x.EmpleadoID==a.EmpleadoID).Select(a=>a.SubDepartamentos.Departamentos.Departamento).FirstOrDefault(),
+                    SubDepartamento = _UnitOfWork.context.Empleados.Include(x => x.SubDepartamentos).Where(x => x.SubDepartamentoID == a.SubDepartamentoID).Select(a => a.SubDepartamentos.SubDepartamento).FirstOrDefault()
                 }).ToListAsync();
 
             return EmpleadoList;

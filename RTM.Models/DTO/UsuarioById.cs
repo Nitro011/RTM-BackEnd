@@ -16,7 +16,8 @@ namespace RTM.Models.DTO
         public int? Edad { get; set; }
         public string Direccion { get; set; }
         public string Telefono { get; set; }
-        public string Puesto { get; set; }
+        public string Departamento { get; set; }
+        public string SubDepartamento { get; set; }
         public string NombreUsuario { get; set; }
         public string Rol { get; set; }
 
