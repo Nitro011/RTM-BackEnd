@@ -1,35 +1,34 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Persistence\\RTM.Persistence.csproj": {}
+    "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Persistence\\RTM.Persistence.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj": {
-      "version": "1.0.0",
+    "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj",
+        "projectUniqueName": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj",
         "projectName": "RTM.Models",
-        "projectPath": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj"
+        "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj"
       },
       "frameworks": {
         "net472": {}
       }
     },
-    "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Persistence\\RTM.Persistence.csproj": {
+    "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Persistence\\RTM.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Persistence\\RTM.Persistence.csproj",
+        "projectUniqueName": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Persistence\\RTM.Persistence.csproj",
         "projectName": "RTM.Persistence",
-        "projectPath": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Persistence\\RTM.Persistence.csproj",
-        "packagesPath": "C:\\Users\\hugog\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Persistence\\obj\\",
+        "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Persistence\\RTM.Persistence.csproj",
+        "packagesPath": "C:\\Users\\juan-concentra\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\hugog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\juan-concentra\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -43,8 +42,8 @@
         "frameworks": {
           "net472": {
             "projectReferences": {
-              "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj": {
-                "projectPath": "C:\\Users\\hugog\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj"
+              "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj": {
+                "projectPath": "C:\\Users\\juan-concentra\\Desktop\\RTM-BackEnd\\RTM.Models\\RTM.Models.csproj"
               }
             }
           }

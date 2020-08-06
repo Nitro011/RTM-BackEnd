@@ -262,6 +262,7 @@
     <Compile Include="DTO\Orden_Cliente\OrdenCliente.cs" />
     <Compile Include="DTO\Orden_Cliente\OrdenesClientesDetalles.cs" />
     <Compile Include="DTO\Posiciones\PosicionesListView.cs" />
+    <Compile Include="DTO\RegistroEstilosNuevos.cs" />
     <Compile Include="DTO\Roles\RolesByTipoUsuario.cs" />
     <Compile Include="DTO\SubDepartamentos\SubDepartamentosListView.cs" />
     <Compile Include="DTO\Suplidores\SuplidorById.cs" />
