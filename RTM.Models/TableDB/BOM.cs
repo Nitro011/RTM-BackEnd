@@ -12,28 +12,17 @@ namespace RTM.Models.TableDB
     {
         [Key]
         public int BOMID { get; set; }
-        public DateTime Date { get; set; }
-        public string Category { get; set; }
-        public string PatternName { get; set; }
-        public string Stock { get; set; }
-        public int Pattn { get; set; }
-        public string Construction { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public string PatterN { get; set; }
 
-        [ForeignKey("Colore")]
-        public int? ColorID { get; set; }
-        public string Last { get; set; }
+        [ForeignKey("Constructions")]
+        public int ConstructionID { get; set; }
 
-        [ForeignKey("Size")]
-        public int? SizeID { get; set; }
-        public string Customer { get; set; }
-        public string PartNo { get; set; }
-        public int DIE { get; set; }
-        public string Item { get; set; }
-        public string Description { get; set; }
-        public string Unit { get; set; }
-        public decimal Usage { get; set; }
-        public decimal Cost { get; set; }
-        public virtual Colore Colore { get; set; }
-        public virtual Size Size { get; set; }
+        [ForeignKey("Cliente")]
+        public int ClienteID { get; set; }
+
+        public List<BOM_BOMDetalles> BOM_BOMDetalles { get; set; }
+        public virtual Cliente Cliente { get; set; }
+        public virtual Constructions Constructions { get; set; }
     }
 }

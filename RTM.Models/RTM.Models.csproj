@@ -342,8 +342,11 @@
       <DependentUpon>RTMDataSource.tt</DependentUpon>
     </Compile>
     <Compile Include="TableDB\BOM.cs" />
+    <Compile Include="TableDB\BOMDetalles.cs" />
+    <Compile Include="TableDB\BOM_BOMDetalles.cs" />
     <Compile Include="TableDB\CategoriasEstilos.cs" />
     <Compile Include="TableDB\CategoriaSize.cs" />
+    <Compile Include="TableDB\Constructions.cs" />
     <Compile Include="TableDB\Divisiones.cs" />
     <Compile Include="TableDB\Estilos.cs" />
     <Compile Include="TableDB\Estilos_CategoriasEstilos.cs" />

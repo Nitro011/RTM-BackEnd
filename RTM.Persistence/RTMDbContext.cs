@@ -93,6 +93,8 @@ namespace RTM.Persistence
         public DbSet<Estilos_Modelos> Estilos_Modelos { get; set; }
         public DbSet<Estilos_PesosEstilos> Estilos_PesosEstilos { get; set; }
         public DbSet<Estilos_TiposEstilos> Estilos_TiposEstilos { get; set; }
+        public DbSet<BOMDetalles> BOMDetalles { get; set; }
+        public DbSet<BOM_BOMDetalles> BOM_BOMDetalles { get; set; }
 
 
 
