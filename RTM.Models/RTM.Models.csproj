@@ -250,6 +250,7 @@
     <Compile Include="DTO\EmpleadosListView.cs" />
     <Compile Include="DTO\Empleados\EmpleadoByCedula.cs" />
     <Compile Include="DTO\Empleados\EmpleadoByNombreCompleto_Cedula_CodigoEmpleado.cs" />
+    <Compile Include="DTO\Estilos\EstilosListView.cs" />
     <Compile Include="DTO\IniciarSesion.cs" />
     <Compile Include="DTO\Marcas\MarcasListView.cs" />
     <Compile Include="DTO\MateriasPrimas\MateriasPrimasListView.cs" />

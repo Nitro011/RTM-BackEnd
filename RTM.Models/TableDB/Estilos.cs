@@ -13,7 +13,7 @@ namespace RTM.Models.TableDB
         [Key]
         public int EstiloID { get; set; }
 
-        [ForeignKey("Marca")]
+        [ForeignKey("Marcas")]
         public int? MarcaID { get; set; }
 
         public int Estilo_No { get; set; }
@@ -41,7 +41,7 @@ namespace RTM.Models.TableDB
         public List<Estilos_CategoriasEstilos> CategoriasEstilos { get; set; }
         public List<Estilos_MateriasPrimas> Materias { get; set; }
         public List<Estilos_PesosEstilos> PesosEstilos { get; set; }
-        public virtual Marca Marca { get; set; }
+        public virtual Marca Marcas { get; set; }
         public virtual Divisiones Divisiones { get; set; }
         public virtual Estado Estado { get; set; }
         public virtual UnidadesMedidasEstilos UnidadesMedidasEstilos { get; set; }
