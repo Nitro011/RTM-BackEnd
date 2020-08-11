@@ -250,6 +250,7 @@
     <Compile Include="DTO\EmpleadosListView.cs" />
     <Compile Include="DTO\Empleados\EmpleadoByCedula.cs" />
     <Compile Include="DTO\Empleados\EmpleadoByNombreCompleto_Cedula_CodigoEmpleado.cs" />
+    <Compile Include="DTO\Estilos\EstilosDetallesListView.cs" />
     <Compile Include="DTO\Estilos\EstilosListView.cs" />
     <Compile Include="DTO\IniciarSesion.cs" />
     <Compile Include="DTO\Marcas\MarcasListView.cs" />
@@ -344,7 +345,6 @@
     </Compile>
     <Compile Include="TableDB\BOM.cs" />
     <Compile Include="TableDB\BOMDetalles.cs" />
-    <Compile Include="TableDB\BOM_BOMDetalles.cs" />
     <Compile Include="TableDB\CategoriasEstilos.cs" />
     <Compile Include="TableDB\CategoriaSize.cs" />
     <Compile Include="TableDB\Constructions.cs" />

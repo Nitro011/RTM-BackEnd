@@ -21,7 +21,6 @@ namespace RTM.Models.TableDB
         [ForeignKey("Cliente")]
         public int ClienteID { get; set; }
 
-        public List<BOM_BOMDetalles> BOM_BOMDetalles { get; set; }
         public virtual Cliente Cliente { get; set; }
         public virtual Constructions Constructions { get; set; }
     }

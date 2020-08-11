@@ -133,6 +133,32 @@ namespace RTM.Application.Controllers.EstiloController
             }
         }
 
+        [HttpGet]
+        [Route("[action]/{EstiloID}")]
+        public async Task<IActionResult> ObtenerEstilosPorEstiloID([FromRoute]int EstiloID)
+        {
+            try
+            {
+                var GetEstilos = await ObtenerDetalleEstilo(EstiloID);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetEstilos
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
         // PUT api/<EstilosNuevosController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
@@ -209,6 +235,39 @@ namespace RTM.Application.Controllers.EstiloController
                     Estados = _UnitOfWork.context.Estilos.Include(x => x.Estado).Where(x => x.EstadoID == a.EstadoID).Select(a => a.Estado.Estado1).FirstOrDefault()
 
                 }).ToListAsync();
+
+            return EstilosList;
+        }
+
+        private async Task<List<EstilosListView>> ObtenerDetalleEstilo(int EstiloID)
+        {
+            var EstilosList = new List<EstilosListView>();
+
+            EstilosList = await _UnitOfWork.context.Estilos
+           .Where(a => a.EstiloID == EstiloID)
+           .Select(a => new EstilosListView()
+           {
+               EstiloID = a.EstiloID,
+               Estilo_No = a.Estilo_No,
+               Marcas = _UnitOfWork.context.Estilos.Include(x => x.Marcas).Where(x => x.MarcaID == a.MarcaID).Select(a => a.Marcas.Marca1).FirstOrDefault(),
+               Modelos1 = _UnitOfWork.context.Estilos_Modelos.Include(x => x.Estilos).ThenInclude(x => x.Modelos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Modelo.Modelo1).ToList(),
+               TiposEstilos1 = _UnitOfWork.context.Estilos_TiposEstilos.Include(x => x.Estilos).ThenInclude(x => x.TiposEstilos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Tipo_Calzados.Tipo_Calzado).ToList(),
+               Categorias1 = _UnitOfWork.context.Estilos_CategoriasEstilos.Include(x => x.Estilos).ThenInclude(x => x.CategoriasEstilos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.CategoriasEstilos.CategoriaEstilo).ToList(),
+               Materiales1 = _UnitOfWork.context.Estilos_MateriasPrimas.Include(x => x.Estilos).ThenInclude(x => x.Materias).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Materias_Primas.Nombre_Materia_Prima).ToList(),
+               Pesos = _UnitOfWork.context.Estilos_PesosEstilos.Include(x => x.Estilos).ThenInclude(x => x.PesosEstilos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.PesosEstilos.PesoEstilo).ToList(),
+               Last = a.Last,
+               UnidadesMedidas = _UnitOfWork.context.Estilos.Include(x => x.UnidadesMedidasEstilos).Where(x => x.UnidadMedidaEstiloID == a.UnidadMedidaEstiloID).Select(a => a.UnidadesMedidasEstilos.UnidadMedidaEstilo).FirstOrDefault(),
+               Colores1 = _UnitOfWork.context.Estilos_Colores.Include(x => x.Estilos).ThenInclude(x => x.Colores).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Colore.Color).ToList(),
+               Division = _UnitOfWork.context.Estilos.Include(x => x.Divisiones).Where(x => x.DivisionID == a.DivisionID).Select(a => a.Divisiones.Division).FirstOrDefault(),
+               Descripcion = a.Descripcion,
+               Comentarios = a.Comentarios,
+               CostoSTD = a.CostoSTD,
+               Ganancia = a.Ganancia,
+               FechaCreacion = a.FechaCreacion,
+               PattenNo = a.PattenNo,
+               Estados = _UnitOfWork.context.Estilos.Include(x => x.Estado).Where(x => x.EstadoID == a.EstadoID).Select(a => a.Estado.Estado1).FirstOrDefault()
+
+           }).ToListAsync();
 
             return EstilosList;
         }

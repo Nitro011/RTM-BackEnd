@@ -130,6 +130,10 @@
     <Compile Include="Migrations\20200806211715_AgregarBOMYBOMDetalles.designer.cs">
       <DependentUpon>20200806211715_AgregarBOMYBOMDetalles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200810231514_ModificarBOM.cs" />
+    <Compile Include="Migrations\20200810231514_ModificarBOM.designer.cs">
+      <DependentUpon>20200810231514_ModificarBOM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\RTMDbContextModelSnapshot.cs" />
     <Compile Include="RTMDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

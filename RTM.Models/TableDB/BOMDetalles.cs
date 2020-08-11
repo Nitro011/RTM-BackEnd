@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -12,6 +13,9 @@ namespace RTM.Models.TableDB
     {
         [Key]
         public int BOMDetalleID { get; set; }
+
+        [ForeignKey("BOMs")]
+        public int BOMID { get; set; }
         public string PartNo { get; set; }
         public string DIE { get; set; }
         public string Item { get; set; }
@@ -20,5 +24,7 @@ namespace RTM.Models.TableDB
         public decimal Usage { get; set; }
         public decimal Cost { get; set; }
         public decimal Ext { get; set; }
+
+        public virtual BOM BOMs { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace RTM.Persistence
     public class RTMDbContext : DbContext
     {
 
-        string cn = "server=148.101.61.208;database=RayTrackingMobile;uid=AndresGc;password=A04071997;";
+        string cn = "server=148.0.117.253;database=RayTrackingMobile;uid=AndresGc;password=A04071997;";
 
 
 
@@ -94,7 +94,6 @@ namespace RTM.Persistence
         public DbSet<Estilos_PesosEstilos> Estilos_PesosEstilos { get; set; }
         public DbSet<Estilos_TiposEstilos> Estilos_TiposEstilos { get; set; }
         public DbSet<BOMDetalles> BOMDetalles { get; set; }
-        public DbSet<BOM_BOMDetalles> BOM_BOMDetalles { get; set; }
 
 
 
