@@ -14,7 +14,7 @@ namespace RTM.Persistence
     public class RTMDbContext : DbContext
     {
 
-        string cn = "server=148.0.117.253;database=RayTrackingMobile;uid=AndresGc;password=A04071997;";
+        string cn = "server=148.0.124.0;database=RayTrackingMobile;uid=AndresGc;password=Ag04071997;";
 
 
 
@@ -85,15 +85,13 @@ namespace RTM.Persistence
         public DbSet<Estilos> Estilos { get; set; }
         public DbSet<CategoriasEstilos> CategoriasEstilos { get; set; }
         public DbSet<Divisiones> Divisiones { get; set; }
-        public DbSet<PesosEstilos> PesosEstilos { get; set; }
         public DbSet<UnidadesMedidasEstilos> UnidadesMedidasEstilos { get; set; }
-        public DbSet<Estilos_CategoriasEstilos> Estilos_CategoriasEstilos { get; set; }
-        public DbSet<Estilos_Colores> Estilos_Colores { get; set; }
         public DbSet<Estilos_MateriasPrimas> Estilos_MateriasPrimas { get; set; }
-        public DbSet<Estilos_Modelos> Estilos_Modelos { get; set; }
-        public DbSet<Estilos_PesosEstilos> Estilos_PesosEstilos { get; set; }
-        public DbSet<Estilos_TiposEstilos> Estilos_TiposEstilos { get; set; }
         public DbSet<BOMDetalles> BOMDetalles { get; set; }
+        public DbSet<Constructions> Constructions { get; set; }
+        public DbSet<DivisionesMateriasPrimas> DivisionesMateriasPrimas { get; set; }
+        public DbSet<ITEMS> ITEMS { get; set; }
+        public DbSet<AnchosSizes> AnchosSizes { get; set; }
 
 
 

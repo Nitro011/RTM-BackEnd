@@ -134,6 +134,46 @@
     <Compile Include="Migrations\20200810231514_ModificarBOM.designer.cs">
       <DependentUpon>20200810231514_ModificarBOM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200811222409_AgregarConstructions.cs" />
+    <Compile Include="Migrations\20200811222409_AgregarConstructions.designer.cs">
+      <DependentUpon>20200811222409_AgregarConstructions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200812051103_ModificarEstilos.cs" />
+    <Compile Include="Migrations\20200812051103_ModificarEstilos.designer.cs">
+      <DependentUpon>20200812051103_ModificarEstilos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200812054711_ModificarBOM2.cs" />
+    <Compile Include="Migrations\20200812054711_ModificarBOM2.designer.cs">
+      <DependentUpon>20200812054711_ModificarBOM2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200814014435_AgregarDivisionesMateriasPrimas.cs" />
+    <Compile Include="Migrations\20200814014435_AgregarDivisionesMateriasPrimas.designer.cs">
+      <DependentUpon>20200814014435_AgregarDivisionesMateriasPrimas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200814205551_AgregarITEMS.cs" />
+    <Compile Include="Migrations\20200814205551_AgregarITEMS.designer.cs">
+      <DependentUpon>20200814205551_AgregarITEMS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200814210803_ArreglarITEMS.cs" />
+    <Compile Include="Migrations\20200814210803_ArreglarITEMS.designer.cs">
+      <DependentUpon>20200814210803_ArreglarITEMS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200815041431_ModificarEstilos2.cs" />
+    <Compile Include="Migrations\20200815041431_ModificarEstilos2.designer.cs">
+      <DependentUpon>20200815041431_ModificarEstilos2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200815151442_BorrasRelacionesDeEstilos.cs" />
+    <Compile Include="Migrations\20200815151442_BorrasRelacionesDeEstilos.designer.cs">
+      <DependentUpon>20200815151442_BorrasRelacionesDeEstilos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200815154142_AgregarNuevaRelacionAEstilos.cs" />
+    <Compile Include="Migrations\20200815154142_AgregarNuevaRelacionAEstilos.designer.cs">
+      <DependentUpon>20200815154142_AgregarNuevaRelacionAEstilos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200816055407_AgregarAnchosSizes.cs" />
+    <Compile Include="Migrations\20200816055407_AgregarAnchosSizes.designer.cs">
+      <DependentUpon>20200816055407_AgregarAnchosSizes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\RTMDbContextModelSnapshot.cs" />
     <Compile Include="RTMDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace RTM.Models.TableDB
 {
-    public class PesosEstilos
+    public class ITEMS
     {
         [Key]
-        public int PesoEstiloID { get; set; }
-        public string PesoEstilo { get; set; }
+        public int ITEMID { get; set; }
+        public string nombreITEMS { get; set; }
     }
 }

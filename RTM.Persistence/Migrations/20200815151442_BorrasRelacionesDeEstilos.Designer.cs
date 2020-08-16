@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RTM.Persistence;
 
 namespace RTM.Persistence.Migrations
 {
     [DbContext(typeof(RTMDbContext))]
-    partial class RTMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200815151442_BorrasRelacionesDeEstilos")]
+    partial class BorrasRelacionesDeEstilos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -612,21 +614,6 @@ namespace RTM.Persistence.Migrations
                     b.ToTable("Suplidores");
                 });
 
-            modelBuilder.Entity("RTM.Models.TableDB.AnchosSizes", b =>
-                {
-                    b.Property<int>("AnchoSizeID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AnchoSize")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AnchoSizeID");
-
-                    b.ToTable("AnchosSizes");
-                });
-
             modelBuilder.Entity("RTM.Models.TableDB.BOM", b =>
                 {
                     b.Property<int>("BOMID")
@@ -778,12 +765,6 @@ namespace RTM.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoriaEstiloID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ColorID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Comentarios")
                         .HasColumnType("nvarchar(max)");
 
@@ -817,36 +798,22 @@ namespace RTM.Persistence.Migrations
                     b.Property<int?>("MarcaID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ModeloID")
-                        .HasColumnType("int");
-
                     b.Property<string>("PattenNo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PesoEstilos")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Tipo_CalzadoID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("UnidadMedidaEstiloID")
                         .HasColumnType("int");
 
                     b.HasKey("EstiloID");
-
-                    b.HasIndex("CategoriaEstiloID");
-
-                    b.HasIndex("ColorID");
 
                     b.HasIndex("DivisionID");
 
                     b.HasIndex("EstadoID");
 
                     b.HasIndex("MarcaID");
-
-                    b.HasIndex("ModeloID");
-
-                    b.HasIndex("Tipo_CalzadoID");
 
                     b.HasIndex("UnidadMedidaEstiloID");
 
@@ -1256,14 +1223,6 @@ namespace RTM.Persistence.Migrations
 
             modelBuilder.Entity("RTM.Models.TableDB.Estilos", b =>
                 {
-                    b.HasOne("RTM.Models.TableDB.CategoriasEstilos", "CategoriasEstilos")
-                        .WithMany()
-                        .HasForeignKey("CategoriaEstiloID");
-
-                    b.HasOne("RTM.Models.Colore", "Colores")
-                        .WithMany()
-                        .HasForeignKey("ColorID");
-
                     b.HasOne("RTM.Models.TableDB.Divisiones", "Divisiones")
                         .WithMany()
                         .HasForeignKey("DivisionID");
@@ -1275,14 +1234,6 @@ namespace RTM.Persistence.Migrations
                     b.HasOne("RTM.Models.Marca", "Marcas")
                         .WithMany()
                         .HasForeignKey("MarcaID");
-
-                    b.HasOne("RTM.Models.Modelo", "Modelos")
-                        .WithMany()
-                        .HasForeignKey("ModeloID");
-
-                    b.HasOne("RTM.Models.Tipo_Calzados", "Tipo_Calzados")
-                        .WithMany()
-                        .HasForeignKey("Tipo_CalzadoID");
 
                     b.HasOne("RTM.Models.TableDB.UnidadesMedidasEstilos", "UnidadesMedidasEstilos")
                         .WithMany()

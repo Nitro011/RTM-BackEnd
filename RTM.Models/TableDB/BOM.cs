@@ -15,13 +15,13 @@ namespace RTM.Models.TableDB
         public DateTime FechaCreacion { get; set; }
         public string PatterN { get; set; }
 
-        [ForeignKey("Constructions")]
-        public int ConstructionID { get; set; }
+        [ForeignKey("Modelos")]
+        public int ModeloID { get; set; }
 
         [ForeignKey("Cliente")]
         public int ClienteID { get; set; }
 
         public virtual Cliente Cliente { get; set; }
-        public virtual Constructions Constructions { get; set; }
+        public virtual Modelo Modelos { get; set; }
     }
 }

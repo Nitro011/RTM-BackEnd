@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RTM.Models.DTO.TiposCalzados;
+using RTM.Models.DTO.TiposMateriales;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -33,18 +35,30 @@ namespace RTM.Models.TableDB
         [ForeignKey("UnidadesMedidasEstilos")]
         public int? UnidadMedidaEstiloID { get; set; }
 
-        public string Comentarios { get; set; }
+        [ForeignKey("CategoriasEstilos")]
+        public int? CategoriaEstiloID { get; set; }
 
-        public List<Estilos_Colores> Colores { get; set; }
-        public List<Estilos_Modelos> Modelos { get; set; }
-        public List<Estilos_TiposEstilos> TiposEstilos { get; set; }
-        public List<Estilos_CategoriasEstilos> CategoriasEstilos { get; set; }
+        [ForeignKey("Colores")]
+        public int? ColorID { get; set; }
+
+        [ForeignKey("Modelos")]
+        public int? ModeloID { get; set; }
+
+        [ForeignKey("Tipo_Calzados")]
+        public int? Tipo_CalzadoID { get; set; }
+
+        public string Comentarios { get; set; }
+        public string PesoEstilos { get; set; }
+        public string ImageURL { get; set; } 
         public List<Estilos_MateriasPrimas> Materias { get; set; }
-        public List<Estilos_PesosEstilos> PesosEstilos { get; set; }
         public virtual Marca Marcas { get; set; }
         public virtual Divisiones Divisiones { get; set; }
         public virtual Estado Estado { get; set; }
         public virtual UnidadesMedidasEstilos UnidadesMedidasEstilos { get; set; }
+        public virtual CategoriasEstilos CategoriasEstilos { get; set; }
+        public virtual Colore Colores { get; set; }
+        public virtual Modelo Modelos { get; set; }
+        public virtual Tipo_Calzados Tipo_Calzados { get; set; }
 
     }
 }

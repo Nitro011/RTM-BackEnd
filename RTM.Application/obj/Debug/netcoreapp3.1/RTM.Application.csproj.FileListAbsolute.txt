@@ -292,11 +292,6 @@ C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.genruntimeconfig.cache
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csproj.CoreCompileInputs.cache
 C:\Users\juan-concentra\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csprojAssemblyReference.cache
-C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csproj.CoreCompileInputs.cache
-C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.AssemblyInfoInputs.cache
-C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.AssemblyInfo.cs
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
@@ -431,6 +426,11 @@ C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.R
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Repository.dll.config
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Persistence.pdb
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\bin\Debug\netcoreapp3.1\RTM.Persistence.dll.config
+C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csprojAssemblyReference.cache
+C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csproj.CoreCompileInputs.cache
+C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.AssemblyInfoInputs.cache
+C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.AssemblyInfo.cs
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.RazorTargetAssemblyInfo.cache
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\RTM.Application.csproj.CopyComplete
 C:\Users\hugog\Desktop\RTM-BackEnd\RTM.Application\obj\Debug\netcoreapp3.1\staticwebassets\RTM.Application.StaticWebAssets.Manifest.cache

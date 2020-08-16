@@ -29,13 +29,7 @@ namespace RTM.Models.DTO
 
         public string Comentarios { get; set; }
 
-
-        public List<Estilos_Colores> Colores { get; set; }
-        public List<Estilos_Modelos> Modelos { get; set; }
-        public List<Estilos_TiposEstilos> TiposEstilos { get; set; }
-        public List<Estilos_CategoriasEstilos> CategoriasEstilos { get; set; }
         public List<Estilos_MateriasPrimas> Materias { get; set; }
-        public List<Estilos_PesosEstilos> PesosEstilos { get; set; }
 
     }
 }

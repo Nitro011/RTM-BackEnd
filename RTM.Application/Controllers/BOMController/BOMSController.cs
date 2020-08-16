@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RTM.Models;
+using RTM.Models.DTO.BOMEncabezado;
 using RTM.Models.TableDB;
 using RTM.Repository.Interface;
 
@@ -71,6 +72,90 @@ namespace RTM.Application.Controllers.BOMController
                     status = true,
                     message = "Esta accion se ejecuto correctamente",
                     data = GetBOMS
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
+
+        // GET: api/Departamentos
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> BOMEncabezadosList()
+        {
+            try
+            {
+
+                var GetBOMEncabezado = await BOMEncabezadoListViews();
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetBOMEncabezado
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+
+
+
+        }
+
+        [HttpGet]
+        [Route("[action]/{PatterN}/{Cliente}")]
+        public async Task<IActionResult> ConsultarBOMEncabezadoPorPatterNCliente([FromRoute]string PatterN, string Cliente)
+        {
+            try
+            {
+                var GetBOMEncabezado = await BOMEncabezadoPorPatterNCliente(PatterN,Cliente);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetBOMEncabezado
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]/{PatterN}")]
+        public async Task<IActionResult> BuscarBOMEncabezadoPorPatterNCliente([FromRoute]string PatterN)
+        {
+            try
+            {
+                var GetBOMEncabezado = await ObtenerBOMEncabezadoPorPatterNCliente(PatterN);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetBOMEncabezado
                 });
             }
             catch (Exception ex)
@@ -151,6 +236,63 @@ namespace RTM.Application.Controllers.BOMController
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        //Funciones:
+        private async Task<List<BOMEncabezadoListView>> BOMEncabezadoListViews()
+        {
+
+            var BOMEncabezadoList = new List<BOMEncabezadoListView>();
+
+
+            BOMEncabezadoList = await _UnitOfWork.context.BOMs.Select(a => new BOMEncabezadoListView()
+            {
+                BOMID=a.BOMID,
+                FechaCreacion=a.FechaCreacion,
+                PatterN=a.PatterN,
+                Modelo=_UnitOfWork.context.BOMs.Include(x=>x.Modelos).Where(x=>x.ModeloID==a.ModeloID).Select(a=>a.Modelos.Modelo1).FirstOrDefault(),
+                Cliente= _UnitOfWork.context.BOMs.Include(x => x.Cliente).Where(x => x.ClienteID == a.ClienteID).Select(a => a.Cliente.Nombre_Cliente).FirstOrDefault()
+
+            }).ToListAsync();
+
+            return BOMEncabezadoList;
+
+        }
+
+        private async Task<List<BOMEncabezadoListView>> BOMEncabezadoPorPatterNCliente(string PatterN, string Cliente)
+        {
+            var BOMEncabezadoList = new List<BOMEncabezadoListView>();
+
+            BOMEncabezadoList = await _UnitOfWork.context.BOMs
+           .Where(a => a.PatterN==PatterN || a.Cliente.Nombre_Cliente==Cliente)
+           .Select(a => new BOMEncabezadoListView()
+           {
+               BOMID = a.BOMID,
+               FechaCreacion=a.FechaCreacion,
+               PatterN = a.PatterN,
+               Modelo = _UnitOfWork.context.BOMs.Include(x => x.Modelos).Where(x => x.ModeloID == a.ModeloID).Select(a => a.Modelos.Modelo1).FirstOrDefault(),
+               Cliente = _UnitOfWork.context.BOMs.Include(x => x.Cliente).Where(x => x.ClienteID == a.ClienteID).Select(a => a.Cliente.Nombre_Cliente).FirstOrDefault()
+
+           }).ToListAsync();
+
+            return BOMEncabezadoList;
+        }
+
+        private async Task<ObtenerBOMEncabezadoPorPatterNCliente> ObtenerBOMEncabezadoPorPatterNCliente(string PatterN)
+        {
+            var BOMEncabezadoList = new ObtenerBOMEncabezadoPorPatterNCliente();
+
+            BOMEncabezadoList = await _UnitOfWork.context.BOMs
+           .Where(a => a.PatterN == PatterN)
+           .Select(a => new ObtenerBOMEncabezadoPorPatterNCliente()
+           {
+               BOMID = a.BOMID,
+               PatterN = a.PatterN,
+               Cliente= _UnitOfWork.context.BOMs.Include(x => x.Cliente).Where(x => x.ClienteID == a.ClienteID).Select(a => a.Cliente.Nombre_Cliente).FirstOrDefault()
+
+           }).FirstOrDefaultAsync();
+
+            return BOMEncabezadoList;
         }
     }
 }

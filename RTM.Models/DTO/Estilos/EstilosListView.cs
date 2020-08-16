@@ -21,18 +21,14 @@ namespace RTM.Models.DTO.Estilos
         public string Modelos { get; set; }
         public string TiposEstilos { get; set; }
         public string Categorias { get; set; }
-        public string Materiales { get; set; }
         public string PesosEstilos { get; set; }
         public string Colores { get; set; }
         public string Division { get; set; }
         public string UnidadesMedidas { get; set; }
         public string Estados { get; set; }
-
-        public List<string> Modelos1 { get; set; }
-        public List<string> TiposEstilos1 { get; set; }
-        public List<string> Categorias1 { get; set; }
-        public List<string> Materiales1 { get; set; }
-        public List<string> Pesos { get; set; }
-        public List<string> Colores1 { get; set; }
+        public string ImageURL { get; set; }
+        
+        
+        public List<string> Materiales { get; set; }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RTM.Persistence;
 
 namespace RTM.Persistence.Migrations
 {
     [DbContext(typeof(RTMDbContext))]
-    partial class RTMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200815154142_AgregarNuevaRelacionAEstilos")]
+    partial class AgregarNuevaRelacionAEstilos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -610,21 +612,6 @@ namespace RTM.Persistence.Migrations
                     b.HasKey("SuplidorID");
 
                     b.ToTable("Suplidores");
-                });
-
-            modelBuilder.Entity("RTM.Models.TableDB.AnchosSizes", b =>
-                {
-                    b.Property<int>("AnchoSizeID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AnchoSize")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AnchoSizeID");
-
-                    b.ToTable("AnchosSizes");
                 });
 
             modelBuilder.Entity("RTM.Models.TableDB.BOM", b =>

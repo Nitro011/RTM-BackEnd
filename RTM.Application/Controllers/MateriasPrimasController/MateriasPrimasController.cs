@@ -219,11 +219,12 @@ namespace RTM.Application.Controllers.MateriasPrimasController
 
             MateriasPrimasList = await _UnitOfWork.context.Materias_Primas.Select(a => new MateriasPrimasListView()
             {
-                Materia_PrimaID=a.Materia_PrimaID,
-                PartNo=a.PartNo,
-                Nombre_Materia_Prima=a.Nombre_Materia_Prima,
-                TipoMaterial= _UnitOfWork.context.Materias_Primas.Include(x => x.Tipo_Material).Where(x => x.Materia_PrimaID == a.Materia_PrimaID).Select(a => a.Tipo_Material.Nombre_Material).FirstOrDefault(),
-                Descripcion=a.Descripcion
+                Materia_PrimaID = a.Materia_PrimaID,
+                PartNo = a.PartNo,
+                TipoMaterial = _UnitOfWork.context.Materias_Primas.Include(x => x.Tipo_Material).Where(x => x.Materia_PrimaID == a.Materia_PrimaID).Select(a => a.Tipo_Material.Nombre_Material).FirstOrDefault(),
+                Descripcion = a.Descripcion,
+                Cost = a.Cost,
+                Unit = a.Unit
 
             }).ToListAsync();
 
@@ -237,14 +238,15 @@ namespace RTM.Application.Controllers.MateriasPrimasController
             var MateriasPrimasList = new List<MateriasPrimasListView>();
 
                  MateriasPrimasList = await _UnitOfWork.context.Materias_Primas
-                .Where(a => a.PartNo==PartNo || a.Nombre_Materia_Prima==MateriaPrima)
+                .Where(a => a.PartNo==PartNo || a.Descripcion==MateriaPrima)
                 .Select(a => new MateriasPrimasListView()
                 {
                     Materia_PrimaID=a.Materia_PrimaID,
                     PartNo=a.PartNo,
-                    Nombre_Materia_Prima=a.Nombre_Materia_Prima,
                     TipoMaterial = _UnitOfWork.context.Materias_Primas.Include(x => x.Tipo_Material).Where(x => x.Materia_PrimaID == a.Materia_PrimaID).Select(a => a.Tipo_Material.Nombre_Material).FirstOrDefault(),
-                    Descripcion = a.Descripcion
+                    Descripcion = a.Descripcion,
+                    Cost=a.Cost,
+                    Unit=a.Unit
 
                 }).ToListAsync();
 

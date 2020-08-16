@@ -11,6 +11,7 @@ using RTM.Repository.Interface;
 using System.Collections.Immutable;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.CompilerServices;
+using System.Security.AccessControl;
 
 namespace RTM.Application.Controllers.EstiloController
 {
@@ -182,23 +183,24 @@ namespace RTM.Application.Controllers.EstiloController
             {
                 EstiloID = a.EstiloID,
                 Estilo_No = a.Estilo_No,
-                Marcas = _UnitOfWork.context.Estilos.Include(x=>x.Marcas).Where(x => x.MarcaID==a.MarcaID).Select(a => a.Marcas.Marca1).FirstOrDefault(),
-                Modelos= _UnitOfWork.context.Estilos_Modelos.Include(x=>x.Estilos).ThenInclude(x=>x.Modelos).Where(x=>x.EstiloID==a.EstiloID).Select(a=>a.Modelo.Modelo1).FirstOrDefault(),
-                TiposEstilos= _UnitOfWork.context.Estilos_TiposEstilos.Include(x => x.Estilos).ThenInclude(x=>x.TiposEstilos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Tipo_Calzados.Tipo_Calzado).FirstOrDefault(),
-                Categorias= _UnitOfWork.context.Estilos_CategoriasEstilos.Include(x => x.Estilos).ThenInclude(x=>x.CategoriasEstilos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.CategoriasEstilos.CategoriaEstilo).FirstOrDefault(),
-                Materiales= _UnitOfWork.context.Estilos_MateriasPrimas.Include(x => x.Estilos).ThenInclude(x=>x.Materias).Where(x => x.EstiloID==a.EstiloID).Select(a => a.Materias_Primas.Nombre_Materia_Prima).FirstOrDefault(),
-                PesosEstilos=_UnitOfWork.context.Estilos_PesosEstilos.Include(x=>x.Estilos).ThenInclude(x=>x.PesosEstilos).Where(x=>x.EstiloID==a.EstiloID).Select(a=>a.PesosEstilos.PesoEstilo).FirstOrDefault(),
-                Last=a.Last,
-                UnidadesMedidas= _UnitOfWork.context.Estilos.Include(x=>x.UnidadesMedidasEstilos).Where(x=>x.UnidadMedidaEstiloID==a.UnidadMedidaEstiloID).Select(a=>a.UnidadesMedidasEstilos.UnidadMedidaEstilo).FirstOrDefault(),
-                Colores= _UnitOfWork.context.Estilos_Colores.Include(x => x.Estilos).ThenInclude(x => x.Colores).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Colore.Color).FirstOrDefault(),
-                Division= _UnitOfWork.context.Estilos.Include(x => x.Divisiones).Where(x => x.DivisionID==a.DivisionID).Select(a=>a.Divisiones.Division).FirstOrDefault(),
-                Descripcion=a.Descripcion,
-                Comentarios=a.Comentarios,
-                CostoSTD=a.CostoSTD,
-                Ganancia=a.Ganancia,
-                FechaCreacion=a.FechaCreacion,
-                PattenNo=a.PattenNo,
-                Estados= _UnitOfWork.context.Estilos.Include(x => x.Estado).Where(x => x.EstadoID == a.EstadoID).Select(a => a.Estado.Estado1).FirstOrDefault()
+                Marcas = _UnitOfWork.context.Estilos.Include(x => x.Marcas).Where(x => x.MarcaID == a.MarcaID).Select(a => a.Marcas.Marca1).FirstOrDefault(),
+                Modelos = _UnitOfWork.context.Estilos.Include(x=>x.Modelos).Where(x=>x.ModeloID==a.ModeloID).Select(a=>a.Modelos.Modelo1).FirstOrDefault(),
+                TiposEstilos = _UnitOfWork.context.Estilos.Include(x=>x.Tipo_Calzados).Where(x=>x.Tipo_CalzadoID==a.Tipo_CalzadoID).Select(a=>a.Tipo_Calzados.Tipo_Calzado).FirstOrDefault(),
+                Categorias = _UnitOfWork.context.Estilos.Include(x=>x.CategoriasEstilos).Where(x=>x.CategoriaEstiloID==a.CategoriaEstiloID).Select(a=>a.CategoriasEstilos.CategoriaEstilo).FirstOrDefault(),
+                Materiales = _UnitOfWork.context.Estilos_MateriasPrimas.Include(x => x.Estilos).ThenInclude(x => x.Materias).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Materias_Primas.Descripcion).ToList(),
+                PesosEstilos = a.PesoEstilos,
+                Last = a.Last,
+                UnidadesMedidas = _UnitOfWork.context.Estilos.Include(x => x.UnidadesMedidasEstilos).Where(x => x.UnidadMedidaEstiloID == a.UnidadMedidaEstiloID).Select(a => a.UnidadesMedidasEstilos.UnidadMedidaEstilo).FirstOrDefault(),
+                Colores = _UnitOfWork.context.Estilos.Include(x=>x.Colores).Where(x=>x.ColorID==a.ColorID).Select(a=>a.Colores.Color).FirstOrDefault(),
+                Division = _UnitOfWork.context.Estilos.Include(x => x.Divisiones).Where(x => x.DivisionID == a.DivisionID).Select(a => a.Divisiones.Division).FirstOrDefault(),
+                Descripcion = a.Descripcion,
+                Comentarios = a.Comentarios,
+                CostoSTD = a.CostoSTD,
+                Ganancia = a.Ganancia,
+                FechaCreacion = a.FechaCreacion,
+                PattenNo = a.PattenNo,
+                Estados = _UnitOfWork.context.Estilos.Include(x => x.Estado).Where(x => x.EstadoID == a.EstadoID).Select(a => a.Estado.Estado1).FirstOrDefault(),
+                ImageURL=a.ImageURL
 
             }).ToListAsync();
 
@@ -210,31 +212,32 @@ namespace RTM.Application.Controllers.EstiloController
         {
             var EstilosList = new List<EstilosListView>();
 
-                 EstilosList = await _UnitOfWork.context.Estilos
-                .Where(a => a.Estilo_No==EstiloNo)
-                .Select(a => new EstilosListView()
-                {
-                    EstiloID = a.EstiloID,
-                    Estilo_No = a.Estilo_No,
-                    Marcas = _UnitOfWork.context.Estilos.Include(x => x.Marcas).Where(x => x.MarcaID == a.MarcaID).Select(a => a.Marcas.Marca1).FirstOrDefault(),
-                    Modelos = _UnitOfWork.context.Estilos_Modelos.Include(x => x.Estilos).ThenInclude(x => x.Modelos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Modelo.Modelo1).FirstOrDefault(),
-                    TiposEstilos = _UnitOfWork.context.Estilos_TiposEstilos.Include(x => x.Estilos).ThenInclude(x => x.TiposEstilos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Tipo_Calzados.Tipo_Calzado).FirstOrDefault(),
-                    Categorias = _UnitOfWork.context.Estilos_CategoriasEstilos.Include(x => x.Estilos).ThenInclude(x => x.CategoriasEstilos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.CategoriasEstilos.CategoriaEstilo).FirstOrDefault(),
-                    Materiales = _UnitOfWork.context.Estilos_MateriasPrimas.Include(x => x.Estilos).ThenInclude(x => x.Materias).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Materias_Primas.Nombre_Materia_Prima).FirstOrDefault(),
-                    PesosEstilos = _UnitOfWork.context.Estilos_PesosEstilos.Include(x => x.Estilos).ThenInclude(x => x.PesosEstilos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.PesosEstilos.PesoEstilo).FirstOrDefault(),
-                    Last = a.Last,
-                    UnidadesMedidas = _UnitOfWork.context.Estilos.Include(x => x.UnidadesMedidasEstilos).Where(x => x.UnidadMedidaEstiloID == a.UnidadMedidaEstiloID).Select(a => a.UnidadesMedidasEstilos.UnidadMedidaEstilo).FirstOrDefault(),
-                    Colores = _UnitOfWork.context.Estilos_Colores.Include(x => x.Estilos).ThenInclude(x => x.Colores).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Colore.Color).FirstOrDefault(),
-                    Division = _UnitOfWork.context.Estilos.Include(x => x.Divisiones).Where(x => x.DivisionID == a.DivisionID).Select(a => a.Divisiones.Division).FirstOrDefault(),
-                    Descripcion = a.Descripcion,
-                    Comentarios = a.Comentarios,
-                    CostoSTD = a.CostoSTD,
-                    Ganancia = a.Ganancia,
-                    FechaCreacion = a.FechaCreacion,
-                    PattenNo = a.PattenNo,
-                    Estados = _UnitOfWork.context.Estilos.Include(x => x.Estado).Where(x => x.EstadoID == a.EstadoID).Select(a => a.Estado.Estado1).FirstOrDefault()
+            EstilosList = await _UnitOfWork.context.Estilos
+           .Where(a => a.Estilo_No == EstiloNo)
+           .Select(a => new EstilosListView()
+           {
+               EstiloID = a.EstiloID,
+               Estilo_No = a.Estilo_No,
+               Marcas = _UnitOfWork.context.Estilos.Include(x => x.Marcas).Where(x => x.MarcaID == a.MarcaID).Select(a => a.Marcas.Marca1).FirstOrDefault(),
+               Modelos = _UnitOfWork.context.Estilos.Include(x => x.Modelos).Where(x => x.ModeloID == a.ModeloID).Select(a => a.Modelos.Modelo1).FirstOrDefault(),
+               TiposEstilos = _UnitOfWork.context.Estilos.Include(x => x.Tipo_Calzados).Where(x => x.Tipo_CalzadoID == a.Tipo_CalzadoID).Select(a => a.Tipo_Calzados.Tipo_Calzado).FirstOrDefault(),
+               Categorias = _UnitOfWork.context.Estilos.Include(x => x.CategoriasEstilos).Where(x => x.CategoriaEstiloID == a.CategoriaEstiloID).Select(a => a.CategoriasEstilos.CategoriaEstilo).FirstOrDefault(),
+               Materiales = _UnitOfWork.context.Estilos_MateriasPrimas.Include(x => x.Estilos).ThenInclude(x => x.Materias).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Materias_Primas.Descripcion).ToList(),
+               PesosEstilos = a.PesoEstilos,
+               Last = a.Last,
+               UnidadesMedidas = _UnitOfWork.context.Estilos.Include(x => x.UnidadesMedidasEstilos).Where(x => x.UnidadMedidaEstiloID == a.UnidadMedidaEstiloID).Select(a => a.UnidadesMedidasEstilos.UnidadMedidaEstilo).FirstOrDefault(),
+               Colores = _UnitOfWork.context.Estilos.Include(x => x.Colores).Where(x => x.ColorID == a.ColorID).Select(a => a.Colores.Color).FirstOrDefault(),
+               Division = _UnitOfWork.context.Estilos.Include(x => x.Divisiones).Where(x => x.DivisionID == a.DivisionID).Select(a => a.Divisiones.Division).FirstOrDefault(),
+               Descripcion = a.Descripcion,
+               Comentarios = a.Comentarios,
+               CostoSTD = a.CostoSTD,
+               Ganancia = a.Ganancia,
+               FechaCreacion = a.FechaCreacion,
+               PattenNo = a.PattenNo,
+               Estados = _UnitOfWork.context.Estilos.Include(x => x.Estado).Where(x => x.EstadoID == a.EstadoID).Select(a => a.Estado.Estado1).FirstOrDefault(),
+               ImageURL = a.ImageURL
 
-                }).ToListAsync();
+           }).ToListAsync();
 
             return EstilosList;
         }
@@ -250,14 +253,14 @@ namespace RTM.Application.Controllers.EstiloController
                EstiloID = a.EstiloID,
                Estilo_No = a.Estilo_No,
                Marcas = _UnitOfWork.context.Estilos.Include(x => x.Marcas).Where(x => x.MarcaID == a.MarcaID).Select(a => a.Marcas.Marca1).FirstOrDefault(),
-               Modelos1 = _UnitOfWork.context.Estilos_Modelos.Include(x => x.Estilos).ThenInclude(x => x.Modelos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Modelo.Modelo1).ToList(),
-               TiposEstilos1 = _UnitOfWork.context.Estilos_TiposEstilos.Include(x => x.Estilos).ThenInclude(x => x.TiposEstilos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Tipo_Calzados.Tipo_Calzado).ToList(),
-               Categorias1 = _UnitOfWork.context.Estilos_CategoriasEstilos.Include(x => x.Estilos).ThenInclude(x => x.CategoriasEstilos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.CategoriasEstilos.CategoriaEstilo).ToList(),
-               Materiales1 = _UnitOfWork.context.Estilos_MateriasPrimas.Include(x => x.Estilos).ThenInclude(x => x.Materias).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Materias_Primas.Nombre_Materia_Prima).ToList(),
-               Pesos = _UnitOfWork.context.Estilos_PesosEstilos.Include(x => x.Estilos).ThenInclude(x => x.PesosEstilos).Where(x => x.EstiloID == a.EstiloID).Select(a => a.PesosEstilos.PesoEstilo).ToList(),
+               Modelos = _UnitOfWork.context.Estilos.Include(x => x.Modelos).Where(x => x.ModeloID == a.ModeloID).Select(a => a.Modelos.Modelo1).FirstOrDefault(),
+               TiposEstilos = _UnitOfWork.context.Estilos.Include(x => x.Tipo_Calzados).Where(x => x.Tipo_CalzadoID == a.Tipo_CalzadoID).Select(a => a.Tipo_Calzados.Tipo_Calzado).FirstOrDefault(),
+               Categorias = _UnitOfWork.context.Estilos.Include(x => x.CategoriasEstilos).Where(x => x.CategoriaEstiloID == a.CategoriaEstiloID).Select(a => a.CategoriasEstilos.CategoriaEstilo).FirstOrDefault(),
+               Materiales = _UnitOfWork.context.Estilos_MateriasPrimas.Include(x => x.Estilos).ThenInclude(x => x.Materias).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Materias_Primas.Descripcion).ToList(),
+               PesosEstilos = a.PesoEstilos,
                Last = a.Last,
                UnidadesMedidas = _UnitOfWork.context.Estilos.Include(x => x.UnidadesMedidasEstilos).Where(x => x.UnidadMedidaEstiloID == a.UnidadMedidaEstiloID).Select(a => a.UnidadesMedidasEstilos.UnidadMedidaEstilo).FirstOrDefault(),
-               Colores1 = _UnitOfWork.context.Estilos_Colores.Include(x => x.Estilos).ThenInclude(x => x.Colores).Where(x => x.EstiloID == a.EstiloID).Select(a => a.Colore.Color).ToList(),
+               Colores = _UnitOfWork.context.Estilos.Include(x => x.Colores).Where(x => x.ColorID == a.ColorID).Select(a => a.Colores.Color).FirstOrDefault(),
                Division = _UnitOfWork.context.Estilos.Include(x => x.Divisiones).Where(x => x.DivisionID == a.DivisionID).Select(a => a.Divisiones.Division).FirstOrDefault(),
                Descripcion = a.Descripcion,
                Comentarios = a.Comentarios,
@@ -265,7 +268,8 @@ namespace RTM.Application.Controllers.EstiloController
                Ganancia = a.Ganancia,
                FechaCreacion = a.FechaCreacion,
                PattenNo = a.PattenNo,
-               Estados = _UnitOfWork.context.Estilos.Include(x => x.Estado).Where(x => x.EstadoID == a.EstadoID).Select(a => a.Estado.Estado1).FirstOrDefault()
+               Estados = _UnitOfWork.context.Estilos.Include(x => x.Estado).Where(x => x.EstadoID == a.EstadoID).Select(a => a.Estado.Estado1).FirstOrDefault(),
+               ImageURL = a.ImageURL
 
            }).ToListAsync();
 
