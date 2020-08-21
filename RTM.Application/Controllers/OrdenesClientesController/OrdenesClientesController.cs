@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using RTM.Models;
 using RTM.Models.DTO.Orden_Cliente;
+using RTM.Models.DTO.OrdenesClientes;
 using RTM.Repository.Interface;
 
 namespace RTM.Application.Controllers.OrdenesClientesController
@@ -94,6 +96,62 @@ namespace RTM.Application.Controllers.OrdenesClientesController
             {
 
                 var GetOrdenesClientes = await OrdenCliente(id);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetOrdenesClientes
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> OrdenesClientesList()
+        {
+            try
+            {
+
+                var GetOrdenesClientes = await OrdenesClientesListViews();
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetOrdenesClientes
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+
+
+
+        }
+
+        [HttpGet]
+        [Route("[action]/{Codigo}")]
+        public async Task<IActionResult> ConsultarOrdenesClientesPorCodigo([FromRoute]string Codigo)
+        {
+            try
+            {
+                var GetOrdenesClientes = await BuscarOrdenesClientesPorCodigo(Codigo);
 
                 return Ok(new Request()
                 {
@@ -254,6 +312,58 @@ namespace RTM.Application.Controllers.OrdenesClientesController
             }).ToList();
 
             return orderncliente;
+        }
+
+        private async Task<List<OrdenesClientesListView>> OrdenesClientesListViews()
+        {
+
+            var OrdenesClientesList = new List<OrdenesClientesListView>();
+
+
+            OrdenesClientesList = await _UnitOfWork.context.Ordenes_Clientes.Select(a => new OrdenesClientesListView()
+            {
+                Orden_ClienteID=a.Orden_ClienteID,
+                CodigoQR=a.CodigoQR,
+                Cliente=_UnitOfWork.context.Ordenes_Clientes.Include(x=>x.Cliente).Where(x=>x.ClienteID==a.ClienteID).Select(a=>a.Cliente.Nombre_Cliente).FirstOrDefault(),
+                CantidadCalzados=a.Cantidad_Calzado_Realizar,
+                FechaInicio=a.Fecha_Inicio,
+                FechaEntrega=a.Fecha_Entrega,
+                Estilos=_UnitOfWork.context.OrdenesClientes_Estilos.Include(x=>x.Estilos).Where(x=>x.Orden_ClienteID==a.Orden_ClienteID).Select(a=>a.Estilos.Estilo_No).ToList(),
+                SizesUSA=_UnitOfWork.context.OrdenesClientes_Sizes.Include(x=>x.Sizes).Where(x=>x.Orden_ClienteID==a.Orden_ClienteID).Select(a=>a.Sizes.USA).FirstOrDefault(),
+                SizesUK = _UnitOfWork.context.OrdenesClientes_Sizes.Include(x => x.Sizes).Where(x => x.Orden_ClienteID == a.Orden_ClienteID).Select(a => a.Sizes.UK).FirstOrDefault(),
+                SizesEuro = _UnitOfWork.context.OrdenesClientes_Sizes.Include(x => x.Sizes).Where(x => x.Orden_ClienteID == a.Orden_ClienteID).Select(a => a.Sizes.EURO).FirstOrDefault(),
+                SizesCM = _UnitOfWork.context.OrdenesClientes_Sizes.Include(x => x.Sizes).Where(x => x.Orden_ClienteID == a.Orden_ClienteID).Select(a => a.Sizes.CM).FirstOrDefault(),
+
+
+            }).ToListAsync();
+
+            return OrdenesClientesList;
+
+        }
+
+        private async Task<List<OrdenesClientesListView>> BuscarOrdenesClientesPorCodigo(string Codigo)
+        {
+            var OrdenesClientesList = new List<OrdenesClientesListView>();
+
+            OrdenesClientesList = await _UnitOfWork.context.Ordenes_Clientes
+           .Where(a => a.CodigoQR == Codigo)
+           .Select(a => new OrdenesClientesListView()
+           {
+               Orden_ClienteID = a.Orden_ClienteID,
+               CodigoQR = a.CodigoQR,
+               Cliente = _UnitOfWork.context.Ordenes_Clientes.Include(x => x.Cliente).Where(x => x.ClienteID == a.ClienteID).Select(a => a.Cliente.Nombre_Cliente).FirstOrDefault(),
+               CantidadCalzados = a.Cantidad_Calzado_Realizar,
+               FechaInicio = a.Fecha_Inicio,
+               FechaEntrega = a.Fecha_Entrega,
+               Estilos = _UnitOfWork.context.OrdenesClientes_Estilos.Include(x => x.Estilos).Where(x => x.Orden_ClienteID == a.Orden_ClienteID).Select(a => a.Estilos.Estilo_No).ToList(),
+               SizesUSA = _UnitOfWork.context.OrdenesClientes_Sizes.Include(x => x.Sizes).Where(x => x.Orden_ClienteID == a.Orden_ClienteID).Select(a => a.Sizes.USA).FirstOrDefault(),
+               SizesUK = _UnitOfWork.context.OrdenesClientes_Sizes.Include(x => x.Sizes).Where(x => x.Orden_ClienteID == a.Orden_ClienteID).Select(a => a.Sizes.UK).FirstOrDefault(),
+               SizesEuro = _UnitOfWork.context.OrdenesClientes_Sizes.Include(x => x.Sizes).Where(x => x.Orden_ClienteID == a.Orden_ClienteID).Select(a => a.Sizes.EURO).FirstOrDefault(),
+               SizesCM = _UnitOfWork.context.OrdenesClientes_Sizes.Include(x => x.Sizes).Where(x => x.Orden_ClienteID == a.Orden_ClienteID).Select(a => a.Sizes.CM).FirstOrDefault(),
+
+           }).ToListAsync();
+
+            return OrdenesClientesList;
         }
     }
 }

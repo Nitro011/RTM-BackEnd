@@ -60,7 +60,7 @@ namespace RTM.Application.Controllers.EstiloController
                 return Ok(new Request()
                 {
                     status = true,
-                    message = "La Marca se registro correctamente"
+                    message = "El Estilo se registro correctamente"
 
                 });
             }
@@ -70,7 +70,7 @@ namespace RTM.Application.Controllers.EstiloController
                 return Ok(new Request()
                 {
                     status = false,
-                    message = "La Marca no se registro correctamente!!",
+                    message = "El Estilo no se registro correctamente!!",
                     data = ex.Message
                 });
             }

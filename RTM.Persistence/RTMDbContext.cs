@@ -92,6 +92,8 @@ namespace RTM.Persistence
         public DbSet<DivisionesMateriasPrimas> DivisionesMateriasPrimas { get; set; }
         public DbSet<ITEMS> ITEMS { get; set; }
         public DbSet<AnchosSizes> AnchosSizes { get; set; }
+        public DbSet<OrdenesClientes_Estilos> OrdenesClientes_Estilos { get; set; }
+        public DbSet<OrdenesClientes_Sizes> OrdenesClientes_Sizes { get; set; }
 
 
 

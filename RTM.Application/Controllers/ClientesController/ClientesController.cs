@@ -110,6 +110,33 @@ namespace RTM.Application.Controllers.ClientesController
             }
         }
 
+        [HttpGet]
+        [Route("[action]/{CodigoCliente}/{RNC}/{NombreCliente}")]
+        public async Task<IActionResult> ConsultarClientePorCodigoClienteRNCNombreCliente([FromRoute]string CodigoCliente, string RNC, string NombreCliente)
+        {
+            try
+            {
+
+                var GetClientes = await ObtenerClientePorCodigoClienteRNCNombre(CodigoCliente,RNC,NombreCliente);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetClientes
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> registrar([FromBody] Cliente cliente)
@@ -197,6 +224,30 @@ namespace RTM.Application.Controllers.ClientesController
                Pais=a.Pais,
                Direccion=a.Direccion
            }).ToListAsync();
+
+            return ClientesList;
+        }
+
+        private async Task<ClientesListView> ObtenerClientePorCodigoClienteRNCNombre(string CodigoCliente, string RNC, string NombreCliente)
+        {
+
+            var ClientesList = new ClientesListView();
+
+
+                ClientesList = await _UnitOfWork.context.Clientes
+               .Where(a => a.CodigoCliente==CodigoCliente || a.RNC==RNC ||a.Nombre_Cliente==NombreCliente)
+                .Select(a => new ClientesListView()
+                {
+                    ClienteID = a.ClienteID,
+                    CodigoCliente = a.CodigoCliente,
+                    RNC = a.RNC,
+                    Nombre_Cliente = a.Nombre_Cliente,
+                    Correo_Electronico = a.Correo_Electronico,
+                    No_Telefono = a.No_Telefono,
+                    Pais = a.Pais,
+                    Direccion = a.Direccion
+
+                }).FirstOrDefaultAsync();
 
             return ClientesList;
         }

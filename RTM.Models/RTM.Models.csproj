@@ -262,6 +262,7 @@
     <Compile Include="DTO\MateriasPrimas\MateriasPrimasListView.cs" />
     <Compile Include="DTO\Modelos\ModelosListView.cs" />
     <Compile Include="DTO\OperacionesCalzados\OperacionesCalzadosListView.cs" />
+    <Compile Include="DTO\OrdenesClientes\OrdenesClientesListView.cs" />
     <Compile Include="DTO\Orden_Cliente\DetallesCalzado.cs" />
     <Compile Include="DTO\Orden_Cliente\DetallesColores.cs" />
     <Compile Include="DTO\Orden_Cliente\DetallesDimension.cs" />
@@ -360,6 +361,8 @@
     <Compile Include="TableDB\Estilos_MateriasPrimas.cs" />
     <Compile Include="TableDB\ITEMS.cs" />
     <Compile Include="TableDB\OperacionesCalzados.cs" />
+    <Compile Include="TableDB\OrdenesClientes_Estilos.cs" />
+    <Compile Include="TableDB\OrdenesClientes_Sizes.cs" />
     <Compile Include="TableDB\Posiciones.cs" />
     <Compile Include="TableDB\SubDepartamentos.cs" />
     <Compile Include="TableDB\TiposDepartamentos.cs" />

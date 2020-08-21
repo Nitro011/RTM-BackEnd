@@ -142,6 +142,33 @@ namespace RTM.Application.Controllers.DepartamentosController
 
         }
 
+        [HttpGet]
+        [Route("[action]/{DepartamentoID}")]
+        public async Task<IActionResult> ObtenerDepartamentoPorID([FromRoute]int DepartamentoID)
+        {
+            try
+            {
+
+                var GetDepartamentos = await DepartamentosPorID(DepartamentoID);
+
+                return Ok(new Request()
+                {
+                    status = true,
+                    message = "Esta accion se ejecuto correctamente",
+                    data = GetDepartamentos
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new Request()
+                {
+                    status = false,
+                    message = "Ocurrio un error inesperado!!",
+                    data = ex.Message
+                });
+            }
+        }
+
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> registrar([FromBody] Departamentos departamentos)
@@ -248,6 +275,24 @@ namespace RTM.Application.Controllers.DepartamentosController
 
             return DepartamentosList;
 
+        }
+
+        private async Task<DepartamentosListView> DepartamentosPorID(int DepartamentoID)
+        {
+            var DepartamentosList = new DepartamentosListView();
+
+            DepartamentosList = await _UnitOfWork.context.Departamentos
+           .Where(a => a.DepartamentoID == DepartamentoID)
+           .Select(a => new DepartamentosListView()
+           {
+               DepartamentoID = a.DepartamentoID,
+               TipoDepartamentoID = a.TipoDepartamentoID,
+               TipoDepartamento = _UnitOfWork.context.Departamentos.Include(x => x.TiposDepartamentos).Where(x => x.TipoDepartamentoID == a.TipoDepartamentoID).Select(a => a.TiposDepartamentos.TipoDepartamento).FirstOrDefault(),
+               Departamento = a.Departamento,
+               SubDepartamento = _UnitOfWork.context.SubDepartamentos.Include(x => x.Departamentos).Where(x => x.DepartamentoID == a.DepartamentoID).Select(a => a.SubDepartamento).FirstOrDefault()
+           }).FirstOrDefaultAsync();
+
+            return DepartamentosList;
         }
     }
 }

@@ -9,6 +9,7 @@
 
 namespace RTM.Models
 {
+    using RTM.Models.TableDB;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -28,10 +29,12 @@ namespace RTM.Models
         [ForeignKey("Cliente")]
         public int? ClienteID { get; set; }
         public string CodigoQR { get; set; }
-        public int? Cantidad_Calzado_Realizar { get; set; }
+        public int Cantidad_Calzado_Realizar { get; set; }
         public System.DateTime Fecha_Inicio { get; set; }
         public System.DateTime Fecha_Entrega { get; set; }
-    
+
+        public List<OrdenesClientes_Estilos> OrdenesClientes_Estilos { get; set; }
+        public List<OrdenesClientes_Sizes> OrdenesClientes_Sizes { get; set; }
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual IEnumerable<Control_Ubicacion_Piezas> Control_Ubicacion_Piezas { get; set; }
